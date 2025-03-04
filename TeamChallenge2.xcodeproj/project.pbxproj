@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8612E2A92D76461700F33FE8 /* ShoppeStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8612E2A82D76461700F33FE8 /* ShoppeStore */; };
 		E422C3852D76222B00FE7F97 /* TeamChallenge2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E422C3842D76222B00FE7F97 /* TeamChallenge2App.swift */; };
 		E422C3872D76222B00FE7F97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E422C3862D76222B00FE7F97 /* ContentView.swift */; };
 		E422C3892D76222D00FE7F97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E422C3882D76222D00FE7F97 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8612E2A92D76461700F33FE8 /* ShoppeStore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +113,9 @@
 				Base,
 			);
 			mainGroup = E422C3782D76222B00FE7F97;
+			packageReferences = (
+				8612E2A72D76461700F33FE8 /* XCRemoteSwiftPackageReference "ShoppeStore" */,
+			);
 			productRefGroup = E422C3822D76222B00FE7F97 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -342,6 +347,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8612E2A72D76461700F33FE8 /* XCRemoteSwiftPackageReference "ShoppeStore" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ShapovalovIlya/ShoppeStore.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8612E2A82D76461700F33FE8 /* ShoppeStore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8612E2A72D76461700F33FE8 /* XCRemoteSwiftPackageReference "ShoppeStore" */;
+			productName = ShoppeStore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E422C3792D76222B00FE7F97 /* Project object */;
 }

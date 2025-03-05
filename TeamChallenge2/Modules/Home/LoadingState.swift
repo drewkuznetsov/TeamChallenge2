@@ -6,9 +6,19 @@
 //
 
 import Foundation
+import ShoppeStore
 
-enum LoadingState {
+enum LoadingState: Error {
     case loading
-    case loaded
-    case error
+    case loaded([Category])
+    case error(Error)
+    
+//    init(_ result: Result<[Product], Error>) {
+//        switch result {
+//        case .success(let success):
+//            self = .loaded(success)
+//        case .failure(let failure):
+//            self = .error(failure)
+//        }
+//    }
 }

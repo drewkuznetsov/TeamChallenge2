@@ -8,6 +8,7 @@
 import Foundation
 import ShoppeStore
 import SwiftFP
+import UIKit
 
 struct Category {
     let title: String
@@ -42,6 +43,7 @@ final class HomeViewModel: ObservableObject {
     
     private let networkManager = ShoppeStore.shared
     
+    @MainActor
     @Sendable
     func onAppear() async {
         self.state = await zip(

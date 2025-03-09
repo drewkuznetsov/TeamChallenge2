@@ -11,6 +11,9 @@ import ShoppeStore
 final class HomeViewModel: ObservableObject {
     @Published var products: [Product] = []
     @Published var state: LoadingState = .loading
+    @Published var error: Error?
+    @Published var isErrorShown = false
+    @Published var productsInBasket = 2
     
     private let networkManager = ShoppeStore.shared
     
@@ -19,7 +22,8 @@ final class HomeViewModel: ObservableObject {
             products = try await networkManager.fetchAllProducts().get()
             state = .loaded
         } catch {
-            state = .error
+            self.error = error
+            isErrorShown = true
             }
     }
 }

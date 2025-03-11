@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "seeAll.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -15,6 +15,7 @@ struct OnboardingModel: Identifiable {
     let title: String
     let description: String
     var nextButton: Bool = false
+    var buttonTitle: String?
 }
 
 extension OnboardingModel {
@@ -39,7 +40,8 @@ extension OnboardingModel {
             imageAlignment: .center,
             title: "Manage Your Store",
             description: "Become a manager, add products, and control your catalog!",
-            nextButton: true
+            nextButton: true,
+            buttonTitle: "Next"
         ),
     ]
 }

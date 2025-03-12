@@ -12,13 +12,24 @@ struct OnboardinCardView: View {
     
     let card: OnboardingModel
     let action: () -> Void
+    let title: String?
+    
+    private enum Draving {
+        static var maxWidth: CGFloat { 326 }
+        static var imageMinHeight: CGFloat { 338 }
+        static var padding: CGFloat { 20 }
+        static var cornerRadius: CGFloat { 20 }
+    }
 
     var body: some View {
         VStack {
             Image(card.imageName)
                 .resizable()
                 .scaledToFill()
-                .frame(maxWidth: 326, minHeight: 338, alignment: card.imageAlignment)
+                .frame(
+                    maxWidth: Draving.maxWidth,
+                    minHeight: Draving.imageMinHeight,
+                    alignment: card.imageAlignment)
                 .clipped()
 
             VStack {
@@ -26,7 +37,7 @@ struct OnboardinCardView: View {
                     .font(.title)
                     .multilineTextAlignment(.center)
                     .fontWeight(.bold)
-                    .padding(.bottom, 10)
+                    .padding(.bottom, Draving.padding)
 
                 Text(card.description)
                     .font(.body)
@@ -36,21 +47,14 @@ struct OnboardinCardView: View {
                 Spacer()
 
                 if card.nextButton {
-                    Button(action: action) {
-                        Text("Начать")
-                            .padding(5)
-                            .frame(minWidth: 200)
-                    }
-                    .font(.title2.weight(.light))
-                    .buttonStyle(.borderedProminent)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                    .tint(.accentColor)
+                    CardButton(action: action, title: title)
                 }
             }
-            .padding(20)
+            .padding(Draving.padding)
         }
+        .frame(maxWidth: Draving.maxWidth)
         .background(Color(UIColor.systemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .frame(maxWidth: 326)
+        .clipShape(RoundedRectangle(cornerRadius: Draving.cornerRadius))
+
     }
 }

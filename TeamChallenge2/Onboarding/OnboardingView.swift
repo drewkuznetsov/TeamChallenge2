@@ -15,7 +15,7 @@ struct OnboardingView: View {
             BackgroundView()
                 .equatable()
             
-            VStack(spacing: 20) {
+            VStack() {
                 
                 OnboardingSliderView(
                     selected: $viewModel.selectedCard,

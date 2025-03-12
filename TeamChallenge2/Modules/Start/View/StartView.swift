@@ -18,7 +18,7 @@ struct StartView: View {
                 VStack {
                     Circle()
                         .frame(width: 134, height: 134)
-                        .foregroundStyle(Color.white)
+                        .foregroundStyle(Color(.systemBackground))
                         .shadow(color: Color.primary.opacity(0.16), radius: 4, x: 0, y: 3)
                         .overlay {
                             Image(viewModel.model.storeLabel)
@@ -31,19 +31,19 @@ struct StartView: View {
                 Spacer()
                 
                 VStack(spacing: 18) {
-                    NavigationLink(destination: StartView()) {
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(Color.shopBlue)
-                            .frame(height: 61)
-                            .overlay {
-                                Text(viewModel.model.upperButtonTitle)
-                                    .font(Font.system(size: 22))
-                                    .foregroundStyle(Color.white)
-                            }
+                    NavigationLink(destination: CreateAccountView()) {
+                        ColorRectangleView(
+                            cornerRadius: 16,
+                            text: viewModel.model.upperButtonTitle,
+                            height: 61,
+                            backgroundColor: Color.shopBlue,
+                            textColor: Color.white,
+                            fontSize: 22
+                        )
                     }
                     .padding(.horizontal, 20)
                     
-                    NavigationLink(destination: StartView()) {
+                    NavigationLink(destination: CreateAccountView()) {
                         HStack {
                             Text(viewModel.model.bottomButtonTitle)
                                 .font(Font.system(size: 15))

@@ -46,15 +46,20 @@ struct OnboardinCardView: View {
 
                 Spacer()
 
-                if card.nextButton {
-                    OnboardingCardButton(action: action, title: title)
+                if card.hasNextButton {
+                    OnboardingCardButton(
+                        action: action,
+                        title: title
+                    )
                 }
             }
             .padding(Draving.padding)
         }
         .frame(maxWidth: Draving.maxWidth)
         .background(Color(UIColor.systemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: Draving.cornerRadius))
+        .clipShape(
+            RoundedRectangle(cornerRadius: Draving.cornerRadius)
+        )
 
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Section<Content> : View where Content: View {
+struct HomeSection<Content> : View where Content: View {
     let title: String
     let content: Content
     let onTapSeeAll: () -> Void
@@ -38,14 +38,15 @@ struct Section<Content> : View where Content: View {
                 .foregroundStyle(.black)
                 
             }
-            
+            .padding(.horizontal, 20)
             content
+            
         }
     }
 }
 
 #Preview {
-    Section(title: "Categories") {
+    HomeSection(title: "Categories") {
         Text("Something")
     } onTapSeeAll: { print("See all") }
 }

@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-
-
-
 struct TabBarView: View {
-    /// Selected tab. Initialized to 0 to highlight the first tab at the start.
+    var tabs: [TabBarItem]
     @State private var selectedTab: Int = 0
-    var tabs: [TabInfoModel]
     
     var body: some View {
         TabView(selection: $selectedTab) {
             ForEach(tabs.indices, id: \.self) { index in
                 NavigationStack {
-                    AnyView(tabs[index].view) // Явное преобразование
+                    AnyView(tabs[index].view)
                 }
                 .tabItem {
-                    Image(selectedTab == index ? "\(tabs[index].iconName).selected" : tabs[index].iconName)
+                    Image(
+                        selectedTab == index
+                        ? "\(tabs[index].iconName).selected"
+                        : "\(tabs[index].iconName)"
+                    )
                 }
                 .accessibilityLabel(tabs[index].title)
                 .tag(index)
@@ -33,5 +33,5 @@ struct TabBarView: View {
 }
 
 #Preview {
-    TabBarView(tabs: TabInfoModel.allCases)
+    TabBarView(tabs: TabBarItem.allCases)
 }

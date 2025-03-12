@@ -49,7 +49,7 @@ struct OnboardingPageView: View {
             }
             .padding(20)
         }
-        .background(.white)
+        .background(Color(UIColor.systemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .frame(maxWidth: 326)
     }

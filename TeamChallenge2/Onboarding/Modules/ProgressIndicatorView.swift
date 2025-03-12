@@ -9,23 +9,23 @@
 import SwiftUI
 
 struct ProgressIndicatorView: View {
-    @State var pages: [UUID]
+    @State var cards: [UUID]
     @Binding var selected: UUID?
     
     var body: some View {
         HStack(spacing: 20) {
-            ForEach(pages, id: \.self) { page in
+            ForEach(cards, id: \.self) { card in
                 Circle()
                     .fill(
-                        page == selected
+                        card == selected
                         ? Color.accentColor
                         : Color.accentColor.opacity(0.2))
                     .frame(width: 20, height: 20)
                     .onTapGesture {
-                        selected = page
+                        selected = card
                     }
             }
         }
-        .padding(20)
+        .padding(.bottom, 20)
     }
 }

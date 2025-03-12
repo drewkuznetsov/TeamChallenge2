@@ -8,32 +8,28 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    @StateObject var pagesVM = OnboardingViewModel()
+    @StateObject var viewModel = OnboardingViewModel()
     
     var body: some View {
         ZStack {
-            // Фон
             BackgroundView()
                 .equatable()
             
-            // Контент
-            VStack(spacing: 10) {
+            VStack(spacing: 20) {
                 
-                // Слайдер
                 OnboardingSliderView(
-                    selected: $pagesVM.selected,
-                    pages: pagesVM.all,
-                    onComplete: pagesVM.completeOnboarding
+                    selected: $viewModel.selectedCard,
+                    cards: viewModel.allCards,
+                    onComplete: viewModel.completeOnboarding
                 )
                 
-                // Индикация слайдера
                 ProgressIndicatorView(
-                    pages: pagesVM.all.map(\.id),
-                    selected: $pagesVM.selected
+                    cards: viewModel.allCards.map(\.id),
+                    selected: $viewModel.selectedCard
                 )
             }
         }
-        .onAppear { pagesVM.setSelected }
+        .onAppear { viewModel.setSelected() }
     }
 }
 

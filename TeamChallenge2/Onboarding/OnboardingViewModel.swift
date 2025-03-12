@@ -8,25 +8,20 @@
 
 import SwiftUI
 
-class OnboardingViewModel: ObservableObject {
-    // Используем CoreData через обертку @AppStorage для сохранения состояния завершения онбординга
-    @AppStorage("OnboardingCompleted") private var onboardingCompleted: Bool = false
-    @Published var all = OnboardingModel.all
-    @Published var selected: UUID?
+final class OnboardingViewModel: ObservableObject {
     
-    // Проверка, завершён ли онбординг - пока не используем
-    var isOnboardingCompleted: Bool {
-        onboardingCompleted
-    }
+    @AppStorage("isOnboardingCompleted")
+    var isOnboardingCompleted: Bool = false
     
-    // Метод для завершения онбординга
+    @Published var allCards = OnboardingModel.allCards
+    @Published var selectedCard: UUID?
+    
     func completeOnboarding() {
-        onboardingCompleted = true
-        debugPrint(#line, #function, "Onboarding Completed", #file)
+        isOnboardingCompleted = true
     }
     
     func setSelected() {
-        guard let id = all.first?.id else { return }
-        selected = id
+        guard let id = allCards.first?.id else { return }
+        selectedCard = id
     }
 }

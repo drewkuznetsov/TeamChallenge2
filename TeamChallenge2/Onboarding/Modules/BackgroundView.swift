@@ -10,7 +10,7 @@ import SwiftUI
 
 struct BackgroundView : View, Equatable {
     var body: some View {
-        Image("bubbles")
+        Image(.bubbles)
             .resizable()
             .scaledToFill()
             .ignoresSafeArea()

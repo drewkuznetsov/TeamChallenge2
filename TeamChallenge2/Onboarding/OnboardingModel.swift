@@ -18,7 +18,7 @@ struct OnboardingModel: Identifiable {
 }
 
 extension OnboardingModel {
-    static var all: [OnboardingModel] = [
+    static var allCards: [OnboardingModel] = [
         OnboardingModel(
             imageName: "slide1",
             title: "Welcome",

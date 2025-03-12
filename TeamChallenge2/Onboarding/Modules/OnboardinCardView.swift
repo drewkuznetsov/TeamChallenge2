@@ -8,34 +8,34 @@
 
 import SwiftUI
 
-struct OnboardingPageView: View {
+struct OnboardinCardView: View {
     
-    let page: OnboardingModel
+    let card: OnboardingModel
     let action: () -> Void
 
     var body: some View {
         VStack {
-            Image(page.imageName)
+            Image(card.imageName)
                 .resizable()
                 .scaledToFill()
-                .frame(maxWidth: 326, minHeight: 338, alignment: page.imageAlignment)
+                .frame(maxWidth: 326, minHeight: 338, alignment: card.imageAlignment)
                 .clipped()
 
             VStack {
-                Text(page.title)
+                Text(card.title)
                     .font(.title)
                     .multilineTextAlignment(.center)
                     .fontWeight(.bold)
                     .padding(.bottom, 10)
 
-                Text(page.description)
+                Text(card.description)
                     .font(.body)
                     .multilineTextAlignment(.center)
                     .fontWeight(.light)
 
                 Spacer()
 
-                if page.nextButton {
+                if card.nextButton {
                     Button(action: action) {
                         Text("Начать")
                             .padding(5)

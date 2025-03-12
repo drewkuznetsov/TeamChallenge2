@@ -33,7 +33,7 @@ struct OnboardingView: View {
                 )
             }
         }
-        .onAppear ( perform: pagesVM.setSelected )
+        .onAppear { pagesVM.setSelected }
     }
 }
 

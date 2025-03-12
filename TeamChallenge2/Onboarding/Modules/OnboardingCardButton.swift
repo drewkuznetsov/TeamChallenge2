@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CardButton: View {
+struct OnboardingCardButton: View {
     var action: () -> Void
     var title: String?
     

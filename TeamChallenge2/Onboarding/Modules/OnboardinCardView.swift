@@ -47,7 +47,7 @@ struct OnboardinCardView: View {
                 Spacer()
 
                 if card.nextButton {
-                    CardButton(action: action, title: title)
+                    OnboardingCardButton(action: action, title: title)
                 }
             }
             .padding(Draving.padding)

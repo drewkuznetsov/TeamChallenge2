@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct OnboardingPageView: View {
-    let page: OnboardingPageModel
-    @ObservedObject var onboardingVM: OnboardingViewModel  // Добавляем @ObservedObject
+    
+    let page: OnboardingModel
+    let action: () -> Void
 
     var body: some View {
         VStack {
@@ -35,16 +36,12 @@ struct OnboardingPageView: View {
                 Spacer()
 
                 if page.nextButton {
-                    Button {
-                        // Вызываем метод завершения онбординга через onboardingVM
-                        onboardingVM.completeOnboarding()
-                    } label: {
+                    Button(action: action) {
                         Text("Начать")
                             .padding(5)
                             .frame(minWidth: 200)
                     }
-                    .font(.title2)
-                    .fontWeight(.light)
+                    .font(.title2.weight(.light))
                     .buttonStyle(.borderedProminent)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                     .tint(.accentColor)
@@ -52,7 +49,7 @@ struct OnboardingPageView: View {
             }
             .padding(20)
         }
-        .background(Color.white)
+        .background(.white)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .frame(maxWidth: 326)
     }

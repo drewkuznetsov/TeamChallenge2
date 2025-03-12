@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct OnboardingPageModel: Identifiable {
+struct OnboardingModel: Identifiable {
     let id: UUID = UUID()
     let imageName: String
     var imageAlignment: Alignment = .top
@@ -17,24 +17,24 @@ struct OnboardingPageModel: Identifiable {
     var nextButton: Bool = false
 }
 
-extension OnboardingPageModel {
-    static var all: [OnboardingPageModel] = [
-        OnboardingPageModel(
+extension OnboardingModel {
+    static var all: [OnboardingModel] = [
+        OnboardingModel(
             imageName: "slide1",
             title: "Welcome",
             description: "Discover a fast and easy way to shop online."
         ),
-        OnboardingPageModel(
+        OnboardingModel(
             imageName: "slide2",
             title: "Smart Search & Favorites",
             description: "Find products instantly and save favorites for later."
         ),
-        OnboardingPageModel(
+        OnboardingModel(
             imageName: "slide3",
             title: "Connect",
             description: "Connect with friends and share your experiences with the community."
         ),
-        OnboardingPageModel(
+        OnboardingModel(
             imageName: "slide4",
             imageAlignment: .center,
             title: "Manage Your Store",

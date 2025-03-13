@@ -49,6 +49,10 @@ struct CreateAccountView: View {
                 
                 Spacer()
                 
+                VStack(spacing: 15) {
+                    
+                }
+                
                 VStack(spacing: Drawing.buttonsSpacing) {
                     Button(action: viewModel.createAccount) {
                         ColorRectangleView(

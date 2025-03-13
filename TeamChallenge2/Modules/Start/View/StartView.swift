@@ -8,6 +8,20 @@
 import SwiftUI
 
 struct StartView: View {
+    private enum Drawing {
+        static let imageSize: CGFloat = 134
+        static let titleFont: CGFloat = 52
+        static let buttonsSpacing: CGFloat = 18
+        static let upperButtonCornerRadius: CGFloat = 16
+        static let upperButtonHeight: CGFloat = 61
+        static let upperButtonFontSize: CGFloat = 22
+        static let horizontalPadding: CGFloat = 20
+        static let bottomPadding: CGFloat = 55
+        static let lowerButtonFontSize: CGFloat = 15
+        static let lowerButtonImageName = "arrow.right.circle.fill"
+        static let lowerButtonImageSize: CGFloat = 30
+    }
+    
     let viewModel = StartViewModel()
     
     var body: some View {
@@ -17,7 +31,7 @@ struct StartView: View {
                 
                 VStack {
                     Circle()
-                        .frame(width: 134, height: 134)
+                        .frame(width: Drawing.imageSize, height: Drawing.imageSize)
                         .foregroundStyle(Color(.systemBackground))
                         .shadow(color: Color.primary.opacity(0.16), radius: 4, x: 0, y: 3)
                         .overlay {
@@ -25,38 +39,41 @@ struct StartView: View {
                         }
                     
                     Text(viewModel.model.storeName)
-                        .font(Font.system(size: 52, weight: .bold))
+                        .font(Font.system(size: Drawing.titleFont, weight: .bold))
                 }
                 
                 Spacer()
                 
-                VStack(spacing: 18) {
+                VStack(spacing: Drawing.buttonsSpacing) {
                     NavigationLink(destination: CreateAccountView()) {
                         ColorRectangleView(
-                            cornerRadius: 16,
+                            cornerRadius: Drawing.upperButtonCornerRadius,
                             text: viewModel.model.upperButtonTitle,
-                            height: 61,
+                            height: Drawing.upperButtonHeight,
                             backgroundColor: Color.shopBlue,
                             textColor: Color.white,
-                            fontSize: 22
+                            fontSize: Drawing.upperButtonFontSize
                         )
                     }
-                    .padding(.horizontal, 20)
                     
                     NavigationLink(destination: CreateAccountView()) {
                         HStack {
                             Text(viewModel.model.bottomButtonTitle)
-                                .font(Font.system(size: 15))
+                                .font(Font.system(size: Drawing.lowerButtonFontSize))
                                 .foregroundStyle(Color.primary)
                                 .padding()
                             
-                            Image(systemName: "arrow.right.circle.fill")
+                            Image(systemName: Drawing.lowerButtonImageName)
                                 .resizable()
-                                .frame(width: 30, height: 30)
+                                .frame(
+                                    width: Drawing.lowerButtonImageSize,
+                                    height: Drawing.lowerButtonImageSize
+                                )
                         }
                     }
                 }
-                .padding(.bottom, 55)
+                .padding(.horizontal, Drawing.horizontalPadding)
+                .padding(.bottom, Drawing.bottomPadding)
             }
         }
     }

@@ -12,7 +12,6 @@ struct OnboardinCardView: View {
     
     let card: OnboardingModel
     let action: () -> Void
-    let title: String?
     
     private enum Draving {
         static var maxWidth: CGFloat { 326 }
@@ -27,7 +26,6 @@ struct OnboardinCardView: View {
                 .resizable()
                 .scaledToFill()
                 .frame(
-                    maxWidth: Draving.maxWidth,
                     minHeight: Draving.imageMinHeight,
                     alignment: card.imageAlignment)
                 .clipped()
@@ -49,7 +47,7 @@ struct OnboardinCardView: View {
                 if card.hasNextButton {
                     OnboardingCardButton(
                         action: action,
-                        title: title
+                        title: card.title
                     )
                 }
             }

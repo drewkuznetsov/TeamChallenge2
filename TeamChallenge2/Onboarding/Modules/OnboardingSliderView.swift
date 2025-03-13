@@ -26,8 +26,7 @@ struct OnboardingSliderView: View {
             ForEach(cards) { card in
                 OnboardinCardView(
                     card: card,
-                    action: onComplete,
-                    title: card.buttonTitle
+                    action: onComplete
                 )
                 .tag(card.id)
             }

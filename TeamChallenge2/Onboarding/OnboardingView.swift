@@ -25,7 +25,7 @@ struct OnboardingView: View {
                 
                 ProgressIndicatorView(
                     cards: viewModel.allCards.map(\.id),
-                    selected: $viewModel.selectedCard
+                    selectedCard: $viewModel.selectedCard
                 )
             }
         }

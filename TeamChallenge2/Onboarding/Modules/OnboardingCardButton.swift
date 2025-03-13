@@ -9,18 +9,17 @@ import SwiftUI
 
 struct OnboardingCardButton: View {
     var action: () -> Void
-    var title: String?
+    var title: String
     
     private enum Drawing {
         static var cornerRadius: CGFloat { 16 }
-        static var maxWidth: CGFloat { 200 }
     }
     
     var body: some View {
         Button(action: action) {
-            Text(title ?? "Next")
+            Text(title)
                 .padding(.horizontal)
-                .frame(minWidth: Drawing.maxWidth)
+                .frame(minWidth:.infinity)
         }
         .font(.title2.weight(.light))
         .buttonStyle(.borderedProminent)

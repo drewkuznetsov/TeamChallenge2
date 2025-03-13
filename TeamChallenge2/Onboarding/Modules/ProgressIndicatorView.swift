@@ -10,21 +10,22 @@ import SwiftUI
 
 struct ProgressIndicatorView: View {
     @State var cards: [UUID]
-    @Binding var selected: UUID?
+    @Binding var selectedCard: UUID?
+
     
-    private var size: CGFloat { 20 }
+    private let size: CGFloat = 20
     
     var body: some View {
         HStack(spacing: size) {
             ForEach(cards, id: \.self) { card in
                 Circle()
                     .fill(
-                        card == selected
+                        card == selectedCard
                         ? Color.accentColor
                         : Color.accentColor.opacity(0.2))
                     .frame(width: size, height: size)
                     .onTapGesture {
-                        selected = card
+                        selectedCard = card
                     }
             }
         }

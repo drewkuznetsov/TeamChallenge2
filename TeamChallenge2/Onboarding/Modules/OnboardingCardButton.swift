@@ -18,8 +18,7 @@ struct OnboardingCardButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .padding(.horizontal)
-                .frame(minWidth:.infinity)
+                            .frame(maxWidth: .infinity)
         }
         .font(.title2.weight(.light))
         .buttonStyle(.borderedProminent)
@@ -27,5 +26,10 @@ struct OnboardingCardButton: View {
         .clipShape(
             RoundedRectangle(cornerRadius: Drawing.cornerRadius)
         )
+        .padding(.horizontal, 20)
     }
+}
+
+#Preview {
+    OnboardingView()
 }

@@ -14,8 +14,7 @@ struct OnboardinCardView: View {
     let action: () -> Void
     
     private enum Draving {
-        static var maxWidth: CGFloat { 326 }
-        static var imageMinHeight: CGFloat { 338 }
+        static var size: CGFloat { 340 }
         static var padding: CGFloat { 20 }
         static var cornerRadius: CGFloat { 20 }
     }
@@ -26,7 +25,7 @@ struct OnboardinCardView: View {
                 .resizable()
                 .scaledToFill()
                 .frame(
-                    minHeight: Draving.imageMinHeight,
+                    minHeight: Draving.size,
                     alignment: card.imageAlignment)
                 .clipped()
 
@@ -44,20 +43,24 @@ struct OnboardinCardView: View {
 
                 Spacer()
 
-                if card.hasNextButton {
+                if let title = card.buttonTitle {
                     OnboardingCardButton(
                         action: action,
-                        title: card.title
+                        title: title
                     )
                 }
             }
             .padding(Draving.padding)
         }
-        .frame(maxWidth: Draving.maxWidth)
+        .frame(maxWidth: Draving.size)
         .background(Color(UIColor.systemBackground))
         .clipShape(
             RoundedRectangle(cornerRadius: Draving.cornerRadius)
         )
 
     }
+}
+
+#Preview {
+    OnboardingView()
 }

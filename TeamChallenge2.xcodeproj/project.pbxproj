@@ -15,6 +15,8 @@
 		2D3732CF2D80CD1A009E71BA /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3732CE2D80CD1A009E71BA /* OnboardingModel.swift */; };
 		2D3732D12D80CD3B009E71BA /* OnboardinCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3732D02D80CD3B009E71BA /* OnboardinCardView.swift */; };
 		2D4763752D821E66008EF06D /* OnboardingCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4763742D821E66008EF06D /* OnboardingCardButton.swift */; };
+		2D2685BE2D80D7E800289FCA /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2685BD2D80D7E800289FCA /* TabBarView.swift */; };
+		2D2685F32D8107B300289FCA /* TabBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2685F22D8107B300289FCA /* TabBarModel.swift */; };
 		8612E2A92D76461700F33FE8 /* ShoppeStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8612E2A82D76461700F33FE8 /* ShoppeStore */; };
 		E422C3852D76222B00FE7F97 /* TeamChallenge2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E422C3842D76222B00FE7F97 /* TeamChallenge2App.swift */; };
 		E422C3872D76222B00FE7F97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E422C3862D76222B00FE7F97 /* ContentView.swift */; };
@@ -31,6 +33,8 @@
 		2D3732CE2D80CD1A009E71BA /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		2D3732D02D80CD3B009E71BA /* OnboardinCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardinCardView.swift; sourceTree = "<group>"; };
 		2D4763742D821E66008EF06D /* OnboardingCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCardButton.swift; sourceTree = "<group>"; };
+		2D2685BD2D80D7E800289FCA /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		2D2685F22D8107B300289FCA /* TabBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarModel.swift; sourceTree = "<group>"; };
 		E422C3812D76222B00FE7F97 /* TeamChallenge2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamChallenge2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E422C3842D76222B00FE7F97 /* TeamChallenge2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamChallenge2App.swift; sourceTree = "<group>"; };
 		E422C3862D76222B00FE7F97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +75,13 @@
 				2D2685F82D811D8900289FCA /* Modules */,
 			);
 			path = Onboarding;
+		2D2685BC2D80D7D000289FCA /* TabBarView */ = {
+			isa = PBXGroup;
+			children = (
+				2D2685BD2D80D7E800289FCA /* TabBarView.swift */,
+				2D2685F22D8107B300289FCA /* TabBarModel.swift */,
+			);
+			path = TabBarView;
 			sourceTree = "<group>";
 		};
 		E422C3782D76222B00FE7F97 = {
@@ -93,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				2D3732C52D805AA5009E71BA /* Onboarding */,
+				2D2685BC2D80D7D000289FCA /* TabBarView */,
 				E422C3842D76222B00FE7F97 /* TeamChallenge2App.swift */,
 				E422C3862D76222B00FE7F97 /* ContentView.swift */,
 				E422C3882D76222D00FE7F97 /* Assets.xcassets */,
@@ -190,8 +202,10 @@
 				2D2685F72D811D5400289FCA /* ProgressIndicatorView.swift in Sources */,
 				2D4763752D821E66008EF06D /* OnboardingCardButton.swift in Sources */,
 				E422C3872D76222B00FE7F97 /* ContentView.swift in Sources */,
+				2D2685BE2D80D7E800289FCA /* TabBarView.swift in Sources */,
 				E422C3852D76222B00FE7F97 /* TeamChallenge2App.swift in Sources */,
 				2D3732CD2D80CD08009E71BA /* OnboardingViewModel.swift in Sources */,
+				2D2685F32D8107B300289FCA /* TabBarModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

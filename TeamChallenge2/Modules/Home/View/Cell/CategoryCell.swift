@@ -9,19 +9,27 @@ import SwiftUI
 
 struct CategoryCell: View {
     let category: Category
-//    let imagesURL: [String]
     
     private var maxAmount: Int {
         min(4, imagesURL.count)
     }
     
     private var size: CGFloat {
-        ((UIScreen.main.bounds.width / 2.0) - 20 - 2 - 6*2 - 4) / 2
+        (UIScreen.main.bounds.width
+         - 2.0 * Constants.sideOffset
+         - Constants.imageOffset * 4.0
+         - 2.0 * Constants.interItemSpacing
+         - Constants.interCategorySpacing)
+        / 4.0
+    }
+    
+    private var cellHeight: CGFloat {
+        size * 2.0 + 4.0
     }
     
     private var gridItems: [GridItem] {
         let gridItem = GridItem(.fixed(size), spacing: 4)
-        return imagesURL.count > 2 ? [gridItem, gridItem] : [gridItem]
+        return [gridItem, gridItem]
     }
     
     private var imagesURL: [URL] {
@@ -53,6 +61,7 @@ struct CategoryCell: View {
                 AsyncImage(url: url) { image in
                     image
                         .resizable()
+                        .aspectRatio(1, contentMode: .fill)
                 } placeholder: {
                     ProgressView()
                 }
@@ -60,7 +69,7 @@ struct CategoryCell: View {
                 .clipShape(.rect(cornerRadius: 5))
             }
         }
-        .frame(height: size * 2 + 4)
+        .frame(height: cellHeight)
     }
     
     private var badge: some View {
@@ -71,6 +80,15 @@ struct CategoryCell: View {
                 Color.blue
                     .clipShape(.rect(cornerRadius: 6))
             )
+    }
+}
+
+extension CategoryCell {
+    private enum Constants {
+        static let sideOffset = 20.0
+        static let imageOffset = 6.0
+        static let interItemSpacing = 4.0
+        static let interCategorySpacing = 5.0
     }
 }
 

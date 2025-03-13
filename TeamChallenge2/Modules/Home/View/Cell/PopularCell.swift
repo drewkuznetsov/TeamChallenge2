@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PopularCell: View {
-    
     let product: ProductBO
     
     var body: some View {

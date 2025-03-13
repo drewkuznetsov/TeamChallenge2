@@ -17,7 +17,7 @@ struct Category {
             name: name,
             products: Array(
                 repeating: ProductBO.makeStubProductBO(),
-                count: Int.random(in: 1...4)
+                count: 4
             )
         )
     }

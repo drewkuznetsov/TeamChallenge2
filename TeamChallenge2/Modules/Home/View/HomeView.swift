@@ -30,9 +30,9 @@ struct HomeView: View {
                 search
                 Spacer()
                     .frame(height: 14)
-                HomeViewCollections()
+                HomeViewCollections(categories: Array(repeating: Category.makeStubCategory(), count: 4))
+                    .padding(.zero)
             }
-            .padding(20)
         }
     }
     
@@ -66,6 +66,7 @@ struct HomeView: View {
                     
                 }
         }
+        .padding(.horizontal, 20)
     }
     
     private var search: some View {
@@ -87,6 +88,7 @@ struct HomeView: View {
             }
 
         }
+        .padding(.horizontal, 20)
     }
 }
 

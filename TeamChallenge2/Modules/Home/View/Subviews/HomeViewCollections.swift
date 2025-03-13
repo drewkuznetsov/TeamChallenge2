@@ -8,17 +8,35 @@
 import SwiftUI
 
 struct HomeViewCollections: View {
+    let categories: [Category]
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            LazyVStack {
-                Text("Some content")
-                Text("Some content")
-                Text("Some content")
+            VStack(spacing: 22) {
+                HomeSection(
+                    title: "Categories") {
+                        CategoriesGrid(categories: categories)
+                    } onTapSeeAll: {
+                        // move to CategoriesView()
+                    }
+                
+                HomeSection(title: "Popular") {
+                    Populars(products: categories.first?.products ?? [])
+                } onTapSeeAll: {
+                    // move to PDP
+                }
+
+                HomeSection(title: "Just for You") {
+                    JustForYouGrid(products: categories.first?.products ?? [])
+                } onTapSeeAll: {
+                    // move to PDP
+                }
+
             }
         }
     }
 }
 
 #Preview {
-    HomeViewCollections()
+    HomeViewCollections(categories: Array(repeating: Category.makeStubCategory(), count: 4))
 }

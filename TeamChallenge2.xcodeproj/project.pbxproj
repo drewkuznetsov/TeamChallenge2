@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		117646D32D834EA5004EA363 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117646CE2D834EA5004EA363 /* StartView.swift */; };
+		117646D42D834EA5004EA363 /* StartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117646CC2D834EA5004EA363 /* StartModel.swift */; };
+		117646D52D834EA5004EA363 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117646D02D834EA5004EA363 /* StartViewModel.swift */; };
+		117646DD2D834EB7004EA363 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117646DA2D834EB7004EA363 /* CreateAccountViewModel.swift */; };
+		117646DE2D834EB7004EA363 /* CreateAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117646D62D834EB7004EA363 /* CreateAccountModel.swift */; };
+		117646DF2D834EB7004EA363 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117646D82D834EB7004EA363 /* CreateAccountView.swift */; };
+		117646E32D834F33004EA363 /* ColorRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117646E02D834F33004EA363 /* ColorRectangleView.swift */; };
+		117646E52D8353DB004EA363 /* RoundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117646E42D8353DB004EA363 /* RoundTextField.swift */; };
 		8612E2A92D76461700F33FE8 /* ShoppeStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8612E2A82D76461700F33FE8 /* ShoppeStore */; };
 		D90167E92D82168B00B50A53 /* Populars.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90167E82D82168B00B50A53 /* Populars.swift */; };
 		D90167EC2D82170200B50A53 /* PopularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90167EB2D82170200B50A53 /* PopularCell.swift */; };
@@ -28,6 +36,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		117646CC2D834EA5004EA363 /* StartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartModel.swift; sourceTree = "<group>"; };
+		117646CE2D834EA5004EA363 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		117646D02D834EA5004EA363 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
+		117646D62D834EB7004EA363 /* CreateAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountModel.swift; sourceTree = "<group>"; };
+		117646D82D834EB7004EA363 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
+		117646DA2D834EB7004EA363 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
+		117646E02D834F33004EA363 /* ColorRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRectangleView.swift; sourceTree = "<group>"; };
+		117646E42D8353DB004EA363 /* RoundTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTextField.swift; sourceTree = "<group>"; };
 		D90167E82D82168B00B50A53 /* Populars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Populars.swift; sourceTree = "<group>"; };
 		D90167EB2D82170200B50A53 /* PopularCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCell.swift; sourceTree = "<group>"; };
 		D90167ED2D8220FE00B50A53 /* JustForYouCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustForYouCell.swift; sourceTree = "<group>"; };
@@ -60,6 +76,91 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		117646CD2D834EA5004EA363 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				117646CC2D834EA5004EA363 /* StartModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		117646CF2D834EA5004EA363 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				117646CE2D834EA5004EA363 /* StartView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		117646D12D834EA5004EA363 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				117646D02D834EA5004EA363 /* StartViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		117646D22D834EA5004EA363 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				117646CD2D834EA5004EA363 /* Model */,
+				117646CF2D834EA5004EA363 /* View */,
+				117646D12D834EA5004EA363 /* ViewModel */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		117646D72D834EB7004EA363 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				117646D62D834EB7004EA363 /* CreateAccountModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		117646D92D834EB7004EA363 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				117646D82D834EB7004EA363 /* CreateAccountView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		117646DB2D834EB7004EA363 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				117646DA2D834EB7004EA363 /* CreateAccountViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		117646DC2D834EB7004EA363 /* CreateAccount */ = {
+			isa = PBXGroup;
+			children = (
+				117646D72D834EB7004EA363 /* Model */,
+				117646D92D834EB7004EA363 /* View */,
+				117646DB2D834EB7004EA363 /* ViewModel */,
+			);
+			path = CreateAccount;
+			sourceTree = "<group>";
+		};
+		117646E12D834F33004EA363 /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				117646E02D834F33004EA363 /* ColorRectangleView.swift */,
+				117646E42D8353DB004EA363 /* RoundTextField.swift */,
+			);
+			path = ReusableViews;
+			sourceTree = "<group>";
+		};
+		117646E22D834F33004EA363 /* Resources  */ = {
+			isa = PBXGroup;
+			children = (
+				117646E12D834F33004EA363 /* ReusableViews */,
+			);
+			path = "Resources ";
+			sourceTree = "<group>";
+		};
 		D90167EA2D8216F400B50A53 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +182,8 @@
 		D948F1822D78BF180010E5E0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				117646DC2D834EB7004EA363 /* CreateAccount */,
+				117646D22D834EA5004EA363 /* Start */,
 				D948F1832D78BF200010E5E0 /* Home */,
 			);
 			path = Modules;
@@ -157,6 +260,7 @@
 		E422C3832D76222B00FE7F97 /* TeamChallenge2 */ = {
 			isa = PBXGroup;
 			children = (
+				117646E22D834F33004EA363 /* Resources  */,
 				D948F1822D78BF180010E5E0 /* Modules */,
 				D948F1812D78BF0A0010E5E0 /* App */,
 				E422C3882D76222D00FE7F97 /* Assets.xcassets */,
@@ -243,15 +347,23 @@
 				D90167F02D8223CE00B50A53 /* TitleAndPrice.swift in Sources */,
 				D90167E92D82168B00B50A53 /* Populars.swift in Sources */,
 				E422C3852D76222B00FE7F97 /* TeamChallenge2App.swift in Sources */,
+				117646DD2D834EB7004EA363 /* CreateAccountViewModel.swift in Sources */,
+				117646DE2D834EB7004EA363 /* CreateAccountModel.swift in Sources */,
+				117646DF2D834EB7004EA363 /* CreateAccountView.swift in Sources */,
 				D948F1872D78BF480010E5E0 /* HomeViewModel.swift in Sources */,
 				D90167EE2D8220FE00B50A53 /* JustForYouCell.swift in Sources */,
 				D912759A2D80C60100CFC365 /* CategoriesGrid.swift in Sources */,
 				D91275962D80B0E500CFC365 /* HomeSection.swift in Sources */,
 				D9F0D1502D7D7362009EBED0 /* ProductBO.swift in Sources */,
 				D948F1852D78BF310010E5E0 /* HomeView.swift in Sources */,
+				117646E52D8353DB004EA363 /* RoundTextField.swift in Sources */,
 				D9F0D1552D7D7652009EBED0 /* HomeViewCollections.swift in Sources */,
 				D91275982D80B4FC00CFC365 /* CategoryCell.swift in Sources */,
 				D90167F22D82274600B50A53 /* JustForYouGrid.swift in Sources */,
+				117646D32D834EA5004EA363 /* StartView.swift in Sources */,
+				117646D42D834EA5004EA363 /* StartModel.swift in Sources */,
+				117646E32D834F33004EA363 /* ColorRectangleView.swift in Sources */,
+				117646D52D834EA5004EA363 /* StartViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

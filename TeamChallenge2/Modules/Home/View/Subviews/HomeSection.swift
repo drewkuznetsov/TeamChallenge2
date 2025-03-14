@@ -23,14 +23,14 @@ struct HomeSection<Content> : View where Content: View {
             
             HStack {
                 Text(title)
-                    .font(.system(size: 21, weight: .black))
+                    .font(.cardTitle)
                 Spacer()
                 
                 Button(action: {
                     onTapSeeAll()
                 }) {
                     Text(Constants.seeAll)
-                        .font(.system(size: 15, weight: .black))
+                        .font(.actionText)
                     Image(.seeAll)
                         .resizable()
                         .frame(width: 30, height: 30)

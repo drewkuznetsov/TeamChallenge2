@@ -18,8 +18,10 @@ struct Populars: View {
                         .padding(6)
                 }
             }
-            .padding(.leading, 14)
+            .padding(.horizontal, 14)
+            .scrollTargetLayout()
         }
+        .scrollTargetBehavior(.viewAligned)
     }
 }
 

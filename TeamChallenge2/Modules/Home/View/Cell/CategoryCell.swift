@@ -41,7 +41,7 @@ struct CategoryCell: View {
             grid
             HStack {
                 Text(category.name)
-                    .font(.system(size: 17, weight: .bold))
+                    .font(.bodyBold)
                 Spacer()
                 badge
             }
@@ -50,7 +50,7 @@ struct CategoryCell: View {
         .background(
             RoundedRectangle(cornerRadius: 9)
                 .fill(.white)
-                .shadow(radius: 10, x: 0, y: 5)
+                .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 5)
         )
     }
     
@@ -58,15 +58,7 @@ struct CategoryCell: View {
         LazyHGrid(rows: gridItems, spacing: 4) {
             ForEach(0..<maxAmount) { index in
                 let url = imagesURL[index]
-                AsyncImage(url: url) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fill)
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: size, height: size)
-                .clipShape(.rect(cornerRadius: 5))
+                SquareAsyncImage(url: url, size: size)
             }
         }
         .frame(height: cellHeight)
@@ -74,12 +66,11 @@ struct CategoryCell: View {
     
     private var badge: some View {
         Text(category.products.count.formatted())
-            .font(.system(size: 12, weight: .bold))
+            .font(.captionBold)
             .padding(.horizontal, 8)
-            .background(
-                Color.blue
-                    .clipShape(.rect(cornerRadius: 6))
-            )
+            .padding(.vertical, 4)
+            .background(Color.primaryBackground)
+            .clipShape(.rect(cornerRadius: 6))
     }
 }
 

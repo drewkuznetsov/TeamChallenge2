@@ -9,23 +9,13 @@ import SwiftUI
 
 struct JustForYouCell: View {
     let product: ProductBO
-    let width: CGFloat
+    let size: CGFloat
     let onAddToFavoritesAction: (Int) -> Void
     let onAddToCartAction: (Int) -> Void
     
     var body: some View {
         VStack(spacing: 0) {
-            AsyncImage(url: product.image) { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-                    .aspectRatio(160.0 / 171.0, contentMode: .fit)
-                    .frame(width: width)
-                    .clipped()
-                    .clipShape(.rect(cornerRadius: 5))
-            } placeholder: {
-                ProgressView()
-            }
+            SquareAsyncImage(url: product.image, size: size)
             
             Spacer()
                 .frame(height: 11)
@@ -46,12 +36,12 @@ struct JustForYouCell: View {
                 onAddToCartAction(product.id)
             } label: {
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(.blue)
+                    .fill(Color.accentColor)
                     .frame(height: 31)
                     .overlay {
                         Text(Constants.addToCart)
                             .foregroundStyle(.white)
-                            .font(.system(size: 12))
+                            .font(.actioText)
                     }
                     
             }
@@ -68,7 +58,7 @@ extension JustForYouCell {
 }
 
 #Preview {
-    JustForYouCell(product: ProductBO.makeStubProductBO(), width: 100) {
+    JustForYouCell(product: ProductBO.makeStubProductBO(), size: 100) {
         print("Add to favorites \($0)")
     } onAddToCartAction: {
         print("Add to cart \($0)")

@@ -23,7 +23,7 @@ struct JustForYouGrid: View {
         LazyVGrid(columns: gridItems, spacing: Constants.interItemSpacing) {
             ForEach(0..<products.count) { index in
                 let product = products[index]
-                JustForYouCell(product: product, width: cellWidth, onAddToFavoritesAction: { _ in
+                JustForYouCell(product: product, size: cellWidth, onAddToFavoritesAction: { _ in
                     
                 }, onAddToCartAction: { _ in
                 })
@@ -31,7 +31,7 @@ struct JustForYouGrid: View {
             }
             
         }
-        .padding(.horizontal, Constants.sideInset)
+        .padding(Constants.sideInset)
     }
 }
 

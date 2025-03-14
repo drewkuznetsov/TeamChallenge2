@@ -10,36 +10,50 @@ import SwiftUI
 struct RoundTextField: View {
     @Binding var text: String
     @FocusState private var fieldIsFocused: Bool
+    @State private var isHide: Bool = true
+    
     let placeholder: String
-    let maxCount: Int
     let onSubmit: () -> Void
+    let height: CGFloat
+    let fontSize: CGFloat
+    let backgroundColor: Color
+    let isHiddeble: Bool
+    
+    var field: some View {
+        Group {
+            if isHide && isHiddeble {
+                SecureField(placeholder, text: $text)
+            } else {
+                TextField(placeholder, text: $text)
+            }
+        }
+    }
     
     var body: some View {
-        HStack {
-            ZStack {
-                TextField(placeholder, text: $text)
-                    .font(Font.system(size: 20).weight(.medium))
-                    .foregroundStyle(Color.brown)
-                    .padding(8)
-                    .submitLabel(.done)
-                    .focused($fieldIsFocused)
-                    .onSubmit {
-                        onSubmit()
-                        fieldIsFocused = false
-                    }
-                    .onChange(of: text) { _, newValue in
-                        if newValue.count > maxCount {
-                            text = String(newValue.prefix(maxCount))
-                        }
-                    }
+        HStack{
+            field
+                .autocorrectionDisabled(true)
+                .keyboardType(.emailAddress)
+                .font(Font.system(size: fontSize).weight(.medium))
+                .foregroundStyle(Color.gray)
+                .padding(.horizontal, height/2)
+                .submitLabel(.done)
+                .focused($fieldIsFocused)
+                .onSubmit {
+                    onSubmit()
+                    fieldIsFocused = false
+                }
+            
+            if isHiddeble {
+                Button(action: { isHide.toggle() }) {
+                    Image(systemName: isHide ? "eye.slash" : "eye")
+                        .foregroundColor(Color.gray)
+                }
+                .padding(.horizontal, height/2)
             }
-            .background(Color.red)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(lineWidth: 1)
-                    .foregroundStyle(Color.green)
-            )
         }
+        .frame(height: height)
+        .background(backgroundColor)
+        .clipShape(RoundedRectangle(cornerRadius: height/2))
     }
 }

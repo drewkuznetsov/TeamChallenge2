@@ -13,7 +13,7 @@
 		2D3732C72D806FA8009E71BA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3732C62D806FA8009E71BA /* OnboardingView.swift */; };
 		2D3732CD2D80CD08009E71BA /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3732CC2D80CD08009E71BA /* OnboardingViewModel.swift */; };
 		2D3732CF2D80CD1A009E71BA /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3732CE2D80CD1A009E71BA /* OnboardingModel.swift */; };
-		2D3732D12D80CD3B009E71BA /* OnboardinCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3732D02D80CD3B009E71BA /* OnboardinCardView.swift */; };
+		2D3732D12D80CD3B009E71BA /* OnboardingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3732D02D80CD3B009E71BA /* OnboardingCardView.swift */; };
 		2D4763752D821E66008EF06D /* OnboardingCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4763742D821E66008EF06D /* OnboardingCardButton.swift */; };
 		8612E2A92D76461700F33FE8 /* ShoppeStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8612E2A82D76461700F33FE8 /* ShoppeStore */; };
 		E422C3852D76222B00FE7F97 /* TeamChallenge2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E422C3842D76222B00FE7F97 /* TeamChallenge2App.swift */; };
@@ -29,7 +29,7 @@
 		2D3732C62D806FA8009E71BA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		2D3732CC2D80CD08009E71BA /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		2D3732CE2D80CD1A009E71BA /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
-		2D3732D02D80CD3B009E71BA /* OnboardinCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardinCardView.swift; sourceTree = "<group>"; };
+		2D3732D02D80CD3B009E71BA /* OnboardingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCardView.swift; sourceTree = "<group>"; };
 		2D4763742D821E66008EF06D /* OnboardingCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCardButton.swift; sourceTree = "<group>"; };
 		E422C3812D76222B00FE7F97 /* TeamChallenge2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamChallenge2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E422C3842D76222B00FE7F97 /* TeamChallenge2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamChallenge2App.swift; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				2D2685F42D811D4D00289FCA /* BackgroundView.swift */,
-				2D3732D02D80CD3B009E71BA /* OnboardinCardView.swift */,
+				2D3732D02D80CD3B009E71BA /* OnboardingCardView.swift */,
 				2D4763742D821E66008EF06D /* OnboardingCardButton.swift */,
 				2D2685F92D812D0A00289FCA /* OnboardingSliderView.swift */,
 				2D2685F62D811D5400289FCA /* ProgressIndicatorView.swift */,
@@ -182,7 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D3732D12D80CD3B009E71BA /* OnboardinCardView.swift in Sources */,
+				2D3732D12D80CD3B009E71BA /* OnboardingCardView.swift in Sources */,
 				2D3732CF2D80CD1A009E71BA /* OnboardingModel.swift in Sources */,
 				2D3732C72D806FA8009E71BA /* OnboardingView.swift in Sources */,
 				2D2685FA2D812D0A00289FCA /* OnboardingSliderView.swift in Sources */,

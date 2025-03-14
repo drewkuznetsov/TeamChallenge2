@@ -22,6 +22,7 @@ struct OnboardingView: View {
                     cards: viewModel.allCards,
                     onComplete: viewModel.completeOnboarding
                 )
+                .padding(.horizontal, 24)
                 
                 ProgressIndicatorView(
                     cards: viewModel.allCards.map(\.id),

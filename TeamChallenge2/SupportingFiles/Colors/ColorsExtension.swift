@@ -21,6 +21,11 @@ extension Color {
     static let lightBackground  = Color(hex: "#F2F2F2") // Светлый фон
     static let darkBackground   = Color(hex: "#1A1A1A") // Темный фон
     
+    // Беййджи и прочие элементы
+    static let primaryBackground     = Color(hex: "#E5EBFC") // Основной фон
+    static let secondaryBackground   = Color(hex: "#F5F8FF") // Вторичный фон
+    static let tertiaryBackground    = Color(hex: "#F9F9F9") // Третичный фон
+    
     // Цвета кнопок
     static let buttonPrimary    = Color(hex: "#004DFF") // Основная кнопка
     static let buttonSecondary  = Color(hex: "#D1D1D1") // Вторичная кнопка
@@ -28,16 +33,11 @@ extension Color {
     
     // Специфические элементы
     static let searchField      = Color(hex: "#004AFF") // Поле поиска
-    static let badgeText        = Color(hex: "#0043E0") // Текст бейджей
+    static let BackgroundText        = Color(hex: "#0043E0") // Текст бейджей
     
     // Градиенты и дополнительные
     static let gradientStart    = Color(hex: "#0043E0") // Начало градиента
     static let gradientEnd      = Color(hex: "#0066FF") // Конец градиента
-    
-    // Беййджи и прочие элементы
-    static let primaryBadge     = Color(hex: "#E5EBFC") // Основной фон бейджа
-    static let secondaryBadge   = Color(hex: "#F5F8FF") // Вторичный фон бейджа
-    static let tertiaryBadge    = Color(hex: "#F9F9F9") // Третичный фон бейджа
 }
 
 extension Color {
@@ -69,6 +69,11 @@ struct ColorPreview: View {
         (.lightBackground,  "Light Background"),
         (.darkBackground,   "Dark Background"),
         
+        // Фоновая заливка элементов
+        (.primaryBackground,     "Primary Background Background"),
+        (.secondaryBackground,   "Secondary Background Backgound"),
+        (.tertiaryBackground,    "Tertiary Background Backgound"),
+        
         // Цвета кнопок
         (.buttonPrimary,    "Button Primary"),
         (.buttonSecondary,  "Button Secondary"),
@@ -76,17 +81,11 @@ struct ColorPreview: View {
         
         // Специальные элементы
         (.searchField,      "Search Field"),
-        (.badgeText,        "Badge Text"),
+        (.BackgroundText,        "Background Text"),
         
         // Градиенты
         (.gradientStart,    "Gradient Start"),
         (.gradientEnd,      "Gradient End"),
-        
-        // Бэйджи
-        (.primaryBadge,     "Primary Badge Backgound"),
-        (.secondaryBadge,   "Secondary Badge Backgound"),
-        (.tertiaryBadge,    "Tertiary Badge Backgound")
-        
     ]
     
     var body: some View {

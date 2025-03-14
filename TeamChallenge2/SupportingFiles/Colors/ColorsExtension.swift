@@ -9,30 +9,35 @@ import SwiftUI
 
 extension Color {
     // Основные цвета текста
-    static let primaryText = Color(hex: "#212121")     // Основной текст
-    static let secondaryText = Color(hex: "#383F42")   // Вторичный текст
-    static let tertiaryText = Color(hex: "#C7C7CC")    // Третичный текст
+    static let primaryText      = Color(hex: "#212121") // Основной текст
+    static let secondaryText    = Color(hex: "#383F42") // Вторичный текст
+    static let tertiaryText     = Color(hex: "#C7C7CC") // Третичный текст
     
     // Акцентные цвета
-    static let accentBlue = Color(hex: "#0043E0")      // Основной акцент
-    static let brightBlue = Color(hex: "#004CFF")      // Яркий акцент
+    static let accentBlue       = Color(hex: "#0043E0") // Основной акцент
+    static let brightBlue       = Color(hex: "#004CFF") // Яркий акцент
     
     // Фоновые цвета
-    static let lightBackground = Color(hex: "#F2F2F2") // Светлый фон
-    static let darkBackground = Color(hex: "#1A1A1A")  // Темный фон
+    static let lightBackground  = Color(hex: "#F2F2F2") // Светлый фон
+    static let darkBackground   = Color(hex: "#1A1A1A") // Темный фон
     
     // Цвета кнопок
-    static let buttonPrimary = Color(hex: "#004DFF")   // Основная кнопка
-    static let buttonSecondary = Color(hex: "#D1D1D1") // Вторичная кнопка
-    static let buttonText = Color(hex: "#FFFFFF")      // Текст на кнопках
+    static let buttonPrimary    = Color(hex: "#004DFF") // Основная кнопка
+    static let buttonSecondary  = Color(hex: "#D1D1D1") // Вторичная кнопка
+    static let buttonText       = Color(hex: "#FFFFFF") // Текст на кнопках
     
     // Специфические элементы
-    static let searchField = Color(hex: "#004AFF")     // Поле поиска
-    static let badgeText = Color(hex: "#0043E0")       // Текст бейджей
+    static let searchField      = Color(hex: "#004AFF") // Поле поиска
+    static let badgeText        = Color(hex: "#0043E0") // Текст бейджей
     
     // Градиенты и дополнительные
-    static let gradientStart = Color(hex: "#0043E0")
-    static let gradientEnd = Color(hex: "#0066FF")
+    static let gradientStart    = Color(hex: "#0043E0") // Начало градиента
+    static let gradientEnd      = Color(hex: "#0066FF") // Конец градиента
+    
+    // Беййджи и прочие элементы
+    static let primaryBadge     = Color(hex: "#E5EBFC") // Основной фон бейджа
+    static let secondaryBadge   = Color(hex: "#F5F8FF") // Вторичный фон бейджа
+    static let tertiaryBadge    = Color(hex: "#F9F9F9") // Третичный фон бейджа
 }
 
 extension Color {
@@ -52,69 +57,76 @@ extension Color {
 struct ColorPreview: View {
     private let colors: [(Color, String)] = [
         // Основные цвета текста
-        (.primaryText, "Primary Text"),
-        (.secondaryText, "Secondary Text"),
-        (.tertiaryText, "Tertiary Text"),
+        (.primaryText,      "Primary Text"),
+        (.secondaryText,    "Secondary Text"),
+        (.tertiaryText,     "Tertiary Text"),
         
         // Акцентные цвета
-        (.accentBlue, "Accent Blue"),
-        (.brightBlue, "Bright Blue"),
+        (.accentBlue,       "Accent Blue"),
+        (.brightBlue,       "Bright Blue"),
         
         // Фоновые цвета
-        (.lightBackground, "Light Background"),
-        (.darkBackground, "Dark Background"),
+        (.lightBackground,  "Light Background"),
+        (.darkBackground,   "Dark Background"),
         
         // Цвета кнопок
-        (.buttonPrimary, "Button Primary"),
-        (.buttonSecondary, "Button Secondary"),
-        (.buttonText, "Button Text"),
+        (.buttonPrimary,    "Button Primary"),
+        (.buttonSecondary,  "Button Secondary"),
+        (.buttonText,       "Button Text"),
         
         // Специальные элементы
-        (.searchField, "Search Field"),
-        (.badgeText, "Badge Text"),
+        (.searchField,      "Search Field"),
+        (.badgeText,        "Badge Text"),
         
         // Градиенты
-        (.gradientStart, "Gradient Start"),
-        (.gradientEnd, "Gradient End")
+        (.gradientStart,    "Gradient Start"),
+        (.gradientEnd,      "Gradient End"),
+        
+        // Бэйджи
+        (.primaryBadge,     "Primary Badge Backgound"),
+        (.secondaryBadge,   "Secondary Badge Backgound"),
+        (.tertiaryBadge,    "Tertiary Badge Backgound")
+        
     ]
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                ForEach(colors, id: \.1) { color, name in
-                    HStack(spacing: 15) {
-                        color
-                            .frame(width: 60, height: 60)
-                            .cornerRadius(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(color == .lightBackground ? Color.primaryText.opacity(0.2) : .clear,
-                                            lineWidth: 1)
-                            )
-                        
-                        VStack(alignment: .leading) {
-                            Text(name)
-                                .font(.system(size: 16, weight: .medium))
-                                .foregroundColor(.primaryText)
+        NavigationStack{
+            ScrollView {
+                VStack(alignment: .leading, spacing: 0) {
+                    ForEach(colors, id: \.1) { color, name in
+                        HStack(spacing: 15) {
+                            color
+                                .frame(width: 60, height: 60)
+                                .cornerRadius(10)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.primaryText.opacity(0.2)
+                                    )
+                                )
                             
-                            Text(color.description)
-                                .font(.system(size: 12, weight: .regular))
-                                .foregroundColor(.secondaryText)
+                            VStack(alignment: .leading) {
+                                Text(name)
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(.primaryText)
+                                
+                                Text(color.description)
+                                    .font(.system(size: 12, weight: .regular))
+                                    .foregroundColor(.secondaryText)
+                            }
+                            
+                            Spacer()
                         }
-                        
-                        Spacer()
+                        .padding(.horizontal)
+                        .padding(.vertical, 8)
+                        .background(
+                            color == .darkBackground ? Color.white.opacity(0.1) : Color.clear
+                        )
                     }
-                    .padding(.horizontal)
-                    .padding(.vertical, 8)
-                    .background(
-                        color == .darkBackground ? Color.white.opacity(0.1) : Color.clear
-                    )
                 }
+                .padding(.vertical)
             }
-            .padding(.vertical)
+            .navigationTitle("Color Palette")
         }
-        .background(Color(.systemGroupedBackground))
-        .navigationTitle("Color Palette")
     }
 }
 

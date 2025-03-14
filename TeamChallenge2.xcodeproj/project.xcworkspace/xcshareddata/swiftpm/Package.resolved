@@ -1,5 +1,4 @@
 {
-  "originHash" : "9f95b8541e45df98e152ddb078e332d13aa5914a1ac0b212ca8c5e48e38a1e60",
   "pins" : [
     {
       "identity" : "shoppestore",
@@ -7,7 +6,7 @@
       "location" : "https://github.com/ShapovalovIlya/ShoppeStore.git",
       "state" : {
         "branch" : "main",
-        "revision" : "14e8fe75584b63fe7eb4e38af454d6e2c77486d1"
+        "revision" : "89a7ca5d2955df313b8426518caa7c4803d98dc2"
       }
     },
     {
@@ -20,5 +19,5 @@
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }

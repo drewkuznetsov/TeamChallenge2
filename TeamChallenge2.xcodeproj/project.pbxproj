@@ -20,6 +20,7 @@
 /* Begin PBXFileReference section */
 		2D2685BD2D80D7E800289FCA /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		2D2685F22D8107B300289FCA /* TabBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarModel.swift; sourceTree = "<group>"; };
+		86737B422D84AC4A002DF6DB /* ShoppeCheckout */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ShoppeCheckout; sourceTree = "<group>"; };
 		E422C3812D76222B00FE7F97 /* TeamChallenge2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamChallenge2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E422C3842D76222B00FE7F97 /* TeamChallenge2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamChallenge2App.swift; sourceTree = "<group>"; };
 		E422C3862D76222B00FE7F97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,9 +53,8 @@
 		E422C3782D76222B00FE7F97 = {
 			isa = PBXGroup;
 			children = (
-				864AF05F2D8212F70039E45D /* ShoppeCheckout */,
+				86737B422D84AC4A002DF6DB /* ShoppeCheckout */,
 				E422C3832D76222B00FE7F97 /* TeamChallenge2 */,
-				864AF0602D8214E40039E45D /* Frameworks */,
 				E422C3822D76222B00FE7F97 /* Products */,
 			);
 			sourceTree = "<group>";

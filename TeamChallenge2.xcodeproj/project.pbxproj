@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11FFCF602D844EF400BCAFD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11FFCF5F2D844EF400BCAFD4 /* Assets.xcassets */; };
 		8612E2A92D76461700F33FE8 /* ShoppeStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8612E2A82D76461700F33FE8 /* ShoppeStore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11FFCF5F2D844EF400BCAFD4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E422C3812D76222B00FE7F97 /* TeamChallenge2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamChallenge2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		11FFCF5C2D844ECC00BCAFD4 /* Resources  */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Resources "; sourceTree = "<group>"; };
 		D97C0E202D83615E00C3A177 /* Modules */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modules; sourceTree = "<group>"; };
 		D97C0E272D8361FA00C3A177 /* SupportingFiles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SupportingFiles; sourceTree = "<group>"; };
 		D97C0E282D83621200C3A177 /* App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = App; sourceTree = "<group>"; };
@@ -51,6 +54,8 @@
 		E422C3832D76222B00FE7F97 /* TeamChallenge2 */ = {
 			isa = PBXGroup;
 			children = (
+				11FFCF5F2D844EF400BCAFD4 /* Assets.xcassets */,
+				11FFCF5C2D844ECC00BCAFD4 /* Resources  */,
 				D97C0E282D83621200C3A177 /* App */,
 				D97C0E272D8361FA00C3A177 /* SupportingFiles */,
 				D97C0E202D83615E00C3A177 /* Modules */,
@@ -74,6 +79,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				11FFCF5C2D844ECC00BCAFD4 /* Resources  */,
 				D97C0E202D83615E00C3A177 /* Modules */,
 				D97C0E272D8361FA00C3A177 /* SupportingFiles */,
 				D97C0E282D83621200C3A177 /* App */,
@@ -124,6 +130,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11FFCF602D844EF400BCAFD4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,7 +30,14 @@ struct HomeView: View {
                 search
                 Spacer()
                     .frame(height: 14)
-                HomeViewCollections(categories: Array(repeating: Category.makeStubCategory(), count: 4))
+                HomeViewCollections(
+                    categories: Array(repeating: Category.makeStubCategory(), count: 4)) {
+                        //
+                    } onTapPopular: {
+                        //
+                    } onTapRecomendations: {
+                        //
+                    }
                     .padding(.zero)
             }
         }
@@ -39,14 +46,14 @@ struct HomeView: View {
     private var footer: some View {
         HStack(alignment: .bottom) {
             VStack(alignment: .leading, spacing: 1) {
-                Text("Delivery address")
+                Text(Constants.deliveryAdress)
                     .foregroundStyle(.gray)
                 
                 Button {
                     // open navigation
                 } label: {
                     HStack(spacing: 5) {
-                        Text("Salatiga City, Central Java")
+                        Text(Constants.location)
                             .foregroundStyle(.black)
                         Image(.arrowDown)
                             .resizable()
@@ -71,7 +78,7 @@ struct HomeView: View {
     
     private var search: some View {
         HStack {
-            Text("Shop")
+            Text(Constants.shop)
                 .font(.system(size: 28, weight: .bold))
             Button {
                 // open search screen
@@ -80,15 +87,24 @@ struct HomeView: View {
                     .fill(.gray.opacity(0.5))
                     .frame(height: 36)
                     .overlay(alignment: .leading) {
-                        Text("Search")
+                        Text(Constants.search)
                             .font(.system(size: 16, weight: .light))
                             .foregroundStyle(.gray)
                             .padding(EdgeInsets(top: 9, leading: 16, bottom: 6, trailing: 0))
                     }
             }
-
+            
         }
         .padding(.horizontal, 20)
+    }
+}
+
+extension HomeView {
+    private enum Constants {
+        static let search = "Search"
+        static let shop = "Shop"
+        static let location = "Salatiga City, Central Java"
+        static let deliveryAdress = "Delivery address"
     }
 }
 

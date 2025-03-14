@@ -11,30 +11,36 @@ struct JustForYouGrid: View {
     let products: [ProductBO]
     
     private var cellWidth: CGFloat {
-        (UIScreen.main.bounds.width - 20*2 - 13)/2
+        (UIScreen.main.bounds.width - Constants.sideInset * 2.0 - Constants.interItemSpacing) / 2.0
     }
     
     private var gridItems: [GridItem] {
-        let gridItem = GridItem(spacing: 13)
+        let gridItem = GridItem(spacing: Constants.interItemSpacing)
         return [gridItem, gridItem]
     }
     
     var body: some View {
-        LazyVGrid(columns: gridItems, spacing: 13) {
+        LazyVGrid(columns: gridItems, spacing: Constants.interItemSpacing) {
             ForEach(0..<products.count) { index in
                 let product = products[index]
-                JustForYouCell(product: product, width: cellWidth, onAddToFavorites: { _ in
+                JustForYouCell(product: product, width: cellWidth, onAddToFavoritesAction: { _ in
                     
-                }, onAddToCart: { _ in
+                }, onAddToCartAction: { _ in
                 })
                     .frame(width: cellWidth)
             }
             
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, Constants.sideInset)
     }
 }
 
+extension JustForYouGrid {
+    private enum Constants {
+        static let sideInset = 20.0
+        static let interItemSpacing = 13.0
+    }
+}
 #Preview {
     JustForYouGrid(products: Array(repeating: ProductBO.makeStubProductBO(), count: 4))
 }

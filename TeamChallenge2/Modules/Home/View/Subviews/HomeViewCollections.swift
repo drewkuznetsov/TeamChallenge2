@@ -9,27 +9,30 @@ import SwiftUI
 
 struct HomeViewCollections: View {
     let categories: [Category]
+    let onTapAllCategories: () -> Void
+    let onTapPopular: () -> Void
+    let onTapRecomendations: () -> Void
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 22) {
                 HomeSection(
-                    title: "Categories") {
+                    title: Constants.categories) {
                         CategoriesGrid(categories: categories)
                     } onTapSeeAll: {
-                        // move to CategoriesView()
+                        onTapAllCategories()
                     }
                 
-                HomeSection(title: "Popular") {
+                HomeSection(title: Constants.popular) {
                     Populars(products: categories.first?.products ?? [])
                 } onTapSeeAll: {
-                    // move to PDP
+                    onTapPopular()
                 }
 
-                HomeSection(title: "Just for You") {
+                HomeSection(title: Constants.justForYou) {
                     JustForYouGrid(products: categories.first?.products ?? [])
                 } onTapSeeAll: {
-                    // move to PDP
+                    onTapRecomendations()
                 }
 
             }
@@ -37,6 +40,22 @@ struct HomeViewCollections: View {
     }
 }
 
+extension HomeViewCollections {
+    private enum Constants {
+        static let categories = "Categories"
+        static let popular = "Popular"
+        static let justForYou = "Just for You"
+    }
+}
+
 #Preview {
-    HomeViewCollections(categories: Array(repeating: Category.makeStubCategory(), count: 4))
+    HomeViewCollections(
+        categories: Array(repeating: Category.makeStubCategory(), count: 4)) {
+            //
+        } onTapPopular: {
+            //
+        } onTapRecomendations: {
+            //
+        }
+
 }

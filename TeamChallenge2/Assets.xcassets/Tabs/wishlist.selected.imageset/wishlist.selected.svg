@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="35px" viewBox="0 0 26 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>wishlist.selected</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-31, -39)">
+            <g id="wishlist.selected" transform="translate(31, 39)">
+                <line x1="8.5" y1="31" x2="17.5" y2="31" id="Path" stroke="#000000" stroke-width="3" stroke-linecap="round"></line>
+                <path d="M13.01,20.6365 C17.856,17.3147 20.397,14.2928 21.439,11.7637 C23.396,7.0129 20.064,4 16.778,4 C15.376,4 13.981,4.549 13.01,5.7456 C12.039,4.5487 10.646,4 9.243,4 C5.957,4 2.625,7.0133 4.582,11.7637 C5.624,14.2928 8.165,17.3147 13.01,20.6365 Z M13.01,22.6365 C12.615,22.6365 12.22,22.5197 11.88,22.2861 C7.14,19.0367 4.062,15.7529 2.733,12.5256 C1.627,9.8412 1.776,7.231 3.152,5.1756 C4.464,3.2168 6.798,2 9.243,2 C10.613,2 11.915,2.3858 13.01,3.0928 C14.106,2.3858 15.408,2 16.778,2 C19.224,2 21.558,3.2168 22.869,5.1755 C24.245,7.2308 24.394,9.841 23.288,12.5254 C21.959,15.7529 18.881,19.0367 14.141,22.2861 C13.801,22.5197 13.406,22.6365 13.01,22.6365 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
+                <rect id="Rectangle" opacity="0" fill-rule="nonzero" x="0" y="0" width="26" height="35"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

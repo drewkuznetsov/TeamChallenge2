@@ -11,11 +11,11 @@ struct CategoriesGrid: View {
     let categories: [Category]
     
     private var cellWidth: CGFloat {
-        (UIScreen.main.bounds.width - 20*2 - 5)/2
+        (UIScreen.main.bounds.width - Constants.sideOffset * 2.0 - Constants.interItemSpacing) / 2.0
     }
     
     private var cellHeight: CGFloat {
-        cellWidth + 27
+        cellWidth + Constants.bottomInset
     }
     
     private var gridItems: [GridItem] {
@@ -30,6 +30,14 @@ struct CategoriesGrid: View {
                     .frame(width: cellWidth)
             }
         }
+    }
+}
+
+extension CategoriesGrid {
+    private enum Constants {
+        static let sideOffset = 20.0
+        static let interItemSpacing = 5.0
+        static let bottomInset = 27.0
     }
 }
 

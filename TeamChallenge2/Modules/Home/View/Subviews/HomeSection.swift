@@ -29,7 +29,7 @@ struct HomeSection<Content> : View where Content: View {
                 Button(action: {
                     onTapSeeAll()
                 }) {
-                    Text("See All")
+                    Text(Constants.seeAll)
                         .font(.system(size: 15, weight: .black))
                     Image(.seeAll)
                         .resizable()
@@ -42,6 +42,12 @@ struct HomeSection<Content> : View where Content: View {
             content
             
         }
+    }
+}
+
+extension HomeSection {
+    private enum Constants {
+        static var seeAll: String { "See All" }
     }
 }
 

@@ -10,8 +10,8 @@ import SwiftUI
 struct JustForYouCell: View {
     let product: ProductBO
     let width: CGFloat
-    let onAddToFavorites: (Int) -> Void
-    let onAddToCart: (Int) -> Void
+    let onAddToFavoritesAction: (Int) -> Void
+    let onAddToCartAction: (Int) -> Void
     
     var body: some View {
         VStack(spacing: 0) {
@@ -33,7 +33,7 @@ struct JustForYouCell: View {
             TitleAndPrice(title: product.title, price: product.price)
                 .overlay(alignment: .bottomTrailing) {
                     Button {
-                        onAddToFavorites(product.id)
+                        onAddToFavoritesAction(product.id)
                     } label: {
                         Image(product.isFavorite ? .heartFill : .heart)
                     }
@@ -43,13 +43,13 @@ struct JustForYouCell: View {
                 .frame(height: 8)
             
             Button {
-                onAddToCart(product.id)
+                onAddToCartAction(product.id)
             } label: {
                 RoundedRectangle(cornerRadius: 4)
                     .fill(.blue)
                     .frame(height: 31)
                     .overlay {
-                        Text("Add to cart")
+                        Text(Constants.addToCart)
                             .foregroundStyle(.white)
                             .font(.system(size: 12))
                     }
@@ -61,10 +61,16 @@ struct JustForYouCell: View {
     }
 }
 
+extension JustForYouCell {
+    private enum Constants {
+        static let addToCart = "Add to cart"
+    }
+}
+
 #Preview {
     JustForYouCell(product: ProductBO.makeStubProductBO(), width: 100) {
         print("Add to favorites \($0)")
-    } onAddToCart: {
+    } onAddToCartAction: {
         print("Add to cart \($0)")
     }
 }

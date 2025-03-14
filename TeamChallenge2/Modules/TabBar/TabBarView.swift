@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct TabBarView: View {
-    private var tabs: [TabBarItem] = TabBarItem.allCases
+    private var tabs = TabBarItem.allCases
     @State private var selectedTab = 0
     
     var body: some View {
         TabView(selection: $selectedTab) {
             ForEach(tabs.indices, id: \.self) { index in
                 NavigationStack {
-                    AnyView(tabs[index].view)
+                    tabs[index].view
                 }
                 .tabItem {
                     Image(

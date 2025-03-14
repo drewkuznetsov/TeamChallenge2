@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8612E2A92D76461700F33FE8 /* ShoppeStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8612E2A82D76461700F33FE8 /* ShoppeStore */; };
+		864AF0622D8214E40039E45D /* ShoppeCheckout in Frameworks */ = {isa = PBXBuildFile; productRef = 864AF0612D8214E40039E45D /* ShoppeCheckout */; };
 		E422C3852D76222B00FE7F97 /* TeamChallenge2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E422C3842D76222B00FE7F97 /* TeamChallenge2App.swift */; };
 		E422C3872D76222B00FE7F97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E422C3862D76222B00FE7F97 /* ContentView.swift */; };
 		E422C3892D76222D00FE7F97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E422C3882D76222D00FE7F97 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		864AF05F2D8212F70039E45D /* ShoppeCheckout */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ShoppeCheckout; sourceTree = "<group>"; };
 		E422C3812D76222B00FE7F97 /* TeamChallenge2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamChallenge2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E422C3842D76222B00FE7F97 /* TeamChallenge2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamChallenge2App.swift; sourceTree = "<group>"; };
 		E422C3862D76222B00FE7F97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -28,16 +30,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				8612E2A92D76461700F33FE8 /* ShoppeStore in Frameworks */,
+				864AF0622D8214E40039E45D /* ShoppeCheckout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		864AF0602D8214E40039E45D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E422C3782D76222B00FE7F97 = {
 			isa = PBXGroup;
 			children = (
+				864AF05F2D8212F70039E45D /* ShoppeCheckout */,
 				E422C3832D76222B00FE7F97 /* TeamChallenge2 */,
+				864AF0602D8214E40039E45D /* Frameworks */,
 				E422C3822D76222B00FE7F97 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -364,6 +376,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8612E2A72D76461700F33FE8 /* XCRemoteSwiftPackageReference "ShoppeStore" */;
 			productName = ShoppeStore;
+		};
+		864AF0612D8214E40039E45D /* ShoppeCheckout */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ShoppeCheckout;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

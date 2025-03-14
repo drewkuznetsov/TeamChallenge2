@@ -91,40 +91,31 @@ struct ColorPreview: View {
     
     var body: some View {
         NavigationStack{
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    ForEach(colors, id: \.1) { color, name in
-                        HStack(spacing: 15) {
-                            color
-                                .frame(width: 60, height: 60)
-                                .cornerRadius(10)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.primaryText.opacity(0.2)
-                                    )
-                                )
+            List {
+                ForEach(colors, id: \.1) { color, name in
+                    HStack() {
+                        color
+                            .frame(width: 60, height: 60)
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.primaryText.opacity(0.2)
+                                           )
+                            )
+                        
+                        VStack(alignment: .leading) {
+                            Text(name)
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(.primaryText)
                             
-                            VStack(alignment: .leading) {
-                                Text(name)
-                                    .font(.system(size: 16, weight: .medium))
-                                    .foregroundColor(.primaryText)
-                                
-                                Text(color.description)
-                                    .font(.system(size: 12, weight: .regular))
-                                    .foregroundColor(.secondaryText)
-                            }
-                            
-                            Spacer()
+                            Text(color.description)
+                                .font(.system(size: 12, weight: .regular))
+                                .foregroundColor(.secondaryText)
                         }
-                        .padding(.horizontal)
-                        .padding(.vertical, 8)
-                        .background(
-                            color == .darkBackground ? Color.white.opacity(0.1) : Color.clear
-                        )
                     }
                 }
-                .padding(.vertical)
             }
+            .listStyle(.insetGrouped)
             .navigationTitle("Color Palette")
         }
     }

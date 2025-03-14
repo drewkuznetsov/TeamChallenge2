@@ -9,6 +9,8 @@ import Foundation
 
 final class CreateAccountViewModel: ObservableObject {
     @Published var shouldNavigateToHome: Bool = false
+    @Published var email: String = ""
+    @Published var password: String = ""
     
     let model = CreateAccountModel()
     

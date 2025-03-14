@@ -40,12 +40,6 @@ struct RoundTextField: View {
                     .stroke(lineWidth: 1)
                     .foregroundStyle(Color.green)
             )
-            
-            Text("\(text.count) / \(maxCount)")
-                .font(Font.system(size: 14).weight(.thin))
-                .foregroundStyle(Color.yellow)
-                .lineLimit(1)
-                .frame(width: 60, alignment: .trailing)
         }
     }
 }

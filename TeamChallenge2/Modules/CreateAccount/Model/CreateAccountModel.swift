@@ -12,4 +12,6 @@ struct CreateAccountModel {
     let storeName = "Shoppe"
     let upperButtonTitle = "Done"
     let bottomButtonTitle = "Cancel"
+    let emailFieldPlaceholder = "Email"
+    let passwordFieldPlaceholder = "Password"
 }

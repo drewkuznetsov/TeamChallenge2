@@ -50,7 +50,19 @@ struct CreateAccountView: View {
                 Spacer()
                 
                 VStack(spacing: 15) {
+                    RoundTextField(
+                        text: $viewModel.email,
+                        placeholder: viewModel.model.emailFieldPlaceholder,
+                        maxCount: 100,
+                        onSubmit: {}
+                    )
                     
+                    RoundTextField(
+                        text: $viewModel.password,
+                        placeholder: viewModel.model.passwordFieldPlaceholder,
+                        maxCount: 100,
+                        onSubmit: {}
+                    )
                 }
                 
                 VStack(spacing: Drawing.buttonsSpacing) {
@@ -64,7 +76,6 @@ struct CreateAccountView: View {
                             fontSize: Drawing.upperButtonFontSize
                         )
                     }
-                    .padding(.horizontal, Drawing.horizontalPadding)
                     
                     Button(action: { dismiss() }) {
                         Text(viewModel.model.bottomButtonTitle)
@@ -79,6 +90,7 @@ struct CreateAccountView: View {
                 }
                 .padding(.bottom, Drawing.bottomPadding)
             }
+            .padding(.horizontal, Drawing.horizontalPadding)
             .navigationDestination(isPresented: $viewModel.shouldNavigateToHome) {
                 HomeView()
             }

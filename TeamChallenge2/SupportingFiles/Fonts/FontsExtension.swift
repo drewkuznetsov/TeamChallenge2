@@ -11,19 +11,24 @@ import SwiftUI
 
 extension Font {
     // Raleway
-    static let screenTitle = Font.custom("Raleway-Bold", size: 52)
-    static let sectionHeader = Font.custom("Raleway-Bold", size: 28)
-    static let cardTitle = Font.custom("Raleway-Bold", size: 21)
-    static let bodyBold = Font.custom("Raleway-Bold", size: 17)
-    static let captionBold = Font.custom("Raleway-Bold", size: 12)
+    static let screenTitle = Font.custom("Raleway", size: 52).weight(.bold)
+    static let sectionHeader = Font.custom("Raleway", size: 28).weight(.bold)
+    static let cardTitle = Font.custom("Raleway", size: 21).weight(.bold)
+    static let bodyBold = Font.custom("Raleway", size: 17).weight(.bold)
+    static let seachText = Font.custom("Raleway", size: 16).weight(.medium)
+    static let actionText = Font.custom("Raleway", size: 15).weight(.bold)
+    static let captionBold = Font.custom("Raleway", size: 12).weight(.bold)
     
     // Nunito Sans
-    static let bodyLight = Font.custom("NunitoSans-Light", size: 19)
-    static let buttonText = Font.custom("NunitoSans-Light", size: 16)
+    static let bodyRegular = Font.custom("NunitoSans", size: 12).weight(.regular)
+    static let bodyLight = Font.custom("NunitoSans", size: 19).weight(.light)
+    static let buttonText = Font.custom("NunitoSans", size: 16).weight(.light)
+    static let cardAction = Font.custom("NunitoSans", size: 22).weight(.light)
     
     // Inter
-    static let microText = Font.custom("Inter-Regular", size: 10)
-    static let statusText = Font.custom("Inter-Medium", size: 12)
+    static let microText = Font.custom("Inter", size: 10).weight(.regular)
+    static let statusText = Font.custom("Inter", size: 12).weight(.medium)
+    static let actioText = Font.custom("Inter", size: 12).weight(.regular)
     
     // Poppins
     static let formText = Font.custom("Poppins-Medium", size: 14)

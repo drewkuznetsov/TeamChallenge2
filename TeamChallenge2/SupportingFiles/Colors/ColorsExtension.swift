@@ -25,6 +25,7 @@ extension Color {
     static let primaryBackground     = Color(hex: "#E5EBFC") // Основной фон
     static let secondaryBackground   = Color(hex: "#F5F8FF") // Вторичный фон
     static let tertiaryBackground    = Color(hex: "#F9F9F9") // Третичный фон
+    static let searchBackground      = Color(hex: "F8F8F8FF") // Фон поиска
     
     // Цвета кнопок
     static let buttonPrimary    = Color(hex: "#004DFF") // Основная кнопка
@@ -33,7 +34,7 @@ extension Color {
     
     // Специфические элементы
     static let searchField      = Color(hex: "#004AFF") // Поле поиска
-    static let BackgroundText        = Color(hex: "#0043E0") // Текст бейджей
+    static let BackgroundText   = Color(hex: "#0043E0") // Текст бейджей
     
     // Градиенты и дополнительные
     static let gradientStart    = Color(hex: "#0043E0") // Начало градиента
@@ -73,6 +74,8 @@ struct ColorPreview: View {
         (.primaryBackground,     "Primary Background Background"),
         (.secondaryBackground,   "Secondary Background Backgound"),
         (.tertiaryBackground,    "Tertiary Background Backgound"),
+        (.searchBackground,    "Seach Background Backgound"),
+        
         
         // Цвета кнопок
         (.buttonPrimary,    "Button Primary"),
@@ -81,7 +84,7 @@ struct ColorPreview: View {
         
         // Специальные элементы
         (.searchField,      "Search Field"),
-        (.BackgroundText,        "Background Text"),
+        (.BackgroundText,   "Background Text"),
         
         // Градиенты
         (.gradientStart,    "Gradient Start"),

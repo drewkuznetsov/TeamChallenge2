@@ -19,7 +19,7 @@ struct TabBarItem {
 extension TabBarItem {
     // Example of an array of views
     static var allCases: [TabBarItem] = [
-        TabBarItem(title: "Home",       iconName: "home",       view: AnyView(Text("Home"))),
+        TabBarItem(title: "Home",       iconName: "home",       view: AnyView(HomeView())),
         TabBarItem(title: "Wishlist",   iconName: "wishlist",   view: AnyView(Text("Wishlist"))),
         TabBarItem(title: "Categories", iconName: "categories", view: AnyView(Text("Categories"))),
         TabBarItem(title: "Cart",       iconName: "cart",       view: AnyView(Text("Cart"))),

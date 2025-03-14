@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabBarView: View {
-    var tabs: [TabBarItem]
+    private var tabs: [TabBarItem] = TabBarItem.allCases
     @State private var selectedTab = 0
     
     var body: some View {
@@ -33,5 +33,5 @@ struct TabBarView: View {
 }
 
 #Preview {
-    TabBarView(tabs: TabBarItem.allCases)
+    TabBarView()
 }

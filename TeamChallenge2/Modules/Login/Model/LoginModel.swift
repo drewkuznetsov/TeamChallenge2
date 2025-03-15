@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct CreateAccountModel {
-    let screenLabel = "Create Account"
+struct LoginModel {
+    let screenLabel = "Login"
+    let sublabelLabel = "Good to see you back! ♥"
     let upperButtonTitle = "Done"
     let bottomButtonTitle = "Cancel"
     let emailFieldPlaceholder = "Email"

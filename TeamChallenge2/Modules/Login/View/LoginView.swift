@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-struct CreateAccountView: View {
+struct LoginView: View {
     private enum Drawing {
         static let screenLabelTextSize: CGFloat = 50
-        static let screenLabelWidth: CGFloat = 200
-        static let screenLabelHight: CGFloat = 120
+        static let sublabelLabelTextSize: CGFloat = 19
         static let screenLabelTopPadding: CGFloat = 78
         static let screenLabelLeadingPadding: CGFloat = 30
         static let screenLabelBottomPadding: CGFloat = 30
@@ -20,35 +19,41 @@ struct CreateAccountView: View {
     }
     
     @Environment(\.dismiss) var dismiss
-    @StateObject private var viewModel = CreateAccountViewModel()
+    @StateObject private var viewModel = LoginViewModel()
     
     var body: some View {
         ZStack {
-            Image(.createAccountBackground)
+            Image(.loginBackground)
                 .resizable()
                 .ignoresSafeArea()
             
             VStack {
                 Spacer()
-                    .frame(maxHeight: Drawing.screenLabelTopPadding)
                 
-                HStack {
-                    Text(viewModel.model.screenLabel)
-                        .font(
-                            Font.system(
-                                size: Drawing.screenLabelTextSize,
-                                weight: .bold
+                VStack {
+                    HStack {
+                        Text(viewModel.model.screenLabel)
+                            .font(
+                                Font.system(
+                                    size: Drawing.screenLabelTextSize,
+                                    weight: .bold
+                                )
                             )
-                        )
-                        .frame(width: Drawing.screenLabelWidth)
+                        
+                        Spacer()
+                    }
                     
-                    Spacer()
+                    HStack {
+                        Text(viewModel.model.sublabelLabel)
+                            .font(
+                                Font.system(
+                                    size: Drawing.sublabelLabelTextSize
+                                )
+                            )
+                        
+                        Spacer()
+                    }
                 }
-                .frame(height: Drawing.screenLabelHight)
-                .padding(.leading, Drawing.screenLabelLeadingPadding)
-                
-                Spacer()
-                    .frame(minHeight: Drawing.screenLabelBottomPadding)
                 
                 AuthStack(
                     email: $viewModel.email,
@@ -56,7 +61,7 @@ struct CreateAccountView: View {
                     emailPlaceholder: viewModel.model.emailFieldPlaceholder,
                     passwordPlaceholder: viewModel.model.passwordFieldPlaceholder,
                     upperButtonTitle: viewModel.model.upperButtonTitle,
-                    upperbuttonAction: viewModel.createAccount,
+                    upperbuttonAction: viewModel.login,
                     lowerButtonTitle: viewModel.model.bottomButtonTitle,
                     lowerbuttonAction: { dismiss() }
                 )
@@ -82,5 +87,5 @@ struct CreateAccountView: View {
 }
 
 #Preview {
-    CreateAccountView()
+    LoginView()
 }

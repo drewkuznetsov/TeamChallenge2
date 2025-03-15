@@ -15,14 +15,13 @@ struct OnboardingView: View {
             BackgroundView()
                 .equatable()
             
-            VStack() {
+            VStack(spacing: 0) {
                 
                 OnboardingSliderView(
                     selected: $viewModel.selectedCard,
                     cards: viewModel.allCards,
                     onComplete: viewModel.completeOnboarding
                 )
-                .padding(.horizontal, 24)
                 
                 ProgressIndicatorView(
                     cards: viewModel.allCards.map(\.id),

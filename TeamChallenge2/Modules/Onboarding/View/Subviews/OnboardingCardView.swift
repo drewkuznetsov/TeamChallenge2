@@ -16,13 +16,21 @@ struct OnboardingCardView: View {
     private var maxWidth: CGFloat {
         UIScreen.main.bounds.width - 2 * Drawing.sideInset
     }
+    
+    private var maxHeight: CGFloat {
+        UIScreen.main.bounds.height - Drawing.topInset - Drawing.bottomInset
+    }
 
     var body: some View {
-        image
-            .overlay(alignment: .bottom) {
+        ZStack {
+            Color.clear
+                VStack(spacing: 0) {
+                    image
                     bottomView
-            }
-
+                }
+                .clipShape(.rect(cornerRadius: 20))
+        }
+        .ignoresSafeArea()
     }
     
     private var image: some View {
@@ -30,6 +38,7 @@ struct OnboardingCardView: View {
             .resizable()
             .scaledToFill()
             .frame(width: maxWidth)
+            .frame(height: maxHeight * 0.55 )
             .clipped()
         
     }
@@ -59,7 +68,7 @@ struct OnboardingCardView: View {
                     }
                 }
             }
-            .frame(width: maxWidth, height: maxWidth)
+            .frame(width: maxWidth, height: maxHeight * 0.45 )
     }
 }
 
@@ -67,9 +76,11 @@ extension OnboardingCardView {
     private enum Drawing {
         static var sideInset: CGFloat { 24 }
         static var cornerRadius: CGFloat { 20 }
+        static var topInset: CGFloat { 81 }
+        static var bottomInset: CGFloat { 117 }
     }
 }
 
 #Preview {
-    OnboardingView()
+    OnboardingCardView(card: Onboarding.allCards[1], action: {})
 }

@@ -11,8 +11,6 @@ import SwiftUI
 struct OnboardingSliderView: View {
     
     private enum Draving {
-        static var topInset: CGFloat { 81 }
-        static var bottomInset: CGFloat { 117 }
         static var shadowColor: Color { .black.opacity(0.16) }
         static var shadowRadius: CGFloat { 18.5 }
         static var shadowOffsetY: CGFloat { 10 }
@@ -21,10 +19,6 @@ struct OnboardingSliderView: View {
     @Binding var selected: UUID?
     let cards: [Onboarding]
     let onComplete: () -> Void
-    
-    private var maxHeight: CGFloat {
-        UIScreen.main.bounds.height - Draving.topInset - Draving.bottomInset
-    }
     
     var body: some View {
         TabView(selection: $selected) {
@@ -37,10 +31,6 @@ struct OnboardingSliderView: View {
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .frame(maxHeight: maxHeight)
-        .clipShape(
-            RoundedRectangle(cornerRadius: 20)
-        )
         .shadow(
             color: Draving.shadowColor,
             radius: Draving.shadowRadius,

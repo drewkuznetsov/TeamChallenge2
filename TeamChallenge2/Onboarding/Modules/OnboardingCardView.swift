@@ -8,15 +8,13 @@
 
 import SwiftUI
 
-struct OnboardinCardView: View {
+struct OnboardingCardView: View {
     
-    let card: Onboarding
+    let card: OnboardingModel
     let action: () -> Void
     
-    private enum Draving {
-        static var size: CGFloat { 340 }
-        static var padding: CGFloat { 20 }
-        static var cornerRadius: CGFloat { 20 }
+    private var maxWidth: CGFloat {
+        UIScreen.main.bounds.width - 2 * Drawing.sideInset
     }
 
     var body: some View {
@@ -24,9 +22,7 @@ struct OnboardinCardView: View {
             Image(card.imageName)
                 .resizable()
                 .scaledToFill()
-                .frame(
-                    minHeight: Draving.size,
-                    alignment: card.imageAlignment)
+                .aspectRatio(1, contentMode: .fill)
                 .clipped()
 
             VStack {
@@ -34,7 +30,7 @@ struct OnboardinCardView: View {
                     .font(.title)
                     .multilineTextAlignment(.center)
                     .fontWeight(.bold)
-                    .padding(.bottom, Draving.padding)
+                    .padding(.bottom, Drawing.padding)
 
                 Text(card.description)
                     .font(.body)
@@ -50,14 +46,22 @@ struct OnboardinCardView: View {
                     )
                 }
             }
-            .padding(Draving.padding)
+            .padding(Drawing.padding)
         }
-        .frame(maxWidth: Draving.size)
+        .frame(width: maxWidth)
         .background(Color(UIColor.systemBackground))
         .clipShape(
-            RoundedRectangle(cornerRadius: Draving.cornerRadius)
+            RoundedRectangle(cornerRadius: Drawing.cornerRadius)
         )
 
+    }
+}
+
+extension OnboardingCardView {
+    private enum Drawing {
+        static var sideInset: CGFloat { 25 }
+        static var padding: CGFloat { 20 }
+        static var cornerRadius: CGFloat { 20 }
     }
 }
 

@@ -12,8 +12,7 @@ struct TeamChallenge2App: App {
     var body: some Scene {
         WindowGroup {
             StartView()
-//            HomeView()
-//                .colorScheme(.light)
+                .colorScheme(.light)
         }
     }
 }

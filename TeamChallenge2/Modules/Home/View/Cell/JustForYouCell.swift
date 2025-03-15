@@ -41,7 +41,7 @@ struct JustForYouCell: View {
                     .overlay {
                         Text(Constants.addToCart)
                             .foregroundStyle(.white)
-                            .font(.actioText)
+                            .font(.secondaryActionText)
                     }
                     
             }

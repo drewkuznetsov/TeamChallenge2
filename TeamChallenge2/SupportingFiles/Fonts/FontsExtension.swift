@@ -7,190 +7,151 @@
 
 import SwiftUI
 
-// MARK: - Font Extension
-
+/// Provides custom font styles with Dynamic Type support
+///
+/// This extension adds support for custom fonts:
+/// - Raleway
+/// - Nunito Sans
+/// - Inter
+/// - Poppins (Medium weight)
+///
+/// Offers two sizing modes:
+/// 1. Adaptive sizing based on `UIFont.TextStyle`
+/// 2. Fixed point sizing
 extension Font {
-    // Raleway
-    static let screenTitle = Font.custom("Raleway", size: 52).weight(.bold)
-    static let sectionHeader = Font.custom("Raleway", size: 28).weight(.bold)
-    static let cardTitle = Font.custom("Raleway", size: 21).weight(.bold)
-    static let bodyBold = Font.custom("Raleway", size: 17).weight(.bold)
-    static let seachText = Font.custom("Raleway", size: 16).weight(.medium)
-    static let actionText = Font.custom("Raleway", size: 15).weight(.bold)
-    static let captionBold = Font.custom("Raleway", size: 12).weight(.bold)
     
-    // Nunito Sans
-    static let bodyRegular = Font.custom("NunitoSans", size: 12).weight(.regular)
-    static let bodyLight = Font.custom("NunitoSans", size: 19).weight(.light)
-    static let buttonText = Font.custom("NunitoSans", size: 16).weight(.light)
-    static let cardAction = Font.custom("NunitoSans", size: 22).weight(.light)
+    // MARK: - Raleway
     
-    // Inter
-    static let microText = Font.custom("Inter", size: 10).weight(.regular)
-    static let statusText = Font.custom("Inter", size: 12).weight(.medium)
-    static let actioText = Font.custom("Inter", size: 12).weight(.regular)
+    /// Creates an adaptive Raleway font for the specified text style
+    /// - Parameter style: The text style for dynamic type scaling (default: .body)
+    /// - Returns: Custom Raleway font scaled to match the text style
+    /// - Note: Automatically adapts to user's Dynamic Type settings
+    ///
+    /// # Usage
+    /// ```
+    /// Text("Adaptive Title")
+    ///     .font(.raleway(.title))
+    /// ```
+    static func raleway(_ style: UIFont.TextStyle = .body) -> Font {
+        custom("Raleway", size: UIFont.preferredFont(forTextStyle: style).pointSize)
+    }
     
-    // Poppins
+    /// Creates a Raleway font with fixed point size
+    /// - Parameter fixedSize: The font size in points
+    /// - Returns: Custom Raleway font with specified size
+    /// - Important: Fixed sizes ignore Dynamic Type accessibility settings
+    ///
+    /// # Usage
+    /// ```
+    /// Text("Fixed Size")
+    ///     .font(.raleway(fixedSize: 24))
+    /// ```
+    static func raleway(fixedSize: CGFloat) -> Font {
+        custom("Raleway", size: fixedSize)
+    }
+    
+    // MARK: - Nunito Sans
+    
+    /// Creates an adaptive Nunito Sans font for the specified text style
+    /// - Parameter style: The text style for dynamic type scaling (default: .body)
+    /// - Returns: Custom Nunito Sans font scaled to match the text style
+    /// - Note: Uses regular weight variant
+    ///
+    /// # Usage
+    /// ```
+    /// Text("Headline Text")
+    ///     .font(.nunitoSans(.headline))
+    /// ```
+    static func nunitoSans(_ style: UIFont.TextStyle = .body) -> Font {
+        custom("NunitoSans", size: UIFont.preferredFont(forTextStyle: style).pointSize)
+    }
+    
+    /// Creates a Nunito Sans font with fixed point size
+    /// - Parameter fixedSize: The font size in points
+    /// - Returns: Custom Nunito Sans font with specified size
+    static func nunitoSans(fixedSize: CGFloat) -> Font {
+        custom("NunitoSans", size: fixedSize)
+    }
+    
+    // MARK: - Inter
+    
+    /// Creates an adaptive Inter font for the specified text style
+    /// - Parameter style: The text style for dynamic type scaling (default: .body)
+    /// - Returns: Custom Inter font scaled to match the text style
+    /// - Note: Uses regular weight variant by default
+    ///
+    /// # Usage
+    /// ```
+    /// Text("Body Text")
+    ///     .font(.inter())
+    /// ```
+    static func inter(_ style: UIFont.TextStyle = .body) -> Font {
+        custom("Inter", size: UIFont.preferredFont(forTextStyle: style).pointSize)
+    }
+    
+    /// Creates an Inter font with fixed point size
+    /// - Parameter fixedSize: The font size in points
+    /// - Returns: Custom Inter font with specified size
+    static func inter(fixedSize: CGFloat) -> Font {
+        custom("Inter", size: fixedSize)
+    }
+    
+    // MARK: - Poppins
+    
+    /// Creates an adaptive Poppins Medium font for the specified text style
+    /// - Parameter style: The text style for dynamic type scaling (default: .body)
+    /// - Returns: Custom Poppins Medium font scaled to match the text style
+    /// - Important: Weight is embedded in font name (Medium)
+    ///
+    /// # Usage
+    /// ```
+    /// Text("Poppins Medium")
+    ///     .font(.poppins(.largeTitle))
+    /// ```
+    static func poppins(_ style: UIFont.TextStyle = .body) -> Font {
+        custom("Poppins-Medium", size: UIFont.preferredFont(forTextStyle: style).pointSize)
+    }
+    
+    /// Creates a Poppins Medium font with fixed point size
+    /// - Parameter fixedSize: The font size in points
+    /// - Returns: Custom Poppins Medium font with specified size
+    static func poppins(fixedSize: CGFloat) -> Font {
+        custom("Poppins-Medium", size: fixedSize)
+    }
+}
+
+// MARK: - Role-based Font Modifiers (HIG Compliant)
+extension Font {
+    // MARK: Raleway
+    
+    static let screenTitle      = Font.custom("Raleway", size: 52).weight(.bold)
+    static let sectionHeader    = Font.custom("Raleway", size: 28).weight(.bold)
+    static let cardTitle        = Font.custom("Raleway", size: 21).weight(.bold)
+    static let bodyBold         = Font.custom("Raleway", size: 17).weight(.bold)
+    static let searchText       = Font.custom("Raleway", size: 16).weight(.medium)
+    static let actionText       = Font.custom("Raleway", size: 15).weight(.bold)
+    static let captionBold      = Font.custom("Raleway", size: 12).weight(.bold)
+
+    // MARK: Nunito Sans
+    
+    static let bodyRegular      = Font.custom("NunitoSans", size: 12).weight(.regular)
+    static let bodyLight        = Font.custom("NunitoSans", size: 19).weight(.light)
+    static let buttonText       = Font.custom("NunitoSans", size: 16).weight(.light)
+    static let cardAction       = Font.custom("NunitoSans", size: 22).weight(.light)
+
+    // MARK: Inter
+    
+    static let microText        = Font.custom("Inter", size: 10).weight(.regular)
+    static let statusText       = Font.custom("Inter", size: 12).weight(.medium)
+    static let secondaryActionText = Font.custom("Inter", size: 12).weight(.regular)
+
+    // MARK: Poppins
+    
     static let formText = Font.custom("Poppins-Medium", size: 14)
-}
-
-// MARK: - Main View
-
-struct FontsAndColorsTestView: View {
-    private let fontWeights = FontWeight.allCases
-    private let customFonts = CustomFont.allCases
-    
-    var body: some View {
-        NavigationStack {
-            List {
-                ForEach(customFonts, id: \.self) { fontStyle in
-                    CustomFontSection(style: fontStyle)
-                }
-            
-                ForEach(fontWeights, id: \.self) { weight in
-                    FontWeightSection(weight: weight)
-                }
-            }
-            .navigationTitle("Fonts Preview")
-            .navigationBarTitleDisplayMode(.inline)
-        }
-    }
-}
-
-// MARK: - Preview Data
-
-private enum PreviewTextType: String, CaseIterable {
-    case numbers = "1234567890"
-    case uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    case lowercase = "abcdefghijklmnopqrstuvwxyz"
-    
-    var title: String {
-        switch self {
-        case .numbers: return "Numbers"
-        case .uppercase: return "Uppercase"
-        case .lowercase: return "Lowercase"
-        }
-    }
-}
-
-// MARK: - Font Weight Section
-
-private struct FontWeightSection: View {
-    let weight: FontWeight
-    let size: CGFloat = 18
-    
-    var body: some View {
-        Section(weight.rawValue) {
-            ForEach(PreviewTextType.allCases, id: \.self) { type in
-                VStack(alignment: .leading) {
-                    Text(type.title)
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    
-                    Text(type.rawValue)
-                        .font(.system(size: size, weight: weight.systemWeight))
-                }
-                .padding(.vertical, 8)
-            }
-        }
-    }
-}
-
-// MARK: - Custom Font Section
-
-private struct CustomFontSection: View {
-    let style: CustomFont
-    
-    var body: some View {
-        Section(style.description) {
-            ForEach(PreviewTextType.allCases, id: \.self) { type in
-                VStack(alignment: .leading) {
-                    Text(type.title)
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    
-                    Text(type.rawValue)
-                        .font(style.font)
-                }
-                .padding(.vertical, 8)
-            }
-        }
-    }
-}
-
-// MARK: - Data Models
-
-private enum FontWeight: String, CaseIterable {
-    case ultraLight = "Ultra Light"
-    case thin = "Thin"
-    case light = "Light"
-    case regular = "Regular"
-    case medium = "Medium"
-    case semibold = "Semibold"
-    case bold = "Bold"
-    case heavy = "Heavy"
-    case black = "Black"
-    
-    var systemWeight: Font.Weight {
-        switch self {
-        case .ultraLight: return .ultraLight
-        case .thin: return .thin
-        case .light: return .light
-        case .regular: return .regular
-        case .medium: return .medium
-        case .semibold: return .semibold
-        case .bold: return .bold
-        case .heavy: return .heavy
-        case .black: return .black
-        }
-    }
-}
-
-private enum CustomFont: String, CaseIterable {
-    case screenTitle
-    case sectionHeader
-    case cardTitle
-    case bodyBold
-    case captionBold
-    case bodyLight
-    case buttonText
-    case microText
-    case statusText
-    case formText
-    
-    var font: Font {
-        switch self {
-        case .screenTitle: return .screenTitle
-        case .sectionHeader: return .sectionHeader
-        case .cardTitle: return .cardTitle
-        case .bodyBold: return .bodyBold
-        case .captionBold: return .captionBold
-        case .bodyLight: return .bodyLight
-        case .buttonText: return .buttonText
-        case .microText: return .microText
-        case .statusText: return .statusText
-        case .formText: return .formText
-        }
-    }
-    
-    var description: String {
-        switch self {
-        case .screenTitle: return "Screen Title (Raleway-Bold 52)"
-        case .sectionHeader: return "Section Header (Raleway-Bold 28)"
-        case .cardTitle: return "Card Title (Raleway-Bold 21)"
-        case .bodyBold: return "Body Bold (Raleway-Bold 17)"
-        case .captionBold: return "Caption Bold (Raleway-Bold 12)"
-        case .bodyLight: return "Body Light (NunitoSans-Light 19)"
-        case .buttonText: return "Button Text (NunitoSans-Light 16)"
-        case .microText: return "Micro Text (Inter-Regular 10)"
-        case .statusText: return "Status Text (Inter-Medium 12)"
-        case .formText: return "Form Text (Poppins-Medium 14)"
-        }
-    }
 }
 
 // MARK: - Preview
 
 #Preview {
-    FontsAndColorsTestView()
+    FontsPreView()
 }

@@ -44,8 +44,8 @@ struct TabBarView: View {
         .fullScreenCover(isPresented: $showOnboarding) {
             OnboardingView(viewModel: OnboardingViewModel())
         }
-        .onChange(of: isOnboardingCompleted) { newValue in
-            if newValue {
+        .onChange(of: isOnboardingCompleted) { isOnboardingCompleted in
+            if isOnboardingCompleted {
                 showOnboarding = false
             }
         }

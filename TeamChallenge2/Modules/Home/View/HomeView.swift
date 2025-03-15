@@ -98,7 +98,7 @@ struct HomeView: View {
                     .frame(height: 36)
                     .overlay(alignment: .leading) {
                         Text(Constants.search)
-                            .font(.seachText)
+                            .font(.searchText)
                             .foregroundStyle(.gray)
                             .padding(EdgeInsets(top: 9, leading: 16, bottom: 6, trailing: 0))
                     }

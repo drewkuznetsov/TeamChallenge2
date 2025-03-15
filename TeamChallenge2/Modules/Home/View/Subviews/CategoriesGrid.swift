@@ -19,17 +19,18 @@ struct CategoriesGrid: View {
     }
     
     private var gridItems: [GridItem] {
-        Array(repeating: GridItem(spacing: 5), count: 2)
+        Array(repeating: GridItem(spacing: 10), count: 2)
     }
     
     var body: some View {
-        LazyVGrid(columns: gridItems, spacing: 5) {
+        LazyVGrid(columns: gridItems, spacing: 15) {
             ForEach(0..<categories.count) { index in
                 let category = categories[index]
                 CategoryCell(category: category)
                     .frame(width: cellWidth)
             }
         }
+        .padding()
     }
 }
 

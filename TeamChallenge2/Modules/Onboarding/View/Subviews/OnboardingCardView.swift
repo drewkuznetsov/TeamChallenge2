@@ -39,15 +39,13 @@ struct OnboardingCardView: View {
             .overlay {
                 VStack {
                     Text(card.title)
-                        .font(.title)
+                        .font(.sectionHeader)
                         .multilineTextAlignment(.center)
-                        .fontWeight(.bold)
                         .padding(EdgeInsets(top: 40, leading: 40, bottom: 16, trailing: 40))
                     
                     Text(card.description)
-                        .font(.body)
+                        .font(.bodyLight)
                         .multilineTextAlignment(.center)
-                        .fontWeight(.light)
                         .padding(.horizontal)
                     
                     Spacer()

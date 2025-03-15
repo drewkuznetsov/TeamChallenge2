@@ -16,8 +16,7 @@ struct HomeViewCollections: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 22) {
-                HomeSection(
-                    title: Constants.categories) {
+                HomeSection(title: Constants.categories) {
                         CategoriesGrid(categories: categories)
                     } onTapSeeAll: {
                         onTapAllCategories()
@@ -34,7 +33,6 @@ struct HomeViewCollections: View {
                 } onTapSeeAll: {
                     onTapRecomendations()
                 }
-
             }
         }
     }

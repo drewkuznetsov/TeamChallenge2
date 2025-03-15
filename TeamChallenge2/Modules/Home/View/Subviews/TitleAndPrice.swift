@@ -15,13 +15,13 @@ struct TitleAndPrice: View {
         VStack(spacing: 1) {
             
             Text(title)
-                .font(.system(size: 12, weight: .light))
+                .font(.bodyRegular)
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .bottomLeading)
             
             Text(price.formatted(.currency(code: "USD")))
-                .font(.system(size: 17, weight: .bold))
+                .font(.bodyBold)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
     }

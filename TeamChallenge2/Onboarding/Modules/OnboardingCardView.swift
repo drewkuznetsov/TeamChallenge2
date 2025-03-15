@@ -27,15 +27,14 @@ struct OnboardingCardView: View {
 
             VStack {
                 Text(card.title)
-                    .font(.title)
+                    .font(.sectionHeader)
                     .multilineTextAlignment(.center)
                     .fontWeight(.bold)
                     .padding(.bottom, Drawing.padding)
 
                 Text(card.description)
-                    .font(.body)
+                    .font(.bodyLight)
                     .multilineTextAlignment(.center)
-                    .fontWeight(.light)
 
                 Spacer()
 

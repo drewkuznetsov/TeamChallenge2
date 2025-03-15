@@ -23,22 +23,30 @@ struct HomeView: View {
         case .loading:
             ProgressView()
         case .loaded:
-            VStack(spacing: 0) {
-                footer
-                Spacer()
-                    .frame(height: 10)
-                search
-                Spacer()
-                    .frame(height: 14)
+            NavigationStack{
                 HomeViewCollections(
-                    categories: Array(repeating: Category.makeStubCategory(), count: 4)) {
-                        //
-                    } onTapPopular: {
-                        //
-                    } onTapRecomendations: {
-                        //
+                    categories: Array(repeating: Category.makeStubCategory(), count: 4)
+                ) {
+                    //
+                } onTapPopular: {
+                    //
+                } onTapRecomendations: {
+                    //
+                }
+                .padding(.zero)
+                
+                .safeAreaInset(edge: .top) {
+                    VStack {
+                        footer
+                        Spacer()
+                            .frame(height: 10)
+                        search
+                        Spacer()
+                            .frame(height: 14)
                     }
-                    .padding(.zero)
+                    .background(Color(uiColor: .systemBackground).opacity(0.6))
+                    .background(.ultraThinMaterial)
+                }
             }
         }
     }
@@ -47,6 +55,7 @@ struct HomeView: View {
         HStack(alignment: .bottom) {
             VStack(alignment: .leading, spacing: 1) {
                 Text(Constants.deliveryAdress)
+                    .font(.microText)
                     .foregroundStyle(.gray)
                 
                 Button {
@@ -54,6 +63,7 @@ struct HomeView: View {
                 } label: {
                     HStack(spacing: 5) {
                         Text(Constants.location)
+                            .font(.statusText)
                             .foregroundStyle(.black)
                         Image(.arrowDown)
                             .resizable()
@@ -79,16 +89,16 @@ struct HomeView: View {
     private var search: some View {
         HStack {
             Text(Constants.shop)
-                .font(.system(size: 28, weight: .bold))
+                .font(.sectionHeader)
             Button {
                 // open search screen
             } label: {
                 Capsule()
-                    .fill(.gray.opacity(0.5))
+                    .fill(.ultraThinMaterial)
                     .frame(height: 36)
                     .overlay(alignment: .leading) {
                         Text(Constants.search)
-                            .font(.system(size: 16, weight: .light))
+                            .font(.searchText)
                             .foregroundStyle(.gray)
                             .padding(EdgeInsets(top: 9, leading: 16, bottom: 6, trailing: 0))
                     }

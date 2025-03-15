@@ -7,22 +7,30 @@
 
 import SwiftUI
 
+struct AnyTabView: View {
+    private let _body: AnyView
+    
+    init<V: View>(_ view: V) {
+        _body = AnyView(view)
+    }
+    
+    var body: some View {
+        _body
+    }
+}
+
 struct TabBarItem {
-    /// Title of the tab.
     let title: String
-    /// Image name for the tab icon.
     let iconName: String
-    /// The view that is displayed when the tab is selected.
-    let view: AnyView
+    let view: AnyTabView
 }
 
 extension TabBarItem {
-    // Example of an array of views
     static var allCases: [TabBarItem] = [
-        TabBarItem(title: "Home",       iconName: "home",       view: AnyView(Text("Home"))),
-        TabBarItem(title: "Wishlist",   iconName: "wishlist",   view: AnyView(Text("Wishlist"))),
-        TabBarItem(title: "Categories", iconName: "categories", view: AnyView(Text("Categories"))),
-        TabBarItem(title: "Cart",       iconName: "cart",       view: AnyView(Text("Cart"))),
-        TabBarItem(title: "Profile",    iconName: "profile",    view: AnyView(Text("Profile"))),
+        TabBarItem(title: "Home",       iconName: "home",       view: AnyTabView(HomeView())),
+        TabBarItem(title: "Wishlist",   iconName: "wishlist",   view: AnyTabView(Text("Wishlist"))),
+        TabBarItem(title: "Categories", iconName: "categories", view: AnyTabView(Text("Categories"))),
+        TabBarItem(title: "Cart",       iconName: "cart",       view: AnyTabView(Text("Cart"))),
+        TabBarItem(title: "Profile",    iconName: "profile",    view: AnyTabView(Text("Profile")))
     ]
 }

@@ -3,28 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D2685BE2D80D7E800289FCA /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2685BD2D80D7E800289FCA /* TabBarView.swift */; };
-		2D2685F32D8107B300289FCA /* TabBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2685F22D8107B300289FCA /* TabBarModel.swift */; };
 		8612E2A92D76461700F33FE8 /* ShoppeStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8612E2A82D76461700F33FE8 /* ShoppeStore */; };
-		E422C3852D76222B00FE7F97 /* TeamChallenge2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E422C3842D76222B00FE7F97 /* TeamChallenge2App.swift */; };
-		E422C3872D76222B00FE7F97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E422C3862D76222B00FE7F97 /* ContentView.swift */; };
-		E422C3892D76222D00FE7F97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E422C3882D76222D00FE7F97 /* Assets.xcassets */; };
-		E422C38C2D76222D00FE7F97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E422C38B2D76222D00FE7F97 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2D2685BD2D80D7E800289FCA /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
-		2D2685F22D8107B300289FCA /* TabBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarModel.swift; sourceTree = "<group>"; };
 		E422C3812D76222B00FE7F97 /* TeamChallenge2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamChallenge2.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E422C3842D76222B00FE7F97 /* TeamChallenge2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamChallenge2App.swift; sourceTree = "<group>"; };
-		E422C3862D76222B00FE7F97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		E422C3882D76222D00FE7F97 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E422C38B2D76222D00FE7F97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D97C0E202D83615E00C3A177 /* Modules */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modules; sourceTree = "<group>"; };
+		D97C0E272D8361FA00C3A177 /* SupportingFiles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SupportingFiles; sourceTree = "<group>"; };
+		D97C0E282D83621200C3A177 /* App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = App; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E422C37E2D76222B00FE7F97 /* Frameworks */ = {
@@ -38,15 +32,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2D2685BC2D80D7D000289FCA /* TabBarView */ = {
-			isa = PBXGroup;
-			children = (
-				2D2685BD2D80D7E800289FCA /* TabBarView.swift */,
-				2D2685F22D8107B300289FCA /* TabBarModel.swift */,
-			);
-			path = TabBarView;
-			sourceTree = "<group>";
-		};
 		E422C3782D76222B00FE7F97 = {
 			isa = PBXGroup;
 			children = (
@@ -66,21 +51,11 @@
 		E422C3832D76222B00FE7F97 /* TeamChallenge2 */ = {
 			isa = PBXGroup;
 			children = (
-				2D2685BC2D80D7D000289FCA /* TabBarView */,
-				E422C3842D76222B00FE7F97 /* TeamChallenge2App.swift */,
-				E422C3862D76222B00FE7F97 /* ContentView.swift */,
-				E422C3882D76222D00FE7F97 /* Assets.xcassets */,
-				E422C38A2D76222D00FE7F97 /* Preview Content */,
+				D97C0E282D83621200C3A177 /* App */,
+				D97C0E272D8361FA00C3A177 /* SupportingFiles */,
+				D97C0E202D83615E00C3A177 /* Modules */,
 			);
 			path = TeamChallenge2;
-			sourceTree = "<group>";
-		};
-		E422C38A2D76222D00FE7F97 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				E422C38B2D76222D00FE7F97 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,6 +72,11 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D97C0E202D83615E00C3A177 /* Modules */,
+				D97C0E272D8361FA00C3A177 /* SupportingFiles */,
+				D97C0E282D83621200C3A177 /* App */,
 			);
 			name = TeamChallenge2;
 			productName = TeamChallenge2;
@@ -144,8 +124,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E422C38C2D76222D00FE7F97 /* Preview Assets.xcassets in Resources */,
-				E422C3892D76222D00FE7F97 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,10 +134,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E422C3872D76222B00FE7F97 /* ContentView.swift in Sources */,
-				2D2685BE2D80D7E800289FCA /* TabBarView.swift in Sources */,
-				E422C3852D76222B00FE7F97 /* TeamChallenge2App.swift in Sources */,
-				2D2685F32D8107B300289FCA /* TabBarModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +266,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TeamChallenge2/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -320,7 +294,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TeamChallenge2/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

@@ -8,9 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		8612E2A92D76461700F33FE8 /* ShoppeStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8612E2A82D76461700F33FE8 /* ShoppeStore */; };
+		D968883C2D86179500539E9A /* RoundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96888392D86179500539E9A /* RoundTextField.swift */; };
+		D968883D2D86179500539E9A /* AuthStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96888372D86179500539E9A /* AuthStack.swift */; };
+		D968883E2D86179500539E9A /* ColorRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96888382D86179500539E9A /* ColorRectangleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D96888372D86179500539E9A /* AuthStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStack.swift; sourceTree = "<group>"; };
+		D96888382D86179500539E9A /* ColorRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRectangleView.swift; sourceTree = "<group>"; };
+		D96888392D86179500539E9A /* RoundTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTextField.swift; sourceTree = "<group>"; };
 		E422C3812D76222B00FE7F97 /* TeamChallenge2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamChallenge2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -42,6 +48,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D968883A2D86179500539E9A /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				D96888372D86179500539E9A /* AuthStack.swift */,
+				D96888382D86179500539E9A /* ColorRectangleView.swift */,
+				D96888392D86179500539E9A /* RoundTextField.swift */,
+			);
+			path = ReusableViews;
+			sourceTree = "<group>";
+		};
+		D968883B2D86179500539E9A /* Resources  */ = {
+			isa = PBXGroup;
+			children = (
+				D968883A2D86179500539E9A /* ReusableViews */,
+			);
+			path = "Resources ";
+			sourceTree = "<group>";
+		};
 		E422C3782D76222B00FE7F97 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +88,7 @@
 				D97C0E282D83621200C3A177 /* App */,
 				D97C0E272D8361FA00C3A177 /* SupportingFiles */,
 				D97C0E202D83615E00C3A177 /* Modules */,
+				D968883B2D86179500539E9A /* Resources  */,
 			);
 			path = TeamChallenge2;
 			sourceTree = "<group>";
@@ -144,6 +169,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D968883C2D86179500539E9A /* RoundTextField.swift in Sources */,
+				D968883D2D86179500539E9A /* AuthStack.swift in Sources */,
+				D968883E2D86179500539E9A /* ColorRectangleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

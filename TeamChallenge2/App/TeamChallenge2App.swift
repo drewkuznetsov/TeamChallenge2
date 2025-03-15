@@ -11,7 +11,7 @@ import SwiftUI
 struct TeamChallenge2App: App {
     var body: some Scene {
         WindowGroup {
-            StartView()
+            OnboardingView()
                 .colorScheme(.light)
         }
     }

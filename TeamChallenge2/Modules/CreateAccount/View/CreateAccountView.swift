@@ -15,18 +15,8 @@ struct CreateAccountView: View {
         static let screenLabelTopPadding: CGFloat = 78
         static let screenLabelLeadingPadding: CGFloat = 30
         static let screenLabelBottomPadding: CGFloat = 30
-        static let fieldsSpacing: CGFloat = 18
-        static let fieldsHeight: CGFloat = 52
-        static let fieldsFontSize: CGFloat = 14
-        static let fieldsBottomPadding: CGFloat = 62
-        static let buttonsSpacing: CGFloat = 18
-        static let upperButtonHeight: CGFloat = 61
-        static let upperButtonCornerRadius: CGFloat = 16
-        static let upperButtonFontSize: CGFloat = 22
         static let horizontalPadding: CGFloat = 20
         static let bottomPadding: CGFloat = 55
-        static let lowerButtonFontSize: CGFloat = 15
-        static let textFieldsColor: Color = Color.gray.opacity(0.25)
     }
     
     @Environment(\.dismiss) var dismiss
@@ -60,54 +50,16 @@ struct CreateAccountView: View {
                 Spacer()
                     .frame(minHeight: Drawing.screenLabelBottomPadding)
                 
-                VStack(spacing: Drawing.fieldsSpacing) {
-                    RoundTextField(
-                        text: $viewModel.email,
-                        placeholder: viewModel.model.emailFieldPlaceholder,
-                        onSubmit: {},
-                        height: Drawing.fieldsHeight,
-                        fontSize: Drawing.fieldsFontSize,
-                        backgroundColor: Drawing.textFieldsColor,
-                        isHiddeble: false
-                    )
-                    
-                    RoundTextField(
-                        text: $viewModel.password,
-                        placeholder: viewModel.model.passwordFieldPlaceholder,
-                        onSubmit: {},
-                        height: Drawing.fieldsHeight,
-                        fontSize: Drawing.fieldsFontSize,
-                        backgroundColor: Drawing.textFieldsColor,
-                        isHiddeble: true
-                    )
-                }
-                
-                Spacer()
-                    .frame(maxHeight: Drawing.fieldsBottomPadding)
-                
-                VStack(spacing: Drawing.buttonsSpacing) {
-                    Button(action: viewModel.createAccount) {
-                        ColorRectangleView(
-                            cornerRadius: Drawing.upperButtonCornerRadius,
-                            text: viewModel.model.upperButtonTitle,
-                            height: Drawing.upperButtonHeight,
-                            backgroundColor: Color.shopBlue,
-                            textColor: Color.white,
-                            fontSize: Drawing.upperButtonFontSize
-                        )
-                    }
-                    
-                    Button(action: { dismiss() }) {
-                        Text(viewModel.model.bottomButtonTitle)
-                            .font(
-                                Font.system(
-                                    size: Drawing.lowerButtonFontSize
-                                )
-                            )
-                            .foregroundStyle(Color.primary)
-                            .padding()
-                    }
-                }
+                AuthStack(
+                    email: $viewModel.email,
+                    password: $viewModel.password,
+                    emailPlaceholder: viewModel.model.emailFieldPlaceholder,
+                    passwordPlaceholder: viewModel.model.passwordFieldPlaceholder,
+                    upperButtonTitle: viewModel.model.upperButtonTitle,
+                    upperbuttonAction: viewModel.createAccount,
+                    lowerButtonTitle: viewModel.model.bottomButtonTitle,
+                    lowerbuttonAction: { dismiss() }
+                )
                 
                 Spacer()
                     .frame(maxHeight: Drawing.bottomPadding)

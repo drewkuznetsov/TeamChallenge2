@@ -10,70 +10,31 @@ import Foundation
 import ShoppeStore
 @testable import Cart
 
-
-struct CartDomainTest {
-    func makeSut(
-        fetchProducts: @escaping @Sendable () async -> Result<[Product], Error> = {
+extension CartDomain.Dependency {
+    static let test = CartDomain.Dependency(
+        fetchProducts: {
             Issue.record("Should't run")
             return .failure(URLError(.badURL))
         },
-        loadCart: @escaping @Sendable () -> [Int: Int] = {
+        fetchCart: {
             Issue.record("Should't run")
             return [:]
         },
-        fetchLocation: @escaping @Sendable () -> String? = {
+        fetchLocation: {
             Issue.record("Should't run")
             return ""
         }
-    ) -> CartDomain {
-        CartDomain(
-            .init(
-                fetchProducts: fetchProducts,
-                loadCart: loadCart,
-                fetchLocation: fetchLocation
-            )
-        )
-    }
+    )
+}
 
-    @Test func onViewAppear() async throws {
-        let sut = makeSut()
-        var state = CartDomain.State()
-        let token = try #require(CartDomain.LoadToken.test)
-        var actions = await Array(sut.reduce(&state, action: .onAppear))
-        
-        #expect(state.cart.isEmpty == true)
-        #expect(state.products == nil)
-        #expect(actions == [.fetchProducts(token), .loadCart])
-        
-        state = CartDomain.State(products: .loading)
-        
-        actions = await Array(sut.reduce(&state, action: .onAppear))
-        
-        #expect(actions == [.loadCart])
-    }
-
-    @Test func loadCart() async throws {
-        let cart = [1: 1]
-        let sut = makeSut(loadCart: { cart })
-        
-        var state = CartDomain.State()
-        
-        _ = await sut.reduce(&state, action: .loadCart)
-        
-        #expect(state.cart == cart)
+struct CartDomainTest {
+    typealias Sut = CartDomain
+    func makeSut(_ d: Sut.Dependency = .test) -> Sut {
+        Sut(d)
     }
     
-    @Test func fetchProducts() async throws {
-        let sut = makeSut(fetchProducts: { .failure(URLError(.badURL)) })
-        var state = CartDomain.State()
-        
-        _ = await sut.reduce(&state, action: .fetchProducts(.test))
-        
-        #expect(state.products == .loading)
-    }
-    
-    @Test func fetchProductEndSuccess() async throws {
-        let test = Product(
+    let product = CartProduct(
+        product: Product(
             id: 1,
             title: "baz",
             price: 1,
@@ -81,50 +42,78 @@ struct CartDomainTest {
             category: .electronics,
             image: URL(string: "foo")!,
             rating: .init(rate: 1, count: 1)
-        )
+        ),
+        quantity: 1
+    )
         
+    @Test func onViewAppear() async throws {
         let sut = makeSut()
+        var state = Sut.State()
+        
+        let token = try #require(Sut.LoadContentToken.parse(state))
+        var actions = await Array(sut.reduce(&state, action: .onAppear))
+        
+        #expect(actions == [.loadContent(token)])
+        
+        state = Sut.State(products: [product], shippingAddress: "baz")
+        
+        actions = await Array(sut.reduce(&state, action: .onAppear))
+        
+        #expect(actions.isEmpty == true)
+    }
+
+    @Test func loadContentFailed() async throws {
+        var sut = makeSut()
         var state = CartDomain.State()
+        let token = try #require(Sut.LoadContentToken.parse(state))
+        let error = URLError(.badURL)
         
-        _ = await sut.reduce(&state, action: .fetchProductResult(.success([test])))
+        sut.dependency.fetchProducts = { .failure(URLError(.badURL)) }
+        sut.dependency.fetchCart = { [1: 1] }
+        _ = await Array(sut.reduce(&state, action: .loadContent(token)))
         
-        #expect(state.products == .loaded([test]))
+        #expect(state.error == .loading(error.localizedDescription))
     }
     
-    @Test func fetchProductEndError() async throws {
-        let error = URLError(.badURL)
-        let sut = makeSut()
+    @Test func fetchProductEndSuccess() async throws {
+        
+        let cart = [1: 1]
+        var sut = makeSut()
         var state = CartDomain.State()
+        let token = try #require(Sut.LoadContentToken.parse(state))
         
-        _ = await sut.reduce(&state, action: .fetchProductResult(.failure(error)))
+        sut.dependency.fetchProducts = { .success([product.product]) }
+        sut.dependency.fetchCart = { cart }
+        _ = await sut.reduce(&state, action: .loadContent(token))
         
-        #expect(state.products == .failed(error))
+        #expect(state.products == [product])
     }
     
     @Test func removeProductFromCart() async throws {
         let sut = makeSut()
-        var state = CartDomain.State(cart: [1:1])
+        var state = CartDomain.State(products: [product])
         
         _ = await sut.reduce(&state, action: .removeProduct(1))
         
-        #expect(state.cart.isEmpty == true)
+        #expect(state.products.isEmpty == true)
     }
     
     @Test func changeProductCount() async throws {
         let sut = makeSut()
-        var state = CartDomain.State(cart: [1:1])
+        var state = CartDomain.State(products: [product])
         
         _ = await sut.reduce(&state, action: .setProduct(1, count: 2))
         
-        #expect(state.cart == [1: 2])
+        #expect(state.products[0].quantity == 2)
         
         _ = await sut.reduce(&state, action: .setProduct(1, count: 1))
         
-        #expect(state.cart == [1: 1])
+        #expect(state.products[0].quantity == 1)
         
         _ = await sut.reduce(&state, action: .setProduct(2, count: 1))
         
-        #expect(state.cart == [1: 1])
+        #expect(state.products[0].quantity == 1)
+        #expect(state.products.count == 1)
         
         let actions = await Array(sut.reduce(&state, action: .setProduct(1, count: 0)))
         

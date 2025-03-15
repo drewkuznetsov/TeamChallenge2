@@ -20,9 +20,10 @@ public final class Store<Reducer: ReducerDomain>: ObservableObject, @unchecked S
     }
     
     public func send(_ action: Reducer.Action) {
-        Task { @MainActor in
-            await reducer.reduce(&state, action: action)
-                .map(self.send(_:))
+        Task(priority: .high) { @MainActor in
+            await reducer
+                .reduce(&state, action: action)
+                .forEach(self.send(_:))
         }
     }
     

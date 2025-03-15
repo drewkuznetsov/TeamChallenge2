@@ -9,10 +9,16 @@ import SwiftUI
 
 struct CartView: View {
     var body: some View {
-        Text("Hello world!")
+        VStack {
+            Text("Hello world!")
+        }
+//        .navigationBarTitleDisplayMode(.large)
+        .navigationTitle("Cart")
     }
 }
 
 #Preview {
-    CartView()
+    NavigationStack {
+        CartView()
+    }
 }

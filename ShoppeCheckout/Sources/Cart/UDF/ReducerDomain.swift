@@ -9,7 +9,7 @@ import Foundation
 import FoundationFX
 
 public protocol ReducerDomain: Sendable {
-    typealias Effect = Sequence<Action>
+    typealias Effect = Collection<Action>
     associatedtype State
     associatedtype Action: Sendable
     
@@ -22,6 +22,11 @@ public extension ReducerDomain {
     @inlinable
     func run(_ action: Action) -> some Effect {
         CollectionOfOne(action)
+    }
+    
+    @inlinable
+    func run(_ actions: Action...) -> some Effect {
+        actions
     }
     
     @inlinable

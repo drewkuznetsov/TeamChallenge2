@@ -6,129 +6,162 @@
 //
 
 import Foundation
-import FoundationFX
+import SwiftFP
 import ShoppeStore
 
+@dynamicMemberLookup
+struct CartProduct: Equatable {
+    let product: Product
+    var quantity: Int
+    
+    @inlinable
+    subscript<T>(dynamicMember keyPath: KeyPath<Product, T>) -> T {
+        product[keyPath: keyPath]
+    }
+}
+
+enum CartError: Error, Equatable {
+    case loading(String)
+}
+
 struct CartDomain: ReducerDomain {
+    
+    typealias ProductID = Identifier<Product, Int>
+    
     //MARK: - State
     struct State: Equatable {
-        fileprivate(set) var products: RequestState<[Product], Error>?
-        fileprivate(set) var cart: [Int: Int]
-        fileprivate(set) var shippingAddress: String?
+        fileprivate(set) var products: [CartProduct]
+        fileprivate(set) var shippingAddress: String
+        fileprivate(set) var error: CartError?
         
-        var totalProducts: Int { cart.count }
+        var totalProducts: Int { products.count }
         
         var totalPrice: Double {
-            guard case let .loaded(products) = products else {
-                return .zero
-            }
-            return products
-                .reduce(into: [Int: Double]()) { $0[$1.id] = $1.price }
-                .merging(
-                    cart.mapValues(Double.init),
-                    uniquingKeysWith: *
-                )
-                .values
+            products
+                .map { $0.price * Double($0.quantity) }
                 .reduce(Double(), +)
         }
         
+//        var totalPrice: Double {
+//            products
+//                .reduce(into: [Int: Double]()) { $0[$1.id] = $1.price }
+//                .merging(cart.mapValues(Double.init), uniquingKeysWith: *)
+//                .values
+//                .reduce(Double(), +)
+//        }
+        
         //MARK: - init(_:)
         init(
-            products: RequestState<[Product], Error>? = nil,
-            cart: [Int: Int] = .init(),
-            shippingAddress: String? = nil
+            products: [CartProduct] = .init(),
+            shippingAddress: String = .init(),
+            error: CartError? = nil
         ) {
             self.products = products
-            self.cart = cart
             self.shippingAddress = shippingAddress
+            self.error = error
         }
     }
     
     //MARK: - Action
-    enum Action: Sendable, Equatable {
+    enum Action: Sendable {
         case onAppear
-        case loadCart
-        case fetchProducts(CartDomain.LoadToken)
+        case loadContent(LoadContentToken)
         case fetchLocation
-        case fetchProductResult(Result<[Product], Error>)
         case setProduct(_ id: Int, count: Int)
         case removeProduct(_ id: Int)
+    }
         
-        @inlinable
-        static func == (lhs: Self, rhs: Self) -> Bool {
-            String(describing: lhs) == String(describing: rhs)
-        }
-    }
-    
-    struct Dependency: Sendable {
-        let fetchProducts: @Sendable () async -> Result<[Product], Error>
-        let loadCart: @Sendable () -> [Int: Int]
-        let fetchLocation: @Sendable () async -> String?
-    }
-    
+    @inlinable
     init(_ dependencies: Dependency) {
         self.dependency = dependencies
     }
     
     //MARK: - Dependencies
-    private let dependency: Dependency
+    var dependency: Dependency
     
     //MARK: - Reducer
     @inlinable
-    func reduce(_ state: inout State, action: Action) async -> any Effect {
+    func reduce(_ state: inout State, action: Action) async -> any Self.Effect {
         switch action {
         case .onAppear:
-            return schedule {
-                if let token = LoadToken(state) {
-                    Action.fetchProducts(token)
-                }
-                Action.fetchLocation
-                Action.loadCart
-            }
-        case .loadCart:
-            state.cart = dependency.loadCart()
+            let action = LoadContentToken
+                .parse(state)
+                .map(Action.loadContent)
+                .map(self.run(_:))
             
-        case .fetchProducts:
-            state.products = .loading
-            let result = await dependency.fetchProducts()
-            return run(.fetchProductResult(result))
+            guard let action else { break }
+            return action
+            
+        case .loadContent:
+            switch await dependency.fetchProducts() {
+            case .success(let products):
+                state.products = dependency.fetchCart()
+                    .compactMap { id, quantity -> CartProduct? in
+                        guard
+                            quantity > .zero,
+                            let element = products.first(where: \.id == id)
+                        else {
+                            return nil
+                        }
+                        return CartProduct(product: element, quantity: quantity)
+                    }
+            case .failure(let e):
+                state.error = CartError.loading(e.localizedDescription)
+            }
             
         case .fetchLocation:
             break
             
-        case let .fetchProductResult(.success(products)):
-            state.products = .loaded(products)
-            
-        case let .fetchProductResult(.failure(error)):
-            state.products = .failed(error)
-            
-        case let .setProduct(id, count):
-            guard state.cart.keys.contains(id) else {
-                break
-            }
-            if count <= .zero {
+        case let .setProduct(id, quantity):
+            if quantity < 1 {
                 return run(.removeProduct(id))
             }
-            state.cart.updateValue(count, forKey: id)
+            state.products.firstIndex(where: \.id == id).map { i in
+                state.products[i].quantity = quantity
+            }
             
         case let .removeProduct(id):
-            state.cart.removeValue(forKey: id)
+            state.products.removeAll(where: \.id == id)
+            
         }
         return empty
     }
 }
 
 extension CartDomain {
-    //MARK: - LoadToken
-    struct LoadToken: Equatable {
-        init?(_ state: State) {
-            switch state.products {
-            case .none, .loaded: return
-            default: return nil
-            }
-        }
+    //MARK: - Dependency
+    struct Dependency: Sendable {
+        var fetchProducts: @Sendable () async -> Result<[Product], Error>
+        var fetchCart: @Sendable () -> [Int: Int]
+        var fetchLocation: @Sendable () async -> String?
         
+        public init(
+            fetchProducts: @escaping @Sendable () -> Result<[Product], Error>,
+            fetchCart: @escaping @Sendable () -> [Int : Int],
+            fetchLocation: @escaping @Sendable () -> String?
+        ) {
+            self.fetchProducts = fetchProducts
+            self.fetchCart = fetchCart
+            self.fetchLocation = fetchLocation
+        }
+    }
+
+    struct LoadContentToken {
         private init() {}
-        static let test = LoadToken()
+
+        @inlinable
+        static func parse(_ state: State) -> LoadContentToken? {
+            if state.shippingAddress.isEmpty || state.products.isEmpty {
+                return LoadContentToken()
+            }
+            return nil
+        }
+    }
+}
+
+extension CartDomain.Action: Equatable {
+    @inlinable
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        String(describing: lhs) == String(describing: rhs)
     }
 }

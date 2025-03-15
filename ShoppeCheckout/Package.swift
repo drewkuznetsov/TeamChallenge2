@@ -6,8 +6,8 @@ import PackageDescription
 let package = Package(
     name: "ShoppeCheckout",
     platforms: [
-        .iOS(.v15),
-        .macOS(.v12)
+        .iOS(.v16),
+        .macOS(.v13)
     ],
     products: [
         .library(name: "ShoppeCheckout", targets: [

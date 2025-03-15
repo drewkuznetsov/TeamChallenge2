@@ -19,7 +19,7 @@ struct OnboardingSliderView: View {
     }
     
     @Binding var selected: UUID?
-    let cards: [Onboarding]
+    let cards: [OnboardingModel]
     let onComplete: () -> Void
     
     private var maxHeight: CGFloat {
@@ -38,9 +38,6 @@ struct OnboardingSliderView: View {
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .frame(maxHeight: maxHeight)
-        .clipShape(
-            RoundedRectangle(cornerRadius: 20)
-        )
         .shadow(
             color: Draving.shadowColor,
             radius: Draving.shadowRadius,

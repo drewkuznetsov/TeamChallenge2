@@ -55,7 +55,7 @@ extension Color {
     }
 }
 
-struct ColorPreview: View {
+fileprivate struct ColorPreview: View {
     private let colors: [(Color, String)] = [
         // Основные цвета текста
         (.primaryText,      "Primary Text"),

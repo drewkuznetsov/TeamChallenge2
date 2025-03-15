@@ -36,7 +36,7 @@ extension Font {
 
 // MARK: - Main View
 
-struct FontsAndColorsTestView: View {
+fileprivate struct FontsAndColorsTestView: View {
     private let fontWeights = FontWeight.allCases
     private let customFonts = CustomFont.allCases
     
@@ -59,7 +59,7 @@ struct FontsAndColorsTestView: View {
 
 // MARK: - Preview Data
 
-private enum PreviewTextType: String, CaseIterable {
+fileprivate enum PreviewTextType: String, CaseIterable {
     case numbers = "1234567890"
     case uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     case lowercase = "abcdefghijklmnopqrstuvwxyz"
@@ -73,54 +73,9 @@ private enum PreviewTextType: String, CaseIterable {
     }
 }
 
-// MARK: - Font Weight Section
-
-private struct FontWeightSection: View {
-    let weight: FontWeight
-    let size: CGFloat = 18
-    
-    var body: some View {
-        Section(weight.rawValue) {
-            ForEach(PreviewTextType.allCases, id: \.self) { type in
-                VStack(alignment: .leading) {
-                    Text(type.title)
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    
-                    Text(type.rawValue)
-                        .font(.system(size: size, weight: weight.systemWeight))
-                }
-                .padding(.vertical, 8)
-            }
-        }
-    }
-}
-
-// MARK: - Custom Font Section
-
-private struct CustomFontSection: View {
-    let style: CustomFont
-    
-    var body: some View {
-        Section(style.description) {
-            ForEach(PreviewTextType.allCases, id: \.self) { type in
-                VStack(alignment: .leading) {
-                    Text(type.title)
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    
-                    Text(type.rawValue)
-                        .font(style.font)
-                }
-                .padding(.vertical, 8)
-            }
-        }
-    }
-}
-
 // MARK: - Data Models
 
-private enum FontWeight: String, CaseIterable {
+fileprivate enum FontWeight: String, CaseIterable {
     case ultraLight = "Ultra Light"
     case thin = "Thin"
     case light = "Light"
@@ -146,7 +101,7 @@ private enum FontWeight: String, CaseIterable {
     }
 }
 
-private enum CustomFont: String, CaseIterable {
+fileprivate enum CustomFont: String, CaseIterable {
     case screenTitle
     case sectionHeader
     case cardTitle
@@ -185,6 +140,52 @@ private enum CustomFont: String, CaseIterable {
         case .microText: return "Micro Text (Inter-Regular 10)"
         case .statusText: return "Status Text (Inter-Medium 12)"
         case .formText: return "Form Text (Poppins-Medium 14)"
+        }
+    }
+}
+
+// MARK: - Font Weight Section
+
+fileprivate struct FontWeightSection: View {
+    let weight: FontWeight
+    let size: CGFloat = 18
+    
+    var body: some View {
+        Section(weight.rawValue) {
+            ForEach(PreviewTextType.allCases, id: \.self) { type in
+                VStack(alignment: .leading) {
+                    Text(type.title)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                    
+                    Text(type.rawValue)
+                        .font(.system(size: size, weight: weight.systemWeight))
+                }
+                .padding(.vertical, 8)
+            }
+        }
+    }
+}
+
+
+// MARK: - Custom Font Section
+
+fileprivate struct CustomFontSection: View {
+    let style: CustomFont
+    
+    var body: some View {
+        Section(style.description) {
+            ForEach(PreviewTextType.allCases, id: \.self) { type in
+                VStack(alignment: .leading) {
+                    Text(type.title)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                    
+                    Text(type.rawValue)
+                        .font(style.font)
+                }
+                .padding(.vertical, 8)
+            }
         }
     }
 }

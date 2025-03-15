@@ -38,6 +38,9 @@ struct OnboardingSliderView: View {
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .frame(maxHeight: maxHeight)
+        .clipShape(
+            RoundedRectangle(cornerRadius: 20)
+        )
         .shadow(
             color: Draving.shadowColor,
             radius: Draving.shadowRadius,

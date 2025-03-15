@@ -18,49 +18,56 @@ struct OnboardingCardView: View {
     }
 
     var body: some View {
-        VStack {
-            Image(card.imageName)
-                .resizable()
-                .scaledToFill()
-                .aspectRatio(1, contentMode: .fill)
-                .clipped()
+        image
+            .overlay(alignment: .bottom) {
+                    bottomView
+            }
 
-            VStack {
-                Text(card.title)
-                    .font(.title)
-                    .multilineTextAlignment(.center)
-                    .fontWeight(.bold)
-                    .padding(.bottom, Drawing.padding)
-
-                Text(card.description)
-                    .font(.body)
-                    .multilineTextAlignment(.center)
-                    .fontWeight(.light)
-
-                Spacer()
-
-                if let title = card.buttonTitle {
-                    OnboardingCardButton(
-                        action: action,
-                        title: title
-                    )
+    }
+    
+    private var image: some View {
+        Image(card.imageName)
+            .resizable()
+            .scaledToFill()
+            .frame(width: maxWidth)
+            .clipped()
+        
+    }
+    
+    private var bottomView: some View {
+        Color.white
+            .overlay {
+                VStack {
+                    Text(card.title)
+                        .font(.title)
+                        .multilineTextAlignment(.center)
+                        .fontWeight(.bold)
+                        .padding(EdgeInsets(top: 40, leading: 40, bottom: 16, trailing: 40))
+                    
+                    Text(card.description)
+                        .font(.body)
+                        .multilineTextAlignment(.center)
+                        .fontWeight(.light)
+                        .padding(.horizontal)
+                    
+                    Spacer()
+                    
+                    if let title = card.buttonTitle {
+                        OnboardingCardButton(
+                            action: action,
+                            title: title
+                        )
+                        .padding(EdgeInsets(top: 23, leading: 62, bottom: 23, trailing: 62))
+                    }
                 }
             }
-            .padding(Drawing.padding)
-        }
-        .frame(width: maxWidth)
-        .background(Color(UIColor.systemBackground))
-        .clipShape(
-            RoundedRectangle(cornerRadius: Drawing.cornerRadius)
-        )
-
+            .frame(width: maxWidth, height: maxWidth)
     }
 }
 
 extension OnboardingCardView {
     private enum Drawing {
-        static var sideInset: CGFloat { 25 }
-        static var padding: CGFloat { 20 }
+        static var sideInset: CGFloat { 24 }
         static var cornerRadius: CGFloat { 20 }
     }
 }

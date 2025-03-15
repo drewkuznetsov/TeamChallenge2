@@ -17,7 +17,7 @@ final class CreateAccountViewModel: ObservableObject {
     
     let model = CreateAccountModel()
     
-    private func valideteNewAccount() -> Bool {
+    private func valideteTextFields() -> Bool {
         let emailPattern = #"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"#
         let passwordPattern = #"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"#
         
@@ -37,14 +37,38 @@ final class CreateAccountViewModel: ObservableObject {
         return true
     }
     
-    func createAccount() {
-        if valideteNewAccount() {
-
-#warning("TO DO: реализовать регистрацию пользователя")
-            
-            shouldNavigateToHome = true
-        } else {
-            isAllertPresented = true
+    private func validateNewUser() -> Bool {
+        let users = (try? ShoppeStore.shared.persistence.loadUsers().get()) ?? []
+        
+        if users.contains(where: { $0.email == email }) {
+            alertMessage = "User with this email already exists"
+            return false
         }
+        
+        let user = ShoppeUser(
+            id: 0,
+            username: "Enter your name",
+            email: email,
+            password: password
+        )
+        
+        ShoppeStore.shared.persistence.saveUsers(users + [user])
+        ShoppeStore.shared.persistence.currentUser = user
+        
+        return true
+    }
+    
+    func createAccount() {
+        if !valideteTextFields() || !validateNewUser() {
+            isAllertPresented = true
+            return
+        }
+        
+        shouldNavigateToHome = true
+    }
+    
+    func onAppear() {
+        email = ""
+        password = ""
     }
 }

@@ -56,7 +56,7 @@ struct StartView: View {
                         )
                     }
                     
-                    NavigationLink(destination: CreateAccountView()) {
+                    NavigationLink(destination: LoginView()) {
                         HStack {
                             Text(viewModel.model.bottomButtonTitle)
                                 .font(Font.system(size: Drawing.lowerButtonFontSize))

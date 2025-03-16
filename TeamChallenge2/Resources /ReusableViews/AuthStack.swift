@@ -12,7 +12,7 @@ struct AuthStack: View {
         static let fieldsSpacing: CGFloat = 18
         static let fieldsHeight: CGFloat = 52
         static let fieldsFontSize: CGFloat = 14
-        static let textFieldsColor: Color = Color.gray.opacity(0.25)
+        static let textFieldsColor: Material = .regularMaterial
         static let fieldsBottomPadding: CGFloat = 62
         static let buttonsSpacing: CGFloat = 18
         static let upperButtonCornerRadius: CGFloat = 16

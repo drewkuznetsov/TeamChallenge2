@@ -20,14 +20,6 @@ final class RootViewModel: ObservableObject {
     @Published var currentScreen: Tab = .onbording
     
     private init() {
-        checkStatus()
-        
-        if ShoppeStore.shared.persistence.currentUser != nil {
-            currentScreen = .home
-        }
-    }
-    
-    private func checkStatus() {
         if ShoppeStore.shared.persistence.isOnboarded {
             currentScreen = .login
         }

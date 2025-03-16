@@ -17,7 +17,7 @@ final class RootViewModel: ObservableObject {
         case home
     }
     
-    @Published var currentScreen: Tab = .onbording
+    @Published private(set) var currentScreen: Tab = .onbording
     
     private init() {
         if ShoppeStore.shared.persistence.isOnboarded {

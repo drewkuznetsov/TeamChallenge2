@@ -22,6 +22,5 @@ struct TeamChallenge2App: App {
                 TabBarView()
             }
         }
-        
     }
 }

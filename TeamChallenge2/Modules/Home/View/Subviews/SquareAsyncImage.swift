@@ -10,6 +10,7 @@ import SwiftUI
 struct SquareAsyncImage: View {
     let url: URL
     let size: CGFloat
+    var anligment: Alignment = .top
     
     var body: some View {
         AsyncImage(url: url) { image in
@@ -18,14 +19,13 @@ struct SquareAsyncImage: View {
                 .scaledToFill()
         } placeholder: {
             ZStack{
-                Rectangle()
-                    .fill(.background.opacity(0))
-                    .background(.thinMaterial)
-                ProgressView()
-                    .opacity(0.5)
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.regularMaterial)
+                .modifier(Shimmer())
+                .redacted(reason: .placeholder)
             }
         }
-        .frame(width: size, height: size)
+        .frame(width: size, height: size, alignment: anligment)
         .clipShape(.rect(cornerRadius: 5))
     }
 }

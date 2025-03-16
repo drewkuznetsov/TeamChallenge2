@@ -68,9 +68,6 @@ struct CreateAccountView: View {
         }
         .onAppear(perform: viewModel.onAppear )
         .navigationBarBackButtonHidden(true)
-        .navigationDestination(isPresented: $viewModel.shouldNavigateToHome) {
-            HomeView()
-        }
         .alert(isPresented: $viewModel.isAllertPresented) {
             Alert(
                 title: Text("Error"),

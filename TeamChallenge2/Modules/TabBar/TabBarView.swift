@@ -11,9 +11,6 @@ struct TabBarView: View {
     private var tabs = TabBarItem.allCases
     @State private var selectedTab = 0
     @State private var showOnboarding: Bool = false
-    
-    @AppStorage("isOnboardingCompleted")
-    private var isOnboardingCompleted: Bool = false
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -33,21 +30,8 @@ struct TabBarView: View {
             }
         }
         .labelsHidden()
-        .onAppear {
-            if !isOnboardingCompleted {
-                showOnboarding = true
-            }
-            #if DEBUG
-            isOnboardingCompleted = false
-            #endif
-        }
         .fullScreenCover(isPresented: $showOnboarding) {
             OnboardingView(viewModel: OnboardingViewModel())
-        }
-        .onChange(of: isOnboardingCompleted) { isOnboardingCompleted in
-            if isOnboardingCompleted {
-                showOnboarding = false
-            }
         }
     }
 }

@@ -28,9 +28,9 @@ struct TabBarItem {
 extension TabBarItem {
     static var allCases: [TabBarItem] = [
         TabBarItem(title: "Home",       iconName: "home",       view: AnyTabView(HomeView())),
-        TabBarItem(title: "Wishlist",   iconName: "wishlist",   view: AnyTabView(Text("Wishlist"))),
+        TabBarItem(title: "Wishlist",   iconName: "wishlist",   view: AnyTabView(WishlistView())),
         TabBarItem(title: "Categories", iconName: "categories", view: AnyTabView(Text("Categories"))),
         TabBarItem(title: "Cart",       iconName: "cart",       view: AnyTabView(Text("Cart"))),
-        TabBarItem(title: "Profile",    iconName: "profile",    view: AnyTabView(Text("Profile")))
+        TabBarItem(title: "Profile",    iconName: "profile",    view: AnyTabView(LoginView()))
     ]
 }

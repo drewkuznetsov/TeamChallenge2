@@ -35,7 +35,7 @@ extension TabBarItem {
         TabBarItem(
             title: "Wishlist",
             iconName: "wishlist",
-            view: AnyTabView(Text("Wishlist"))
+            view: AnyTabView(WishlistView())
         ),
         TabBarItem(
             title: "Categories",

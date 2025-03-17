@@ -16,7 +16,7 @@ struct RoundTextField: View {
     let onSubmit: () -> Void
     let height: CGFloat
     let fontSize: CGFloat
-    let backgroundColor: Color
+    let backgroundColor: Material
     let isHiddeble: Bool
     
     var field: some View {

@@ -9,15 +9,11 @@
 import SwiftUI
 
 final class OnboardingViewModel: ObservableObject {
-    
-    @AppStorage("isOnboardingCompleted")
-    var isOnboardingCompleted: Bool = false
-    
     @Published var allCards = Onboarding.allCards
     @Published var selectedCard: UUID?
     
     func completeOnboarding() {
-        isOnboardingCompleted = true
+        RootViewModel.shared.completeOnboarding()
     }
     
     func setSelected() {

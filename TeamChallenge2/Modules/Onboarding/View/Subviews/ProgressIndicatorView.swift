@@ -29,6 +29,10 @@ struct ProgressIndicatorView: View {
                     }
             }
         }
-        .padding(size)
+        .padding(.bottom, 67)
     }
+}
+
+#Preview {
+    OnboardingView()
 }

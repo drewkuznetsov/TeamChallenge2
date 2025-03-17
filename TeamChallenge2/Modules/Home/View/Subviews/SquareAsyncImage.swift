@@ -10,23 +10,37 @@ import SwiftUI
 struct SquareAsyncImage: View {
     let url: URL
     let size: CGFloat
-    
+    var alignment: Alignment = .center
+    var scaleType: ContentMode = .fill
+
     var body: some View {
-        AsyncImage(url: url) { image in
-            image
-                .resizable()
-                .scaledToFill()
-        } placeholder: {
-            ZStack{
-                Rectangle()
-                    .fill(.background.opacity(0))
-                    .background(.thinMaterial)
-                ProgressView()
-                    .opacity(0.5)
+        AsyncImage(url: url) { phase in
+            if let image = phase.image {
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: scaleType)
+                    .frame(width: size, height: size) // Фиксируем размер
+                    .clipped() // Обрезаем изображение, если оно выходит за пределы
+            } else if phase.error != nil {
+                // В случае ошибки загрузки изображения
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(.regularMaterial)
+                    Image(systemName: "xmark.circle")
+                        .foregroundColor(.red)
+                }
+            } else {
+                // Плейсхолдер во время загрузки
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(.regularMaterial)
+                        .modifier(Shimmer())
+                        .redacted(reason: .placeholder)
+                }
             }
         }
-        .frame(width: size, height: size)
-        .clipShape(.rect(cornerRadius: 5))
+        .frame(width: size, height: size, alignment: alignment) // Фиксируем размер вью
+        .clipShape(RoundedRectangle(cornerRadius: 5)) // Скругляем углы
     }
 }
 

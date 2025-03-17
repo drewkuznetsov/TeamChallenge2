@@ -9,7 +9,6 @@ import Foundation
 import ShoppeStore
 
 final class CreateAccountViewModel: ObservableObject {
-    @Published var shouldNavigateToHome: Bool = false
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var isAllertPresented: Bool = false
@@ -64,7 +63,7 @@ final class CreateAccountViewModel: ObservableObject {
             return
         }
         
-        shouldNavigateToHome = true
+        RootViewModel.shared.login()
     }
     
     func onAppear() {

@@ -23,13 +23,13 @@ struct HomeViewCollections: View {
                     }
                 
                 HomeSection(title: Constants.popular) {
-                    Populars(products: categories.first?.products ?? [])
+                    Populars(products: categories.randomElement()?.products ?? [])
                 } onTapSeeAll: {
                     onTapPopular()
                 }
 
                 HomeSection(title: Constants.justForYou) {
-                    JustForYouGrid(products: categories.first?.products ?? [])
+                    JustForYouGrid(products: categories.randomElement()?.products ?? [])
                 } onTapSeeAll: {
                     onTapRecomendations()
                 }

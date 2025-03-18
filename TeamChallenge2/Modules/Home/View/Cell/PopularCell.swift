@@ -23,6 +23,7 @@ struct PopularCell: View {
             Spacer()
                 .frame(height: 4)
             TitleAndPrice(title: product.title, price: product.price)
+                .frame(width: size)
         }
     }
 }

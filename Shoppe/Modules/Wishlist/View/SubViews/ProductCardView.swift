@@ -12,16 +12,26 @@ import ShoppeStore
 struct ProductCardView: View {
     @State var productToView: ProductBO
     var size: CGFloat
+    var state: LoadingState
+    var alignment: Alignment = .top
+    var scaleType: ContentMode = .fill
     var actionAddToFavorites: () -> Void
     var actionAddToCart: () -> Void
     
+    private var isButtonsDisabled: Bool { state == .loading ? true : false }
+    
     var body: some View {
         VStack{
-            SquareAsyncImage(url: productToView.image, size: size, alignment: .center, scaleType: .fit)
-                .padding(5)
-                .background(.white)
-                .clipShape(.rect(cornerRadius: 9))
-                .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 5)
+            SquareAsyncImage(
+                url: productToView.image,
+                size: size,
+                alignment: .center,
+                scaleType: scaleType
+            )
+            .padding(5)
+            .background(.white)
+            .clipShape(.rect(cornerRadius: 9))
+            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 5)
             
             HStack {
                 VStack(alignment:.leading) {
@@ -45,8 +55,8 @@ struct ProductCardView: View {
                     .font(.secondaryActionText)
                     .buttonStyle(.borderedProminent)
                     .tint(.accentColor)
-                    .clipShape(.rect(cornerRadius: 5)
-                    )
+                    .clipShape(.rect(cornerRadius: 5))
+                    .disabled(isButtonsDisabled)
                 }
                 
                 VStack {
@@ -57,6 +67,7 @@ struct ProductCardView: View {
                         Image(productToView.isFavorite ? .heart : .heartFill)
                             .padding(5)
                     }
+                    .disabled(isButtonsDisabled)
                 }
             }
             .padding(5)
@@ -69,6 +80,7 @@ struct ProductCardView: View {
     ProductCardView(
         productToView: prod,
         size: 300,
+        state: .loading,
         actionAddToFavorites: { WishlistViewModel().addToFavorited(id: prod.id) },
         actionAddToCart: { WishlistViewModel().addToCart(id: prod.id) }
     )

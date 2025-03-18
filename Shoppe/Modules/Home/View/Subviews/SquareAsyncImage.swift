@@ -34,7 +34,7 @@ struct SquareAsyncImage: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(.regularMaterial)
-                        .modifier(Shimmer())
+                        .modifier(ShimmerEffect())
                         .redacted(reason: .placeholder)
                 }
             }

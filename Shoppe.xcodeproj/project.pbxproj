@@ -25,7 +25,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		2D981C2F2D87545300E4DD5C /* TeamChallenge2 */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (2D981C662D87545300E4DD5C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TeamChallenge2; sourceTree = "<group>"; };
+		2D981C2F2D87545300E4DD5C /* Shoppe */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (2D981C662D87545300E4DD5C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shoppe; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,7 +43,7 @@
 		E422C3782D76222B00FE7F97 = {
 			isa = PBXGroup;
 			children = (
-				2D981C2F2D87545300E4DD5C /* TeamChallenge2 */,
+				2D981C2F2D87545300E4DD5C /* Shoppe */,
 				E422C3822D76222B00FE7F97 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,7 +72,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				2D981C2F2D87545300E4DD5C /* TeamChallenge2 */,
+				2D981C2F2D87545300E4DD5C /* Shoppe */,
 			);
 			name = TeamChallenge2;
 			productName = TeamChallenge2;

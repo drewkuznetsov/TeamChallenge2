@@ -29,71 +29,43 @@ struct WishlistView: View {
                         ProductCardView(
                             productToView: product,
                             size: cellWidth,
+                            state: viewModel.state,
                             actionAddToFavorites: { viewModel.addToFavorited(id: product.id) },
                             actionAddToCart: { viewModel.addToCart(id: product.id) }
                         )
                     }
                 }
                 .padding(Constants.interItemSpacing)
-                .modifier(Shimmer(loadingState: viewModel.state))
+                .modifier(ShimmerEffect(loadingState: viewModel.state))
             }
         }
         .onAppear {
+            Task { await viewModel.fetchFavoriteProducts() }
+        }
+        .refreshable {
             Task { await viewModel.fetchFavoriteProducts() }
         }
         .navigationTitle(model.TitleLabel)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                HStack(spacing:20){
+                HStack(spacing:Constants.interItemSpacing){
                     Text(model.TitleLabel).font(.sectionHeader)
                     TextField("Search", text: $viewModel.searchText)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 5)
+                        .padding(.horizontal, Constants.interItemSpacing)
+                        .padding(.vertical)
                         .background(.ultraThinMaterial)
-                        .clipShape(.rect(cornerRadius: 20))
+                        .clipShape(.rect(cornerRadius: Constants.interItemSpacing))
                 }
             }
         }
     }
 }
 
-
 extension WishlistView {
     private enum Constants {
         static let sideInset = 20.0
         static let interItemSpacing = 15.0
-    }
-}
-
-public struct Shimmer: ViewModifier {
-    
-    var loadingState: LoadingState = .loading
-    @State var isInitialState: Bool = true
-    
-    public func body(content: Content) -> some View {
-        switch loadingState {
-        case .loading:
-            content
-                .mask {
-                    LinearGradient(
-                        gradient: .init(colors: [.black.opacity(0.4), .black, .black.opacity(0.4)]),
-                        startPoint: (isInitialState ? .init(x: -5, y: -5) : .init(x: 1, y: 1)),
-                        endPoint: (isInitialState ? .init(x: 0, y: 0) : .init(x: 5, y: 5))
-                    )
-                }
-                .animation(
-                    .linear(duration: 1.5).delay(0.5).repeatForever(autoreverses: false),
-                    value: isInitialState
-                )
-                .onAppear() {
-                    isInitialState = false
-                }
-                .redacted(reason: .placeholder)
-        case .loaded:
-            content
-            
-        }
     }
 }
 

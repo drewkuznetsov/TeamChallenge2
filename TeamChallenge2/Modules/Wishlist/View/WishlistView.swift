@@ -75,6 +75,7 @@ public struct Shimmer: ViewModifier {
         switch loadingState {
         case .loading:
             content
+                .redacted(reason: .placeholder)
                 .mask {
                     LinearGradient(
                         gradient: .init(colors: [.black.opacity(0.4), .black, .black.opacity(0.4)]),
@@ -89,7 +90,6 @@ public struct Shimmer: ViewModifier {
                 .onAppear() {
                     isInitialState = false
                 }
-                .redacted(reason: .placeholder)
         case .loaded:
             content
             

@@ -16,10 +16,13 @@ struct TeamChallenge2App: App {
             switch viewModel.currentScreen {
             case .onbording:
                 OnboardingView()
+                    .colorScheme(.light)
             case .login:
                 StartView()
+                    .colorScheme(.light)
             case .home:
                 TabBarView()
+                    .colorScheme(.light)
             }
         }
     }

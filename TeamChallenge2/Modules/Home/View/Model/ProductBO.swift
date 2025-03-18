@@ -80,4 +80,22 @@ struct ProductBO {
             isAddedToBasket: Bool.random()
         )
     }
+    
+    static func makeLocalStubLocalProductBO() -> Self {
+        let urlString = "slide1"
+        
+        let url = URL(string: urlString) ?? URL(fileURLWithPath: "")
+        
+        return ProductBO(
+            id: Int.random(in: 0...100),
+            title: "Some title",
+            price: Double.random(in: 0...100),
+            description: "Some description",
+            category: Product.Category.allCases.randomElement() ?? .electronics,
+            image: url,
+            rating: Product.Rating(rate: Double.random(in: 0...5), count: Int.random(in: 0...5)),
+            isFavorite: Bool.random(),
+            isAddedToBasket: Bool.random()
+        )
+    }
 }

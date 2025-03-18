@@ -19,22 +19,15 @@ struct SquareAsyncImage: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: scaleType)
-                    .frame(width: size, height: size) // Фиксируем размер
-                    .clipped() // Обрезаем изображение, если оно выходит за пределы
-            } else if phase.error != nil {
-                // В случае ошибки загрузки изображения
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(.regularMaterial)
-                    Image(systemName: "xmark.circle")
-                        .foregroundColor(.red)
-                }
+                    .frame(width: size, height: size)
+                    .clipped()
             } else {
                 // Плейсхолдер во время загрузки
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(.regularMaterial)
-                        .modifier(Shimmer())
+                        .fill(.gray.opacity(0.5))
+                        .background(.regularMaterial)
+                        .modifier(ShimmerEffect())
                         .redacted(reason: .placeholder)
                 }
             }

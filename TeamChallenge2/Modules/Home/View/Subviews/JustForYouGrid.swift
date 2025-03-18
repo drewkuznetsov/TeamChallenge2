@@ -29,6 +29,7 @@ struct JustForYouGrid: View {
                 })
                     .frame(width: cellWidth)
             }
+            
         }
         .padding(Constants.sideInset)
     }

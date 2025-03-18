@@ -15,18 +15,19 @@ class WishlistViewModel: ObservableObject {
     @Published var error: Error?
     @Published var isErrorShown = false
     @Published var productsInBasket = 2
-    @Published var favoriteProducts: [ProductBO] = (0..<10).map { _ in
-        ProductBO.makeStubProductBO()
-    }
+    @Published var favoriteProducts: [ProductBO] = Array( repeating: ProductBO.makeStubProductBO(), count: 4 )
     @Published var favoriteProductsIds: Set<Int>?
     @Published var searchText = "" {
         didSet { self.filterProducts() }
     }
-    
-    private var allFavoriteProducts: [ProductBO] = [] {
-        didSet { self.filterProducts() }
-    }
 
+    private var allFavoriteProducts: [ProductBO] = []
+    {
+        didSet {
+            self.filterProducts()
+            print(self.allFavoriteProducts)
+        }
+    }
     private let networkManager = ShoppeStore.shared
 
     func fetchProducts() async {
@@ -107,13 +108,9 @@ class WishlistViewModel: ObservableObject {
     }
 
     private func filterProducts() {
-        Task {
-            await MainActor.run {
-                favoriteProducts = searchText.isEmpty
-                ? allFavoriteProducts
-                : allFavoriteProducts.filter { self.productMatchesSearchText(product: $0) }
-            }
-        }
+        favoriteProducts = searchText.isEmpty
+        ? allFavoriteProducts
+        : allFavoriteProducts.filter { self.productMatchesSearchText(product: $0) }
     }
 
     private func productMatchesSearchText(product: ProductBO) -> Bool {

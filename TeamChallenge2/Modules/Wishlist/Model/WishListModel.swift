@@ -12,9 +12,4 @@ struct WishListModel {
     let titleLabel = "Wishlist"
     let storeName = "Shoppe"
     let search = "Search"
-    
-    static var sample: [ProductBO] = Array(
-        repeating: ProductBO.makeStubProductBO(),
-        count: 6
-    )
 }

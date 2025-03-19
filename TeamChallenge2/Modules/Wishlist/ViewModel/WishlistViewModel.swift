@@ -10,6 +10,7 @@ import ShoppeStore
 import Foundation
 
 class WishlistViewModel: ObservableObject {
+    
     // MARK: - Published Properties
     @Published var products: [ProductBO] = []
     @Published var productsInCart: [Int : Int] = [:]
@@ -81,11 +82,18 @@ class WishlistViewModel: ObservableObject {
         await updateState(.loading)
         
         #if DEBUG
+        await addDelay()
         generateMockCartIfNeeded()
         #endif
         
         guard let cart = networkManager.persistence.card else { return }
-        self.productsInCart = cart
+        #if DEBUG
+        dump(cart)
+        #endif
+        
+        await MainActor.run {
+            self.productsInCart = cart
+        }
     }
     
     func addToCart(id: Int) {
@@ -157,10 +165,6 @@ class WishlistViewModel: ObservableObject {
     private func generateMockFavoritesIfNeeded() async {
         guard networkManager.persistence.favorites == nil else { return }
         
-        // Имитация задержки сети
-        try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
-        
-        // Генерация уникальных случайных ID
         var uniqueIDs = Set<Int>()
         while uniqueIDs.count < 10 {
             uniqueIDs.insert(Int.random(in: 1...20))
@@ -194,5 +198,9 @@ class WishlistViewModel: ObservableObject {
             }
             return results
         }
+    }
+    
+    private func addDelay() async {
+        try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
     }
 }

@@ -22,7 +22,6 @@ struct SquareAsyncImage: View {
                     .frame(width: size, height: size)
                     .clipped()
             } else {
-                // Плейсхолдер во время загрузки
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(.gray.opacity(0.5))
@@ -32,8 +31,8 @@ struct SquareAsyncImage: View {
                 }
             }
         }
-        .frame(width: size, height: size, alignment: alignment) // Фиксируем размер вью
-        .clipShape(RoundedRectangle(cornerRadius: 5)) // Скругляем углы
+        .frame(width: size, height: size, alignment: alignment)
+        .clipShape(.rect(cornerRadius: 5))
     }
 }
 

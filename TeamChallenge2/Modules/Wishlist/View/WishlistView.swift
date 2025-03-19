@@ -57,7 +57,7 @@ struct WishlistView: View {
                             .padding(.horizontal, Constants.interItemSpacing)
                             .padding(.vertical, 5)
                             .background(.ultraThinMaterial)
-                            .clipShape(.rect(cornerRadius: Constants.interItemSpacing))
+                            .clipShape(.capsule)
                     }
                 }
             }

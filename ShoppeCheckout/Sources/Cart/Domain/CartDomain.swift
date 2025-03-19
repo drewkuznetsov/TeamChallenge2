@@ -9,25 +9,7 @@ import Foundation
 import SwiftFP
 import ShoppeStore
 
-@dynamicMemberLookup
-struct CartProduct: Equatable {
-    let product: Product
-    var quantity: Int
-    
-    @inlinable
-    subscript<T>(dynamicMember keyPath: KeyPath<Product, T>) -> T {
-        product[keyPath: keyPath]
-    }
-}
-
-enum CartError: Error, Equatable {
-    case loading(String)
-}
-
 struct CartDomain: ReducerDomain {
-    
-    typealias ProductID = Identifier<Product, Int>
-    
     //MARK: - State
     struct State: Equatable {
         fileprivate(set) var products: [CartProduct]
@@ -39,16 +21,8 @@ struct CartDomain: ReducerDomain {
         var totalPrice: Double {
             products
                 .map { $0.price * Double($0.quantity) }
-                .reduce(Double(), +)
+                .reduce(Double.zero, +)
         }
-        
-//        var totalPrice: Double {
-//            products
-//                .reduce(into: [Int: Double]()) { $0[$1.id] = $1.price }
-//                .merging(cart.mapValues(Double.init), uniquingKeysWith: *)
-//                .values
-//                .reduce(Double(), +)
-//        }
         
         //MARK: - init(_:)
         init(
@@ -67,14 +41,12 @@ struct CartDomain: ReducerDomain {
         case onAppear
         case loadContent(LoadContentToken)
         case fetchLocation
-        case setProduct(_ id: Int, count: Int)
-        case removeProduct(_ id: Int)
+        case setProduct(_ id: CartProduct.ID, count: Int)
+        case removeProduct(_ id: CartProduct.ID)
     }
         
     @inlinable
-    init(_ dependencies: Dependency) {
-        self.dependency = dependencies
-    }
+    init(_ dependencies: Dependency) { self.dependency = dependencies }
     
     //MARK: - Dependencies
     var dependency: Dependency
@@ -95,16 +67,14 @@ struct CartDomain: ReducerDomain {
         case .loadContent:
             switch await dependency.fetchProducts() {
             case .success(let products):
-                state.products = dependency.fetchCart()
-                    .compactMap { id, quantity -> CartProduct? in
-                        guard
-                            quantity > .zero,
-                            let element = products.first(where: \.id == id)
-                        else {
-                            return nil
-                        }
-                        return CartProduct(product: element, quantity: quantity)
+                let cart = dependency.fetchCart()
+                state.products = products
+                    .compactMap { p -> (Product, Int)? in
+                        Optional(p)
+                            .zip(cart[p.id])
                     }
+                    .compactMap(CartProduct.init)
+                
             case .failure(let e):
                 state.error = CartError.loading(e.localizedDescription)
             }

@@ -9,10 +9,11 @@ import SwiftUI
 
 struct CartView: View {
     let header: Header
-    
+    let products: [CartProduct]
     let changeAddress: () -> Void
     let checkout: () -> Void
     
+    //MARK: - body
     var body: some View {
         VStack(alignment: .leading) {
             CartHeader(header.title, quantity: header.total)
@@ -27,28 +28,30 @@ struct CartView: View {
             .equatable()
             .padding(.horizontal)
             
-            HStack(spacing: 10) {
-                AsyncImage(
-                    url: URL(string: "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg"),
-                    content: { $0.resizable() },
-                    placeholder: ProgressView.init
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-                .shadow(radius: 10, y: 5)
-                .frame(maxWidth: 120, maxHeight: 100)
-                VStack(alignment: .leading) {
-                    Text("Lorem ipsum dolor sit amet consectetur.")
-                        .font(.callout)
-                    Text("Pink, Size M")
-                    HStack {
+            ScrollView {
+                ForEach(products) { product in
+                    HStack(spacing: 10) {
                         
+                        AsyncImage(
+                            url: product.image,
+                            content: { $0.resizable() },
+                            placeholder: ProgressView.init
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .shadow(radius: 10, y: 5)
+                        .frame(maxWidth: 120/*, maxHeight: 100*/)
+                        
+                        ProductDescription(
+                            product.title,
+                            price: product.price,
+                            quantity: .constant(product.quantity)
+                        )
+                        .equatable()
                     }
+                    .padding(.horizontal)
+                    .frame(maxHeight: 110)
                 }
             }
-            .padding(.horizontal)
-            
-            Spacer()
-            
             TotalBar(14, buttonTitle: "Checkout", checkout: checkout)
                 .equatable()
         }
@@ -56,6 +59,7 @@ struct CartView: View {
 }
 
 extension CartView {
+    //MARK: - Header
     struct Header: Equatable {
         let title: String
         let total: Int
@@ -68,10 +72,12 @@ extension CartView {
     
 }
 
+//MARK: - Preview
 #Preview {
     NavigationStack {
         CartView(
             header: CartView.Header("Cart", total: 2),
+            products: CartProduct.sample,
             changeAddress: { print("changeAddress") },
             checkout: { print("checkout") }
         )

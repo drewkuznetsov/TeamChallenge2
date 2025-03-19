@@ -34,7 +34,7 @@ struct CartDomainTest {
     }
     
     let product = CartProduct(
-        product: Product(
+        Product(
             id: 1,
             title: "baz",
             price: 1,
@@ -44,7 +44,7 @@ struct CartDomainTest {
             rating: .init(rate: 1, count: 1)
         ),
         quantity: 1
-    )
+    )!
         
     @Test func onViewAppear() async throws {
         let sut = makeSut()

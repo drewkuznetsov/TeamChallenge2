@@ -12,4 +12,9 @@ extension View {
     func withSize(_ s: CGSize) -> some View {
         frame(width: s.width, height: s.height)
     }
+    
+    @inlinable
+    func withSize(_ equally: CGFloat) -> some View {
+        withSize(CGSize(width: equally, height: equally))
+    }
 }

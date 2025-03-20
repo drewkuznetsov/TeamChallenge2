@@ -18,7 +18,7 @@ struct ProductCardView: View {
     var actionAddToFavorites: () -> Void
     var actionAddToCart: () -> Void
     
-    private var isButtonsDisabled: Bool { state == .loading ? true : false }
+    private var isButtonsDisabled: Bool { state == .loading }
     
     var body: some View {
         VStack{

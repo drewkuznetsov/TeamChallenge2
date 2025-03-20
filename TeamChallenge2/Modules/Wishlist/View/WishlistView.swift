@@ -40,9 +40,6 @@ struct WishlistView: View {
                 .modifier(ShimmerEffect(loadingState: viewModel.state))
             }
         }
-        .onAppear {
-            Task { await viewModel.fetchFavoriteProducts() }
-        }
         .refreshable {
             Task { await viewModel.fetchFavoriteProducts() }
         }
@@ -50,15 +47,13 @@ struct WishlistView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                HStack(spacing:Constants.sideInset){
-                    HStack(spacing:Constants.interItemSpacing){
-                        Text(model.titleLabel).font(.sectionHeader)
-                        TextField(model.search, text: $viewModel.searchText)
-                            .padding(.horizontal, Constants.interItemSpacing)
-                            .padding(.vertical, 5)
-                            .background(.ultraThinMaterial)
-                            .clipShape(.capsule)
-                    }
+                HStack(spacing:Constants.interItemSpacing){
+                    Text(model.titleLabel).font(.sectionHeader)
+                    TextField(model.search, text: $viewModel.searchText)
+                        .padding(.horizontal, Constants.interItemSpacing)
+                        .padding(.vertical, 5)
+                        .background(.ultraThinMaterial)
+                        .clipShape(.capsule)
                 }
             }
         }
@@ -76,8 +71,3 @@ extension WishlistView {
 #Preview {
     WishlistView()
 }
-
-
-
-
-

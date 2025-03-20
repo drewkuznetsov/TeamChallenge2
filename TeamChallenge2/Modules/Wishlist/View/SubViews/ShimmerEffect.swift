@@ -7,7 +7,6 @@
 
 
 import SwiftUI
-import ShoppeStore
 
 public struct ShimmerEffect: ViewModifier {
     

@@ -39,8 +39,8 @@ class WishlistViewModel: ObservableObject {
         
         Task {
             await fetchProducts()
-            await fetchFavoriteProducts()
             await fetchCartProducts()
+            await fetchFavoriteProducts()
         }
     }
     
@@ -65,6 +65,7 @@ class WishlistViewModel: ObservableObject {
         
         #if DEBUG
         await generateMockFavoritesIfNeeded()
+        await addDelay()
         #endif
         
         let favoriteIDs = networkManager.persistence.favorites ?? []
@@ -82,7 +83,6 @@ class WishlistViewModel: ObservableObject {
         await updateState(.loading)
         
         #if DEBUG
-        await addDelay()
         generateMockCartIfNeeded()
         #endif
         
@@ -201,6 +201,6 @@ class WishlistViewModel: ObservableObject {
     }
     
     private func addDelay() async {
-        try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
+        try? await Task.sleep(for: .seconds(3), tolerance: .seconds(1))
     }
 }

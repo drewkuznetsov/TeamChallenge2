@@ -13,17 +13,17 @@ struct TeamChallenge2App: App {
     
     var body: some Scene {
         WindowGroup {
-            switch viewModel.currentScreen {
-            case .onbording:
-                OnboardingView()
-                    .colorScheme(.light)
-            case .login:
-                StartView()
-                    .colorScheme(.light)
-            case .home:
-                TabBarView()
-                    .colorScheme(.light)
+            Group{
+                switch viewModel.currentScreen {
+                case .onbording:
+                    OnboardingView()
+                case .login:
+                    StartView()
+                case .home:
+                    TabBarView()
+                }
             }
+            .colorScheme(.light)
         }
     }
 }

@@ -25,6 +25,11 @@ struct CartHeader: View, Equatable {
         self.quantity = quantity
     }
     
+    @inlinable
+    init(dataSource: DataSource) {
+        self.init(dataSource.title, quantity: dataSource.total)
+    }
+    
     //MARK: - body
     var body: some View {
         HStack {
@@ -38,6 +43,19 @@ struct CartHeader: View, Equatable {
                 .clipShape(Circle())
             
             Spacer()
+        }
+    }
+}
+ 
+extension CartHeader {
+    //MARK: - Header
+    struct DataSource: Equatable {
+        let title: String
+        let total: Int
+        
+        @inlinable init(_ title: String, total: Int) {
+            self.title = title
+            self.total = total
         }
     }
 }

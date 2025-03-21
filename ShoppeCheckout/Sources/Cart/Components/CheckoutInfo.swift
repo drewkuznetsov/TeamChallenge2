@@ -29,8 +29,8 @@ struct CheckoutInfo: View, Equatable {
     }
     
     @inlinable
-    init(_ info: Info) {
-        self.init(info.title, text: info.text, changeTap: info.change)
+    init(dataSource: DataSource) {
+        self.init(dataSource.title, text: dataSource.text, changeTap: dataSource.change)
     }
     
     //MARK: - body
@@ -62,13 +62,13 @@ struct CheckoutInfo: View, Equatable {
 }
 
 extension CheckoutInfo {
-    struct Info: Equatable {
+    struct DataSource: Equatable {
         let title: String
         let text: String
         let change: () -> Void
         
         @inlinable
-        static func == (lhs: CheckoutInfo.Info, rhs: CheckoutInfo.Info) -> Bool {
+        static func == (lhs: DataSource, rhs: DataSource) -> Bool {
             lhs.title == rhs.text && lhs.text == rhs.text
         }
     }

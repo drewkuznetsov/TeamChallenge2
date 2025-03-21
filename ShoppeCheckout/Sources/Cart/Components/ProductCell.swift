@@ -10,20 +10,24 @@ import SwiftUI
 struct ProductCell: View {
     private enum Drawing {
         static var spacing: CGFloat { 10 }
+        static var padding: CGFloat { 4 }
     }
     
     //MARK: - Properties
     let product: CartProduct
     let setQuantity: @Sendable (Int) -> Void
+    let onDelete: () -> Void
     
     //MARK: - init(_:)
     @inlinable
     init(
         _ product: CartProduct,
-        setQuantity: @escaping @Sendable (Int) -> Void
+        setQuantity: @escaping @Sendable (Int) -> Void,
+        onDelete: @escaping () -> Void
     ) {
         self.product = product
         self.setQuantity = setQuantity
+        self.onDelete = onDelete
     }
     
     //MARK: - body
@@ -43,6 +47,13 @@ struct ProductCell: View {
             )
             .equatable()
         }
+        .overlay(alignment: .bottomLeading) {
+            ButtonIcon(.trashCircle, action: onDelete)
+                .padding(Drawing.padding)
+                .background(Color.white)
+                .clipShape(Circle())
+                .foregroundStyle(Color.red)
+        }
     }
 }
 
@@ -56,7 +67,8 @@ extension ProductCell: Equatable {
 #Preview {
     VStack {
         ForEach(CartProduct.sample) { p in
-            ProductCell(p) { _ in }
+            ProductCell(p, setQuantity: { _ in }, onDelete: {})
+                .frame(width: 335, height: 110)
         }
     }
 }

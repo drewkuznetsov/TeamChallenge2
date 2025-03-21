@@ -18,10 +18,20 @@ struct TotalBar: View, Equatable {
     let checkout: () -> Void
     
     //MARK: - init(_:)
+    @inlinable
     init(_ total: Double, buttonTitle: String, checkout: @escaping () -> Void) {
         self.total = total
         self.buttonTitle = buttonTitle
         self.checkout = checkout
+    }
+    
+    @inlinable
+    init(dataSource: DataSource) {
+        self.init(
+            dataSource.total,
+            buttonTitle: dataSource.button,
+            checkout: dataSource.onTap
+        )
     }
     
     //MARK: - body
@@ -43,6 +53,35 @@ struct TotalBar: View, Equatable {
     @inlinable
     nonisolated static func == (lhs: TotalBar, rhs: TotalBar) -> Bool {
         lhs.total == rhs.total && lhs.buttonTitle == rhs.buttonTitle
+    }
+}
+
+extension TotalBar {
+    struct DataSource: Equatable {
+        let title: String
+        let total: Double
+        let button: String
+        let onTap: () -> Void
+        
+        @inlinable
+        init(
+            _ title: String,
+            total: Double,
+            button: String,
+            onTap: @escaping () -> Void
+        ) {
+            self.title = title
+            self.total = total
+            self.button = button
+            self.onTap = onTap
+        }
+        
+        @inlinable
+        static func == (lhs: DataSource, rhs: DataSource) -> Bool {
+            lhs.title == rhs.title
+            && lhs.total == rhs.total
+            && lhs.button == rhs.button
+        }
     }
 }
 

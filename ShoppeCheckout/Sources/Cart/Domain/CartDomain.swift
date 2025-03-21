@@ -67,7 +67,9 @@ struct CartDomain: ReducerDomain {
         case .loadContent:
             switch await dependency.fetchProducts() {
             case .success(let products):
-                let cart = dependency.fetchCart()
+                guard let cart = dependency.fetchCart() else {
+                    break
+                }
                 state.products = products
                     .compactMap { p -> (Product, Int)? in
                         Optional(p)
@@ -102,13 +104,13 @@ extension CartDomain {
     //MARK: - Dependency
     struct Dependency: Sendable {
         var fetchProducts: @Sendable () async -> Result<[Product], Error>
-        var fetchCart: @Sendable () -> [Int: Int]
+        var fetchCart: @Sendable () -> [Int: Int]?
         var fetchLocation: @Sendable () async -> String?
         
         public init(
-            fetchProducts: @escaping @Sendable () -> Result<[Product], Error>,
-            fetchCart: @escaping @Sendable () -> [Int : Int],
-            fetchLocation: @escaping @Sendable () -> String?
+            fetchProducts: @escaping @Sendable () async -> Result<[Product], Error>,
+            fetchCart: @escaping @Sendable () -> [Int : Int]?,
+            fetchLocation: @escaping @Sendable () async -> String?
         ) {
             self.fetchProducts = fetchProducts
             self.fetchCart = fetchCart
@@ -133,5 +135,16 @@ extension CartDomain.Action: Equatable {
     @inlinable
     static func == (lhs: Self, rhs: Self) -> Bool {
         String(describing: lhs) == String(describing: rhs)
+    }
+}
+
+extension CartDomain.Dependency {
+    static var live: Self {
+        let shoppe = ShoppeStore.shared
+        return CartDomain.Dependency(
+            fetchProducts: shoppe.fetchAllProducts,
+            fetchCart: { shoppe.persistence.card },
+            fetchLocation: { nil }
+        )
     }
 }

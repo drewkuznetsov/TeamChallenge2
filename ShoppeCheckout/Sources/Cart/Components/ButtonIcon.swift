@@ -8,9 +8,20 @@
 import SwiftUI
 
 struct ButtonIcon: View, Equatable {
-    let icon: IconSymbol
+    let icon: String
     let size: CGFloat
     let action: () -> Void
+    
+    @inlinable
+    init(
+        systemName: String,
+        size: CGFloat = 30,
+        action: @escaping () -> Void
+    ) {
+        self.icon = systemName
+        self.size = size
+        self.action = action
+    }
     
     @inlinable
     init(
@@ -18,14 +29,14 @@ struct ButtonIcon: View, Equatable {
         size: CGFloat = 30,
         action: @escaping () -> Void
     ) {
-        self.icon = icon
+        self.icon = icon.rawValue
         self.size = size
         self.action = action
     }
     
     var body: some View {
         Button(action: action) {
-            Image(systemName: icon.rawValue)
+            Image(systemName: icon)
                 .resizable()
         }
         .withSize(size)
@@ -42,6 +53,7 @@ extension ButtonIcon {
     enum IconSymbol: String {
         case minusCircle = "minus.circle"
         case plusCircle = "plus.circle"
+        case trashCircle = "trash.circle"
     }
 }
 

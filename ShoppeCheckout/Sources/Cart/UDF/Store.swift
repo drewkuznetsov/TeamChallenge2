@@ -20,10 +20,16 @@ public final class Store<Reducer: ReducerDomain>: ObservableObject, @unchecked S
     }
     
     public func send(_ action: Reducer.Action) {
-        Task(priority: .high) { @MainActor in
+        Task(priority: .high) {
+            var updated = state
+            
             await reducer
-                .reduce(&state, action: action)
+                .reduce(&updated, action: action)
                 .forEach(self.send(_:))
+            
+            await MainActor.run { [updated] in
+                self.state = updated
+            }
         }
     }
     

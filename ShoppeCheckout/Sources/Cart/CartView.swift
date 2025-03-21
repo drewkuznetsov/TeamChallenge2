@@ -20,7 +20,7 @@ struct CartView: View {
     let products: [CartProduct]
     let bottomBar: TotalBar.DataSource
     
-    let setProductQuantity: @Sendable (CartProduct.ID, Int) -> Void
+    let setProductQuantity: @MainActor (CartProduct.ID, Int) -> Void
     let deleteProduct: (CartProduct.ID) -> Void
     
     //MARK: - init(_:)
@@ -29,7 +29,7 @@ struct CartView: View {
         info: CheckoutInfo.DataSource,
         products: [CartProduct],
         bottomBar: TotalBar.DataSource,
-        setProductQuantity: @escaping @Sendable (CartProduct.ID, Int) -> Void,
+        setProductQuantity: @escaping @MainActor (CartProduct.ID, Int) -> Void,
         deleteProduct: @escaping (CartProduct.ID) -> Void
     ) {
         self.header = header

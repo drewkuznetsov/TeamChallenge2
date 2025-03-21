@@ -10,7 +10,7 @@ import FoundationFX
 
 public protocol ReducerDomain: Sendable {
     typealias Effect = Collection<Action>
-    associatedtype State
+    associatedtype State: Sendable
     associatedtype Action: Sendable
     
     func reduce(_ state: inout State, action: Action) async -> any Effect

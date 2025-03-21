@@ -15,14 +15,14 @@ struct ProductCell: View {
     
     //MARK: - Properties
     let product: CartProduct
-    let setQuantity: @Sendable (Int) -> Void
+    let setQuantity: @MainActor (Int) -> Void
     let onDelete: () -> Void
     
     //MARK: - init(_:)
     @inlinable
     init(
         _ product: CartProduct,
-        setQuantity: @escaping @Sendable (Int) -> Void,
+        setQuantity: @escaping @MainActor (Int) -> Void,
         onDelete: @escaping () -> Void
     ) {
         self.product = product
@@ -42,7 +42,7 @@ struct ProductCell: View {
                 price: product.price,
                 quantity: Binding(
                     get: { product.quantity },
-                    set: setQuantity
+                    set: { setQuantity($0) }
                 )
             )
             .equatable()

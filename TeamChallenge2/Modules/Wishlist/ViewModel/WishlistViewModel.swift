@@ -63,10 +63,10 @@ class WishlistViewModel: ObservableObject {
     func fetchFavoriteProducts() async {
         await updateState(.loading)
         
-        #if DEBUG
+#if DEBUG
         await generateMockFavoritesIfNeeded()
         await addDelay()
-        #endif
+#endif
         
         let favoriteIDs = networkManager.persistence.favorites ?? []
         let fetchedProducts = await fetchFavoriteProducts(ids: Array(favoriteIDs))
@@ -182,21 +182,18 @@ class WishlistViewModel: ObservableObject {
     
     // MARK: Network Operations
     private func fetchFavoriteProducts(ids: [Int]) async -> [ProductBO] {
-        await withTaskGroup(of: ProductBO?.self) { group in
-            for id in ids {
+        await withTaskGroup(of: ProductBO?.self) { [networkManager] group in
+            ids.forEach { id in
                 group.addTask {
-                    guard let product = try? await self.networkManager.fetchProduct(withId: id).get() else {
-                        return nil
-                    }
-                    return ProductBO(product: product)
+                    try? await networkManager
+                        .fetchProduct(withId: id)
+                        .map(ProductBO.init)
+                        .get()
                 }
             }
-            
-            var results = [ProductBO]()
-            for await case let product? in group {
-                results.append(product)
-            }
-            return results
+            return await group
+                .compactMap(\.self)
+                .reduce(into: [ProductBO]()) { $0.append($1) }
         }
     }
     

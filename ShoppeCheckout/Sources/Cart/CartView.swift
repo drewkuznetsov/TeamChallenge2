@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct CartView: View {
+    //MARK: - Drawing
+    private enum Drawing {
+        static var verticalSpacing: CGFloat { .zero }
+        static var cellHeightFraction: CGFloat { 0.25 }
+    }
+    
+    //MARK: - Properties
     let header: Header
     let products: [CartProduct]
     let changeAddress: () -> Void
     let checkout: () -> Void
+    let setProductQuantity: @Sendable (CartProduct.ID, Int) -> Void
     
     //MARK: - body
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: Drawing.verticalSpacing) {
             CartHeader(header.title, quantity: header.total)
                 .equatable()
                 .padding(.horizontal)
@@ -26,35 +34,26 @@ struct CartView: View {
                 changeTap: changeAddress
             )
             .equatable()
-            .padding(.horizontal)
-            
-            ScrollView {
-                ForEach(products) { product in
-                    HStack(spacing: 10) {
-                        
-                        AsyncImage(
-                            url: product.image,
-                            content: { $0.resizable() },
-                            placeholder: ProgressView.init
-                        )
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                        .shadow(radius: 10, y: 5)
-                        .frame(maxWidth: 120/*, maxHeight: 100*/)
-                        
-                        ProductDescription(
-                            product.title,
-                            price: product.price,
-                            quantity: .constant(product.quantity)
-                        )
+            .padding([.horizontal, .top])
+            GeometryReader { proxy in
+                ScrollView {
+                    ForEach(products) { product in
+                        ProductCell(product) {
+                            setProductQuantity(product.id, $0)
+                        }
                         .equatable()
+                        .frame(height: computeCellFraction(proxy))
                     }
-                    .padding(.horizontal)
-                    .frame(maxHeight: 110)
                 }
+                .padding([.horizontal, .top])
             }
             TotalBar(14, buttonTitle: "Checkout", checkout: checkout)
                 .equatable()
         }
+    }
+    
+    private func computeCellFraction(_ proxy: GeometryProxy) -> CGFloat {
+        ceil(proxy.size.height * Drawing.cellHeightFraction)
     }
 }
 
@@ -79,7 +78,8 @@ extension CartView {
             header: CartView.Header("Cart", total: 2),
             products: CartProduct.sample,
             changeAddress: { print("changeAddress") },
-            checkout: { print("checkout") }
+            checkout: { print("checkout") },
+            setProductQuantity: { print("Product: \($0), quantity: \($1.description)") }
         )
     }
 }

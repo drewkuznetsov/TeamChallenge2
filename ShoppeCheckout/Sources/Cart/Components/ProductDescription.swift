@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct ProductDescription: View {
+    //MARK: - Drawing
+    private enum Drawing {
+        static var stepperPriority: CGFloat { 1 }
+    }
+    
+    //MARK: - Private properties
     private let description: String
     private let price: Double
     @Binding private var quantity: Int
@@ -30,6 +36,7 @@ struct ProductDescription: View {
                     .font(.title2.bold())
                 Spacer()
                 QuantityStepper($quantity)
+                    .layoutPriority(Drawing.stepperPriority)
             }
         }
     }

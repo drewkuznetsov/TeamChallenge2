@@ -69,5 +69,10 @@ private extension QuantityStepper {
 }
 
 #Preview {
-    QuantityStepper(.constant(200))
+    VStack {
+        QuantityStepper(.constant(2000))
+        QuantityStepper(.constant(200))
+        QuantityStepper(.constant(2))
+        QuantityStepper(.constant(20))
+    }
 }

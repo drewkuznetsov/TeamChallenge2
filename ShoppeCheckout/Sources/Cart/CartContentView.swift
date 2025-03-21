@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  CartContentView.swift
 //  ShoppeCheckout
 //
 //  Created by Илья Шаповалов on 22.03.2025.
@@ -7,13 +7,15 @@
 
 import SwiftUI
 
-struct CartContentView: View {
+public struct CartContentView: View {
     @StateObject private var store = Store(
         reducer: CartDomain(.live),
         state: CartDomain.State()
     )
     
-    var body: some View {
+    public init() {}
+    
+    public var body: some View {
         CartView(
             header: CartHeader.DataSource(
                 "Cart",

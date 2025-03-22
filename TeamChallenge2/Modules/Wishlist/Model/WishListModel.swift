@@ -9,11 +9,7 @@ import Foundation
 import ShoppeStore
 
 struct WishListModel {
-    let TitleLabel = "Wishlist"
+    let titleLabel = "Wishlist"
     let storeName = "Shoppe"
-    
-    static var sample: [ProductBO] = Array(
-        repeating: ProductBO.makeStubProductBO(),
-        count: 6
-    )
+    let search = "Search"
 }

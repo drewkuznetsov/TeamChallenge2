@@ -13,8 +13,8 @@ struct WishlistView: View {
     let model = WishListModel()
     
     let columns = [
-        GridItem(.flexible()), // Первая колонка
-        GridItem(.flexible())  // Вторая колонка
+        GridItem(.flexible()),
+        GridItem(.flexible())
     ]
     
     private var cellWidth: CGFloat {
@@ -29,29 +29,31 @@ struct WishlistView: View {
                         ProductCardView(
                             productToView: product,
                             size: cellWidth,
-                            actionAddToFavorites: { viewModel.addToFavorited(id: product.id) },
+                            state: viewModel.state,
+                            scaleType: viewModel.scaleType,
+                            actionAddToFavorites: { viewModel.addToFavorites(id: product.id) },
                             actionAddToCart: { viewModel.addToCart(id: product.id) }
                         )
                     }
                 }
                 .padding(Constants.interItemSpacing)
-                .modifier(Shimmer(loadingState: viewModel.state))
+                .modifier(ShimmerEffect(loadingState: viewModel.state))
             }
         }
-        .onAppear {
+        .refreshable {
             Task { await viewModel.fetchFavoriteProducts() }
         }
-        .navigationTitle(model.TitleLabel)
+        .navigationTitle(model.titleLabel)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                HStack(spacing:20){
-                    Text(model.TitleLabel).font(.sectionHeader)
-                    TextField("Search", text: $viewModel.searchText)
-                        .padding(.horizontal, 20)
+                HStack(spacing:Constants.interItemSpacing){
+                    Text(model.titleLabel).font(.sectionHeader)
+                    TextField(model.search, text: $viewModel.searchText)
+                        .padding(.horizontal, Constants.interItemSpacing)
                         .padding(.vertical, 5)
                         .background(.ultraThinMaterial)
-                        .clipShape(.rect(cornerRadius: 20))
+                        .clipShape(.capsule)
                 }
             }
         }
@@ -66,42 +68,6 @@ extension WishlistView {
     }
 }
 
-public struct Shimmer: ViewModifier {
-    
-    var loadingState: LoadingState = .loading
-    @State var isInitialState: Bool = true
-    
-    public func body(content: Content) -> some View {
-        switch loadingState {
-        case .loading:
-            content
-                .mask {
-                    LinearGradient(
-                        gradient: .init(colors: [.black.opacity(0.4), .black, .black.opacity(0.4)]),
-                        startPoint: (isInitialState ? .init(x: -5, y: -5) : .init(x: 1, y: 1)),
-                        endPoint: (isInitialState ? .init(x: 0, y: 0) : .init(x: 5, y: 5))
-                    )
-                }
-                .animation(
-                    .linear(duration: 1.5).delay(0.5).repeatForever(autoreverses: false),
-                    value: isInitialState
-                )
-                .onAppear() {
-                    isInitialState = false
-                }
-                .redacted(reason: .placeholder)
-        case .loaded:
-            content
-            
-        }
-    }
-}
-
 #Preview {
     WishlistView()
 }
-
-
-
-
-

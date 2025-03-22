@@ -46,7 +46,7 @@ extension TabBarItem {
         TabBarItem(
             title: "Cart",
             iconName: "cart",
-            view: AnyTabView(CartContentView())
+            view: AnyTabView(CartContentView(goHome: { "> - <" }))
         ),
         TabBarItem(
             title: "Profile",

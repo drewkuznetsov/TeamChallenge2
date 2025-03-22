@@ -12,8 +12,13 @@ public struct CartContentView: View {
         reducer: CartDomain(.live),
         state: CartDomain.State()
     )
+    let goHome: () -> Void
     
-    public init() {}
+    public init(
+        goHome: @escaping () -> Void
+    ) {
+        self.goHome = goHome
+    }
     
     public var body: some View {
         CartView(
@@ -36,12 +41,13 @@ public struct CartContentView: View {
                 }
             ),
             setProductQuantity: { store.send(.setProduct($0, count: $1)) },
-            deleteProduct: { store.send(.removeProduct($0)) }
+            deleteProduct: { store.send(.removeProduct($0)) },
+            goHomeTap: goHome
         )
         .equatable()
     }
 }
 
 #Preview {
-    CartContentView()
+    CartContentView(goHome: { })
 }

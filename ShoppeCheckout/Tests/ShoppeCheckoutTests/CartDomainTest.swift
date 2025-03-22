@@ -55,7 +55,7 @@ struct CartDomainTest {
         
         #expect(actions == [.loadContent(token)])
         
-        state = Sut.State(products: [product], shippingAddress: "baz")
+        state = Sut.State(products: .success([product]), shippingAddress: "baz")
         
         actions = await Array(sut.reduce(&state, action: .onAppear))
         
@@ -72,7 +72,7 @@ struct CartDomainTest {
         sut.dependency.fetchCart = { [1: 1] }
         _ = await Array(sut.reduce(&state, action: .loadContent(token)))
         
-        #expect(state.error == .loading(error.localizedDescription))
+        #expect(state.products == .failure(.loading(error.localizedDescription)))
     }
     
     @Test func fetchProductEndSuccess() async throws {
@@ -86,37 +86,61 @@ struct CartDomainTest {
         sut.dependency.fetchCart = { cart }
         _ = await sut.reduce(&state, action: .loadContent(token))
         
-        #expect(state.products == [product])
+        #expect(state.products == .success([product]))
     }
     
     @Test func removeProductFromCart() async throws {
         let sut = makeSut()
-        var state = CartDomain.State(products: [product])
+        var state = CartDomain.State(products: .success([product]))
         
-        _ = await sut.reduce(&state, action: .removeProduct(1))
+        _ = await sut.reduce(&state, action: .removeProduct(Identifier(rawValue: 1)))
         
-        #expect(state.products.isEmpty == true)
+        switch state.products {
+        case .success(let content):
+            #expect(content.isEmpty == true)
+            
+        case .failure, .none:
+            throw NSError(domain: "Test", code: 1)
+        }
     }
     
     @Test func changeProductCount() async throws {
         let sut = makeSut()
-        var state = CartDomain.State(products: [product])
+        var state = CartDomain.State(products: .success([product]))
         
-        _ = await sut.reduce(&state, action: .setProduct(1, count: 2))
+        _ = await sut.reduce(&state, action: .setProduct(Identifier(rawValue: 1), count: 2))
         
-        #expect(state.products[0].quantity == 2)
+        switch state.products {
+        case .success(let content):
+            #expect(content[0].quantity == 2)
+            
+        case .failure, .none:
+            throw NSError(domain: "Test", code: 1)
+        }
         
-        _ = await sut.reduce(&state, action: .setProduct(1, count: 1))
+        _ = await sut.reduce(&state, action: .setProduct(Identifier(rawValue: 1), count: 1))
         
-        #expect(state.products[0].quantity == 1)
+        switch state.products {
+        case .success(let content):
+            #expect(content[0].quantity == 1)
+            
+        case .failure, .none:
+            throw NSError(domain: "Test", code: 1)
+        }
         
-        _ = await sut.reduce(&state, action: .setProduct(2, count: 1))
+        _ = await sut.reduce(&state, action: .setProduct(Identifier(rawValue: 2), count: 1))
         
-        #expect(state.products[0].quantity == 1)
-        #expect(state.products.count == 1)
+        switch state.products {
+        case .success(let content):
+            #expect(content[0].quantity == 1)
+            #expect(content.count == 1)
+            
+        case .failure, .none:
+            throw NSError(domain: "Test", code: 1)
+        }
         
-        let actions = await Array(sut.reduce(&state, action: .setProduct(1, count: 0)))
+        let actions = await Array(sut.reduce(&state, action: .setProduct(Identifier(rawValue: 1), count: 0)))
         
-        #expect(actions == [.removeProduct(1)])
+        #expect(actions == [.removeProduct(Identifier(rawValue: 1))])
     }
 }

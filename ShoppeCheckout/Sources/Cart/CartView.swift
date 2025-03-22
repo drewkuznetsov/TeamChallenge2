@@ -17,20 +17,22 @@ struct CartView: View {
     //MARK: - Properties
     let header: CartHeader.DataSource
     let info: CheckoutInfo.DataSource
-    let products: [CartProduct]
+    let products: Result<[CartProduct], CartError>?
     let bottomBar: TotalBar.DataSource
     
     let setProductQuantity: @MainActor (CartProduct.ID, Int) -> Void
     let deleteProduct: (CartProduct.ID) -> Void
+    let goHomeTap: () -> Void
     
     //MARK: - init(_:)
     init(
         header: CartHeader.DataSource,
         info: CheckoutInfo.DataSource,
-        products: [CartProduct],
+        products: Result<[CartProduct], CartError>?,
         bottomBar: TotalBar.DataSource,
         setProductQuantity: @escaping @MainActor (CartProduct.ID, Int) -> Void,
-        deleteProduct: @escaping (CartProduct.ID) -> Void
+        deleteProduct: @escaping (CartProduct.ID) -> Void,
+        goHomeTap: @escaping () -> Void
     ) {
         self.header = header
         self.info = info
@@ -38,11 +40,12 @@ struct CartView: View {
         self.bottomBar = bottomBar
         self.setProductQuantity = setProductQuantity
         self.deleteProduct = deleteProduct
+        self.goHomeTap = goHomeTap
     }
     
     //MARK: - body
     var body: some View {
-        VStack(alignment: .leading, spacing: Drawing.verticalSpacing) {
+        VStack(spacing: Drawing.verticalSpacing) {
             CartHeader(dataSource: header)
                 .equatable()
                 .padding(.horizontal)
@@ -51,27 +54,42 @@ struct CartView: View {
                 .equatable()
                 .padding([.horizontal, .top])
             
-            GeometryReader { proxy in
-                ScrollView {
-                    ForEach(products) { product in
-                        ProductCell(
-                            product,
-                            setQuantity: { setProductQuantity(product.id, $0) },
-                            onDelete: { deleteProduct(product.id) }
-                        )
-                        .equatable()
-                        .frame(height: computeCellFraction(proxy))
-                    }
+            switch products {
+            case .none:
+                CartProductList(CartProduct.sample) { product, area in
+                    ProductCell(product)
+                        .frame(height: computeCellFraction(area))
                 }
-                .padding([.horizontal, .top])
+                .redacted(reason: .placeholder)
+                
+            case .success(let content):
+                CartProductList(content) { product, area in
+                    ProductCell(
+                        product,
+                        setQuantity: { setProductQuantity(product.id, $0) },
+                        onDelete: { deleteProduct(product.id) }
+                    )
+                    .equatable()
+                    .frame(height: computeCellFraction(area))
+                }
+                .equatable()
+                
+            case .failure(let reason):
+                EmptyCartView(
+                    reason: reason.description,
+                    buttonTitle: "Go shopping!",
+                    action: goHomeTap
+                )
+                .equatable()
             }
+            
             TotalBar(dataSource: bottomBar)
                 .equatable()
         }
     }
     
-    private func computeCellFraction(_ proxy: GeometryProxy) -> CGFloat {
-        ceil(proxy.size.height * Drawing.cellHeightFraction)
+    private func computeCellFraction(_ area: CGSize) -> CGFloat {
+        ceil(area.height * Drawing.cellHeightFraction)
     }
 }
 
@@ -87,7 +105,7 @@ extension CartView: @preconcurrency Equatable {
 }
 
 //MARK: - Preview
-#Preview {
+#Preview("Loaded") {
     NavigationStack {
         CartView(
             header: CartHeader.DataSource(
@@ -99,7 +117,7 @@ extension CartView: @preconcurrency Equatable {
                 text: "26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city",
                 change: { print("Change info") }
             ),
-            products: CartProduct.sample,
+            products: .success(CartProduct.sample),
             bottomBar: TotalBar.DataSource(
                 "Total",
                 total: 14.95,
@@ -107,7 +125,60 @@ extension CartView: @preconcurrency Equatable {
                 onTap: { print("Checkout") }
             ),
             setProductQuantity: { print("Product: \($0), quantity: \($1.description)") },
-            deleteProduct: { print("Delete product: \($0)") }
+            deleteProduct: { print("Delete product: \($0)") },
+            goHomeTap: { print("open home page") }
+        )
+    }
+}
+
+#Preview("Loading") {
+    NavigationStack {
+        CartView(
+            header: CartHeader.DataSource(
+                "Cart",
+                total: 2
+            ),
+            info: CheckoutInfo.DataSource(
+                title: "Shipping address",
+                text: "26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city",
+                change: { print("Change info") }
+            ),
+            products: nil,
+            bottomBar: TotalBar.DataSource(
+                "Total",
+                total: 14.95,
+                button: "Checkout",
+                onTap: { print("Checkout") }
+            ),
+            setProductQuantity: { print("Product: \($0), quantity: \($1.description)") },
+            deleteProduct: { print("Delete product: \($0)") },
+            goHomeTap: { print("open home page") }
+        )
+    }
+}
+
+#Preview("Error") {
+    NavigationStack {
+        CartView(
+            header: CartHeader.DataSource(
+                "Cart",
+                total: 2
+            ),
+            info: CheckoutInfo.DataSource(
+                title: "Shipping address",
+                text: "26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city",
+                change: { print("Change info") }
+            ),
+            products: .failure(.empty),
+            bottomBar: TotalBar.DataSource(
+                "Total",
+                total: 14.95,
+                button: "Checkout",
+                onTap: { print("Checkout") }
+            ),
+            setProductQuantity: { print("Product: \($0), quantity: \($1.description)") },
+            deleteProduct: { print("Delete product: \($0)") },
+            goHomeTap: { print("open home page") }
         )
     }
 }

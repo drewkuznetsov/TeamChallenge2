@@ -22,8 +22,8 @@ struct ProductCell: View {
     @inlinable
     init(
         _ product: CartProduct,
-        setQuantity: @escaping @MainActor (Int) -> Void,
-        onDelete: @escaping () -> Void
+        setQuantity: @escaping @MainActor (Int) -> Void = { _ in },
+        onDelete: @escaping () -> Void = { }
     ) {
         self.product = product
         self.setQuantity = setQuantity
@@ -67,7 +67,7 @@ extension ProductCell: Equatable {
 #Preview {
     VStack {
         ForEach(CartProduct.sample) { p in
-            ProductCell(p, setQuantity: { _ in }, onDelete: {})
+            ProductCell(p)
                 .frame(width: 335, height: 110)
         }
     }

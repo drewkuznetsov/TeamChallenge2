@@ -12,27 +12,34 @@ import ShoppeStore
 struct CartDomain: ReducerDomain {
     //MARK: - State
     struct State: Equatable {
-        fileprivate(set) var products: [CartProduct]
+        fileprivate(set) var products: Result<[CartProduct], CartError>?
         fileprivate(set) var shippingAddress: String
-        fileprivate(set) var error: CartError?
         
-        var totalProducts: Int { products.count }
+        var totalProducts: Int {
+            switch products {
+            case .success(let success): return success.count
+            case .failure, .none: return .zero
+            }
+        }
         
         var totalPrice: Double {
-            products
-                .map { $0.price * Double($0.quantity) }
-                .reduce(Double.zero, +)
+            switch products {
+            case .success(let items):
+                return items
+                    .map { $0.price * Double($0.quantity) }
+                    .reduce(Double.zero, +)
+                
+            case .failure, .none: return .zero
+            }
         }
         
         //MARK: - init(_:)
         init(
-            products: [CartProduct] = .init(),
+            products: Result<[CartProduct], CartError>? = nil,
             shippingAddress: String = .init(),
-            error: CartError? = nil
         ) {
             self.products = products
             self.shippingAddress = shippingAddress
-            self.error = error
         }
     }
     
@@ -65,40 +72,54 @@ struct CartDomain: ReducerDomain {
             return action
             
         case .loadContent:
-            switch await dependency.fetchProducts() {
-            case .success(let products):
-                guard let cart = dependency.fetchCart() else {
-                    break
-                }
-                state.products = products
-                    .compactMap { p -> (Product, Int)? in
-                        Optional(p)
-                            .zip(cart[p.id])
-                    }
-                    .compactMap(CartProduct.init)
-                
-            case .failure(let e):
-                state.error = CartError.loading(e.localizedDescription)
+            guard let cart = dependency.fetchCart() else {
+                break
             }
-            
+            state.products = await dependency
+                .fetchProducts()
+                .mapError(CartError.init)
+                .flatMap(reduceToCart(cart))
+        
         case .fetchLocation:
             break
             
         case let .setProduct(id, quantity):
+            guard case var .success(products) = state.products else {
+                break
+            }
             if quantity < 1 {
                 return run(.removeProduct(id))
             }
-            state.products.firstIndex(where: \.id == id).map { i in
-                state.products[i].quantity = quantity
+            products.firstIndex(where: \.id == id).map { i in
+                products[i].quantity = quantity
             }
+            state.products = .success(products)
             
         case let .removeProduct(id):
-            state.products.removeAll(where: \.id == id)
+            guard case var .success(products) = state.products else {
+                break
+            }
+            products.removeAll(where: \.id == id)
+            state.products = .success(products)
             
         }
         return empty
     }
-}
+    
+    private func reduceToCart(_ cart: [Int: Int]) -> ([Product]) -> Result<[CartProduct], CartError> {
+        { products in
+            let cartProducts = products
+                .compactMap { p -> (Product, Int)? in
+                    Optional(p).zip(cart[p.id])
+                }
+                .compactMap(CartProduct.init)
+            
+            return cartProducts.isEmpty
+            ? .failure(.empty)
+            : .success(cartProducts)
+        }
+    }
+ }
 
 extension CartDomain {
     //MARK: - Dependency
@@ -123,7 +144,10 @@ extension CartDomain {
 
         @inlinable
         static func parse(_ state: State) -> LoadContentToken? {
-            if state.shippingAddress.isEmpty || state.products.isEmpty {
+            guard case .success = state.products else {
+                return LoadContentToken()
+            }
+            if state.shippingAddress.isEmpty {
                 return LoadContentToken()
             }
             return nil

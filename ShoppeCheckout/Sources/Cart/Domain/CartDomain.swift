@@ -37,7 +37,7 @@ struct CartDomain: ReducerDomain {
         //MARK: - init(_:)
         init(
             products: Result<[CartProduct], CartError>? = nil,
-            shippingAddress: String = .init(),
+            shippingAddress: String = .init()
         ) {
             self.products = products
             self.shippingAddress = shippingAddress

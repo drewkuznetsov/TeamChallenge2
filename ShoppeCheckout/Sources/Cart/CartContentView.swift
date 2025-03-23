@@ -46,6 +46,7 @@ public struct CartContentView: View {
             goHomeTap: goHome
         )
         .equatable()
+        .onAppear { store.send(.onAppear) }
     }
 }
 

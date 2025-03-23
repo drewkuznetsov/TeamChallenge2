@@ -25,7 +25,7 @@ struct HomeView: View {
         case .loaded:
             NavigationStack{
                 HomeViewCollections(
-                    categories: Array(repeating: Category.makeStubCategory(), count: 4)
+                    categories: viewModel.categories
                 ) {
                     //
                 } onTapPopular: {

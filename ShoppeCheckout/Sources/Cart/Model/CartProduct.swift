@@ -7,6 +7,7 @@
 
 import Foundation
 import ShoppeStore
+import UDF
 
 @dynamicMemberLookup
 struct CartProduct: Equatable, Identifiable {

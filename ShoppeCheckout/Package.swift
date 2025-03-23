@@ -20,17 +20,39 @@ let package = Package(
     ],
     targets: [
         .target(
+            name: "UDF",
+            dependencies: [
+                .product(name: "SwiftFP", package: "SwiftFP"),
+            ],
+            swiftSettings: [
+                .enableUpcomingFeature("StrictConcurrency")
+            ]
+        ),
+        .target(
             name: "Cart",
             dependencies: [
                 .product(name: "SwiftFP", package: "SwiftFP"),
                 .product(name: "ShoppeStore", package: "ShoppeStore"),
+                "UDF",
+            ],
+            swiftSettings: [
+                .enableUpcomingFeature("StrictConcurrency")
+            ]
+        ),
+        .target(
+            name: "Payment",
+            dependencies: [
+                .product(name: "SwiftFP", package: "SwiftFP"),
+                .product(name: "ShoppeStore", package: "ShoppeStore"),
+                "UDF"
             ],
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency")
             ]
         ),
         .testTarget(name: "ShoppeCheckoutTests", dependencies: [
-            "Cart"
+            "Cart",
+            "Payment"
         ]),
     ]
 )

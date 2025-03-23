@@ -8,6 +8,7 @@
 import Testing
 import Foundation
 import ShoppeStore
+import UDF
 @testable import Cart
 
 extension CartDomain.Dependency {

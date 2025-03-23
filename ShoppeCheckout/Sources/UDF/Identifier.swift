@@ -7,14 +7,21 @@
 
 import Foundation
 
-struct Identifier<Domain, RawValue>: RawRepresentable {
-    let rawValue: RawValue
-    @inlinable init(rawValue: RawValue) { self.rawValue = rawValue }
+@dynamicMemberLookup
+public struct Identifier<Domain, RawValue>: RawRepresentable {
+    public let rawValue: RawValue
     
     @inlinable
-    subscript<T>(dynamicMember keyPath: KeyPath<RawValue, T>) -> T {
+    public init(rawValue: RawValue) { self.rawValue = rawValue }
+    
+    @inlinable
+    public subscript<T>(dynamicMember keyPath: KeyPath<RawValue, T>) -> T {
         rawValue[keyPath: keyPath]
     }
+    
+}
+
+public extension Identifier {
     
     @inlinable
     func coerced<NewDomain>(_ type: NewDomain.Type) -> Identifier<NewDomain, RawValue> {
@@ -27,6 +34,7 @@ struct Identifier<Domain, RawValue>: RawRepresentable {
     ) rethrows -> Identifier<Domain, T> {
         try Identifier<Domain, T>(rawValue: transform(self.rawValue))
     }
+    
 }
 
 extension Identifier: Equatable where RawValue: Equatable {}

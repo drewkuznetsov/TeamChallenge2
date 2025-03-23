@@ -42,6 +42,7 @@ struct CategoryCell: View {
             HStack {
                 Text(category.name)
                     .font(.bodyBold)
+                    .lineLimit(1)
                 Spacer()
                 badge
             }

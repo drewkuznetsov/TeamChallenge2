@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "shoppestore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ShapovalovIlya/ShoppeStore.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "879632bc58c9f2d346aa2b480572652632e99044"
+      }
+    },
+    {
+      "identity" : "swiftfp",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ShapovalovIlya/SwiftFP.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f1062eb20d5bca63655df96d22d2dfc725b5dd66"
+      }
+    }
+  ],
+  "version" : 2
+}

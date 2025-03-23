@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Cart
 
 struct AnyTabView: View {
     private let _body: AnyView
@@ -45,7 +46,7 @@ extension TabBarItem {
         TabBarItem(
             title: "Cart",
             iconName: "cart",
-            view: AnyTabView(Text("Cart"))
+            view: AnyTabView(CartContentView(goHome: { "> - <" }))
         ),
         TabBarItem(
             title: "Profile",

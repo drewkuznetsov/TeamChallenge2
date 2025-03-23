@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		8612E2A92D76461700F33FE8 /* ShoppeStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8612E2A82D76461700F33FE8 /* ShoppeStore */; };
+		86AAF9F02D8E1501001B3EEA /* ShoppeCheckout in Frameworks */ = {isa = PBXBuildFile; productRef = 86AAF9EF2D8E1501001B3EEA /* ShoppeCheckout */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		86DB92342D88B48300BF25E5 /* ShoppeCheckout */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ShoppeCheckout; sourceTree = "<group>"; };
 		E422C3812D76222B00FE7F97 /* TeamChallenge2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamChallenge2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -34,16 +36,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				8612E2A92D76461700F33FE8 /* ShoppeStore in Frameworks */,
+				86AAF9F02D8E1501001B3EEA /* ShoppeCheckout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86AAF9EE2D8E1501001B3EEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E422C3782D76222B00FE7F97 = {
 			isa = PBXGroup;
 			children = (
+				86DB92342D88B48300BF25E5 /* ShoppeCheckout */,
 				2D981C2F2D87545300E4DD5C /* TeamChallenge2 */,
+				86AAF9EE2D8E1501001B3EEA /* Frameworks */,
 				E422C3822D76222B00FE7F97 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -362,6 +374,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8612E2A72D76461700F33FE8 /* XCRemoteSwiftPackageReference "ShoppeStore" */;
 			productName = ShoppeStore;
+		};
+		86AAF9EF2D8E1501001B3EEA /* ShoppeCheckout */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ShoppeCheckout;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

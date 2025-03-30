@@ -32,7 +32,7 @@ struct CategoryCell: View {
         return [gridItem, gridItem]
     }
     
-    private var imagesURL: [URL] {
+    private var imagesURL: [UIImage] {
         category.products.map { $0.image }
     }
     
@@ -58,8 +58,8 @@ struct CategoryCell: View {
     private var grid: some View {
         LazyHGrid(rows: gridItems, spacing: 4) {
             ForEach(0..<maxAmount) { index in
-                let url = imagesURL[index]
-                SquareAsyncImage(url: url, size: size)
+                let image = imagesURL[index]
+                SquareImage(image: image, size: size)
             }
         }
         .frame(height: cellHeight)

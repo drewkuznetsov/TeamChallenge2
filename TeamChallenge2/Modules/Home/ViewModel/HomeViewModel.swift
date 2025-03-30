@@ -7,6 +7,7 @@
 
 import Foundation
 import ShoppeStore
+import UIKit
 
 final class HomeViewModel: ObservableObject {
     @Published var categories: [Category] = []
@@ -16,6 +17,8 @@ final class HomeViewModel: ObservableObject {
     @Published var productsInBasket = 2
     
     private let networkManager = ShoppeStore.shared
+    private let imageLoader = ImageLoaderService()
+//    private var imagesMap: [URL: UIImage] = [:]
     
     @MainActor
     func fetchProducts() async throws {
@@ -23,7 +26,8 @@ final class HomeViewModel: ObservableObject {
             async let allProducts = try await networkManager.fetchAllProducts().get()
             async let allCategories = try await networkManager.fetchAllCategories().get()
             let (products, categories) = try await (allProducts, allCategories)
-            self.categories = makeCategories(from: products, categories: categories)
+            let imagesMap = try await fetchImages(for: allProducts)
+            self.categories = makeCategories(from: products, categories: categories, imagesMap: imagesMap)
             state = .loaded
         } catch {
             self.error = error
@@ -31,15 +35,34 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
-    private func makeCategories(from products: [Product], categories: [Product.Category]) -> [Category] {
+    private func fetchImages(for products: [Product]) async -> [URL: UIImage] {
+        let imagesUrls = products.map { $0.image }
+        return await imageLoader.fetchImagesMap(for: imagesUrls)
+    }
+    
+    private func makeCategories(from products: [Product], categories: [Product.Category], imagesMap: [URL: UIImage]) -> [Category] {
         categories.map { category in
             Category(
                 name: category.rawValue.capitalized,
                 products: products
                     .filter { $0.category == category }
-                    .map { ProductBO(product: $0) }
+                    .map { makeProductBO(from: $0, imagesMap: imagesMap) }
             )
         }
+    }
+    
+    private func makeProductBO(from product: Product, imagesMap: [URL: UIImage]) -> ProductBO {
+        ProductBO(
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            description: product.description,
+            category: product.category,
+            image: imagesMap[product.image] ?? UIImage(),
+            rating: product.rating,
+            isFavorite: false,
+            isAddedToBasket: false
+        )
     }
 }
 

@@ -15,7 +15,7 @@ struct JustForYouCell: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            SquareAsyncImage(url: product.image, size: size)
+            SquareImage(image: product.image, size: size)
             
             Spacer()
                 .frame(height: 11)

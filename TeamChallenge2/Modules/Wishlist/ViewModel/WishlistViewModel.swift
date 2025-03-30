@@ -37,9 +37,10 @@ class WishlistViewModel: ObservableObject {
                 try await self.networkManager.fetchAllProducts().get()
             }.value
 
-            let productBOs: [ProductBO] = fetchedProducts.map { product in
-                ProductBO(product: product)
-            }
+            let productBOs: [ProductBO] = []
+//            fetchedProducts.map { product in
+//                ProductBO(product: product)
+//            }
 
             await MainActor.run {
                 self.products = productBOs
@@ -94,7 +95,7 @@ class WishlistViewModel: ObservableObject {
 
             for await product in group {
                 if let product = product {
-                    fetchedProducts.append(ProductBO(product: product))
+//                    fetchedProducts.append(ProductBO(product: product))
                 }
             }
         }

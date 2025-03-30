@@ -14,7 +14,7 @@ struct PopularCell: View {
     
     var body: some View {
         VStack(spacing: 1) {
-            SquareAsyncImage(url: product.image, size: size)
+            SquareImage(image: product.image, size: size)
                 .padding(5)
                 .background(.white)
                 .clipShape(.rect(cornerRadius: 9))

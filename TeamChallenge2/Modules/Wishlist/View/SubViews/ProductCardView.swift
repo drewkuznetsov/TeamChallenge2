@@ -17,7 +17,7 @@ struct ProductCardView: View {
     
     var body: some View {
         VStack{
-            SquareAsyncImage(url: productToView.image, size: size, alignment: .center, scaleType: .fit)
+            SquareImage(image: productToView.image, size: size, alignment: .center, scaleType: .fit)
                 .padding(5)
                 .background(.white)
                 .clipShape(.rect(cornerRadius: 9))

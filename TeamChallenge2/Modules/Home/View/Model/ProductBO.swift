@@ -7,6 +7,7 @@
 
 import Foundation
 import ShoppeStore
+import UIKit
 
 struct ProductBO {
     let id: Int
@@ -14,7 +15,7 @@ struct ProductBO {
     let price: Double
     let description: String
     let category: Product.Category
-    let image: URL
+    let image: UIImage
     let rating: Product.Rating
     var isFavorite: Bool
     var isAddedToBasket: Bool
@@ -24,7 +25,7 @@ struct ProductBO {
          price: Double,
          description: String,
          category: Product.Category,
-         image: URL,
+         image: UIImage,
          rating: Product.Rating,
          isFavorite: Bool,
          isAddedToBasket: Bool
@@ -40,17 +41,17 @@ struct ProductBO {
         self.isAddedToBasket = isAddedToBasket
     }
     
-    init(product: Product) {
-        self.id = product.id
-        self.title = product.title
-        self.price = product.price
-        self.description = product.description
-        self.category = product.category
-        self.image = product.image
-        self.rating = product.rating
-        self.isFavorite = false
-        self.isAddedToBasket = false
-    }
+//    init(product: Product) {
+//        self.id = product.id
+//        self.title = product.title
+//        self.price = product.price
+//        self.description = product.description
+//        self.category = product.category
+//        self.image = product.image
+//        self.rating = product.rating
+//        self.isFavorite = false
+//        self.isAddedToBasket = false
+//    }
     
     mutating func setFavorite(_ isFavortie: Bool) {
         self.isFavorite = isFavortie
@@ -74,7 +75,7 @@ struct ProductBO {
             price: Double.random(in: 0...100),
             description: "Some description",
             category: Product.Category.allCases.randomElement() ?? .electronics,
-            image: url,
+            image: UIImage(),
             rating: Product.Rating(rate: Double.random(in: 0...5), count: Int.random(in: 0...5)),
             isFavorite: Bool.random(),
             isAddedToBasket: Bool.random()
